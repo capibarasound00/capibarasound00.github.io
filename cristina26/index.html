@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)</title>
     
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    
     <meta property="og:title" content="¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)">
     <meta property="og:description" content="Escucha el homenaje especial para Cristina por sus 26 primaveras. ¡Un regalo de sus amigos de siempre! 🎂🎵">
     <meta property="og:url" content="https://capibarasound00.github.io/cristina26/">
@@ -30,7 +28,6 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
 
         /* EVITAR SCROLL HORIZONTAL GENERAL */
@@ -61,9 +58,9 @@
             background: #2ebd85;
         }
 
-        /* FONDO PREMIUM DINÁMICO MEJORADO */
+        /* FONDO PREMIUM */
         body {
-            background: radial-gradient(circle at var(--bg-x, 50%) var(--bg-y, 50%), #1b352b 0%, #091310 70%, #050a08 100%);
+            background: radial-gradient(circle at center, #1b352b 0%, #091310 70%, #050a08 100%);
             background-attachment: fixed;
             color: #ffffff;
             display: flex;
@@ -72,7 +69,6 @@
             min-height: 100vh;
             padding: 20px 15px;
             position: relative;
-            transition: background 0.6s ease-out; /* Movimiento suave de luces del fondo */
         }
 
         /* Contenedor adaptativo premium */
@@ -123,7 +119,7 @@
             }
         }
 
-        /* 🎨 SKELETON LOADING PARA LA PORTADA */
+        /* Portada */
         .cover-wrapper {
             position: relative;
             width: 100%;
@@ -133,17 +129,8 @@
             margin-bottom: 24px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
             border: 2px solid #c5a059;
+            background: #0d1110;
             animation: neonGlow 4s infinite alternate;
-            
-            /* Animación del esqueleto en CSS puro */
-            background: linear-gradient(90deg, #101816 25%, #1c2b26 50%, #101816 75%);
-            background-size: 200% 100%;
-            animation: skeletonShimmer 1.5s infinite linear, neonGlow 4s infinite alternate;
-        }
-
-        @keyframes skeletonShimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
         }
 
         @keyframes neonGlow {
@@ -156,12 +143,6 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            opacity: 0;
-            transition: opacity 0.4s ease-in-out; /* Desvanecimiento suave al cargar */
-        }
-
-        .cover-art.loaded {
-            opacity: 1;
         }
 
         /* Bloque de títulos principal */
@@ -251,7 +232,7 @@
             border-left: 3px solid #2ebd85;
             padding: 15px;
             border-radius: 8px;
-            text-align: left;
+ text-align: left;
             margin-bottom: 24px;
         }
 
@@ -291,7 +272,7 @@
             .custom-player { padding: 20px; }
         }
 
-        /* BOTONERA PRINCIPAL REPRODUCTOR (TOUCH OPTIMIZED + RIPPLE) */
+        /* BOTONERA PRINCIPAL REPRODUCTOR (TOUCH OPTIMIZED) */
         .player-controls {
             display: flex;
             align-items: center;
@@ -318,9 +299,7 @@
             height: 38px;
             border-radius: 50%;
             flex-shrink: 0;
-            touch-action: manipulation;
-            position: relative;
-            overflow: hidden; /* Requerido para el efecto de onda táctil */
+            touch-action: manipulation; /* Remueve los 300ms delay en móvil */
         }
 
         .nav-btn:hover {
@@ -337,8 +316,6 @@
             height: 18px;
             fill: currentColor;
             display: block;
-            position: relative;
-            z-index: 2;
         }
 
         /* EVITAR COMPRESIÓN DEL BOTÓN PLAY */
@@ -356,8 +333,6 @@
             transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
             flex-shrink: 0;
             touch-action: manipulation;
-            position: relative;
-            overflow: hidden;
         }
 
         .play-btn:hover {
@@ -375,34 +350,10 @@
             height: 22px;
             fill: #0d1110;
             display: block;
-            position: relative;
-            z-index: 2;
         }
 
         .pause-icon-svg {
             display: none;
-        }
-
-        /* 🎨 EFECTO RIPPLE (ONDA TÁCTIL) */
-        .ripple {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 50%;
-            transform: scale(0);
-            animation: rippleEffect 0.5s linear;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .play-btn .ripple {
-            background: rgba(13, 17, 16, 0.25); /* Color oscuro para contraste en play */
-        }
-
-        @keyframes rippleEffect {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
         }
 
         /* ESTADOS BUCLE */
@@ -605,7 +556,7 @@
             border-color: #2ebd85;
         }
 
-        /* Estilos de Acordeones (GPU ACCELERATED) */
+        /* Estilos de Acordeones (HIGH PERFORMANCE GPU GRAPHICS) */
         .accordion-container {
             margin-bottom: 12px;
             width: 100%;
@@ -638,7 +589,7 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease;
-            will-change: max-height, opacity;
+            will-change: max-height, opacity; /* Fuerza al móvil a preparar aceleración gráfica */
             opacity: 0;
             background: #0d1412;
             border-radius: 12px;
@@ -714,8 +665,6 @@
             margin: 20px 0;
             transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
             touch-action: manipulation;
-            position: relative;
-            overflow: hidden;
         }
 
         .btn-celebrate:active {
@@ -810,7 +759,7 @@
         </div>
 
         <div class="cover-wrapper">
-            <img class="cover-art" id="coverImage" src="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.png" alt="La Guerrera Silenciosa">
+            <img class="cover-art" src="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.png" alt="La Guerrera Silenciosa">
         </div>
 
         <div class="track-header-block">
@@ -831,19 +780,19 @@
         <div class="custom-player">
             <div class="player-controls">
                 
-                <button class="nav-btn ripple-target" id="restartBtn" title="Volver al principio">
+                <button class="nav-btn" id="restartBtn" title="Volver al principio">
                     <svg viewBox="0 0 24 24">
                         <path d="M6 6h2v12H6V6zm11.5 12l-8.5-6 8.5-6v12z"/>
                     </svg>
                 </button>
 
-                <button class="nav-btn ripple-target" id="rewindBtn" title="Retroceder 10 segundos">
+                <button class="nav-btn" id="rewindBtn" title="Retroceder 10 segundos">
                     <svg viewBox="0 0 24 24">
                         <path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/>
                     </svg>
                 </button>
                 
-                <button class="play-btn ripple-target" id="customPlayBtn" title="Reproducir">
+                <button class="play-btn" id="customPlayBtn" title="Reproducir">
                     <svg class="play-icon-svg" id="playIcon" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z"/>
                     </svg>
@@ -852,13 +801,13 @@
                     </svg>
                 </button>
                 
-                <button class="nav-btn ripple-target" id="forwardBtn" title="Adelantar 10 segundos">
+                <button class="nav-btn" id="forwardBtn" title="Adelantar 10 segundos">
                     <svg viewBox="0 0 24 24">
                         <path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/>
                     </svg>
                 </button>
 
-                <button class="nav-btn ripple-target" id="loopBtn" title="Bucle: Desactivado">
+                <button class="nav-btn" id="loopBtn" title="Bucle: Desactivado">
                     <svg viewBox="0 0 24 24" id="loopSvg">
                         <g id="loopGraphicsContainer"></g>
                     </svg>
@@ -1048,7 +997,7 @@
             </div>
         </div>
 
-        <button class="btn-celebrate ripple-target" onclick="launchConfetti()">¡Felicitar a lo grande! 🥳</button>
+        <button class="btn-celebrate" onclick="launchConfetti()">¡Felicitar a lo grande! 🥳</button>
 
         <div class="share-container">
             <button class="share-btn" id="shareWhatsAppBtn">
@@ -1092,7 +1041,6 @@
         const shareInstagramBtn = document.getElementById('shareInstagramBtn');
         const toastNotification = document.getElementById('toastNotification');
         const easterEgg = document.getElementById('easterEgg');
-        const coverImage = document.getElementById('coverImage');
 
         let lastVolume = 1.0;
         let isSeeking = false;
@@ -1127,41 +1075,247 @@
             updateVolumeSliderBackground(audio.volume);
             loopGraphicsContainer.innerHTML = renderLoopIcon(0);
             
-            // Gestión del Skeleton Loader al cargar la carátula
-            if (coverImage.complete) {
-                coverImage.classList.add('loaded');
-            } else {
-                coverImage.addEventListener('load', () => {
-                    coverImage.classList.add('loaded');
-                });
+            function getShareableUrl() {
+                if (window.location.protocol === 'file:') {
+                    return 'https://capibarasound00.github.io/cristina26/';
+                }
+                return window.location.href;
             }
-
-            // 🎨 Fondo Dinámico Interactivo (Parallax Orbital Sutil en Móvil)
-            if (window.DeviceOrientationEvent) {
-                window.addEventListener('deviceorientation', (event) => {
-                    // Mapeamos la inclinación del móvil a coordenadas de fondo CSS
-                    const tiltX = Math.min(Math.max(event.gamma, -30), 30); // Límite de giro -30deg a 30deg
-                    const tiltY = Math.min(Math.max(event.beta, 15), 75);   // Límite habitual de uso en mano
-                    
-                    const posX = 50 + (tiltX / 2);
-                    const posY = 50 + ((tiltY - 45) / 2);
-                    
-                    document.body.style.setProperty('--bg-x', `${posX}%`);
-                    document.body.style.setProperty('--bg-y', `${posY}%`);
-                });
-            }
-
-            // Fallback para PC: Movimiento del ratón sutil para el fondo parallax
-            window.addEventListener('mousemove', (e) => {
-                const posX = (e.clientX / window.innerWidth) * 100;
-                const posY = (e.clientY / window.innerHeight) * 100;
-                document.body.style.setProperty('--bg-x', `${posX}%`);
-                document.body.style.setProperty('--bg-y', `${posY}%`);
+            
+            const currentUrl = getShareableUrl();
+            
+            shareWhatsAppBtn.addEventListener('click', () => {
+                const text = encodeURIComponent(`¡Escucha el tema oficial de cumpleaños que le hemos hecho a Cristina! 🎂🎵: ${currentUrl}`);
+                window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
             });
 
-            // 🎨 Implementación del Ripple Effect (Onda táctil) en botones
-            const rippleTargets = document.querySelectorAll('.ripple-target');
-            rippleTargets.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const x = e.clientX - rect
+            shareInstagramBtn.addEventListener('click', async () => {
+                if (navigator.share) {
+                    try {
+                        await navigator.share({
+                            title: '¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)',
+                            text: '¡Escucha el tema de cumpleaños que le hemos hecho a Cristina! 🎂🎵',
+                            url: currentUrl
+                        });
+                    } catch (err) {
+                        console.log("Compartición cancelada o cerrada");
+                    }
+                } else {
+                    navigator.clipboard.writeText(currentUrl).then(() => {
+                        showToast('Enlace copiado al portapapeles 📋', false);
+                    });
+                }
+            });
+        });
+
+        function showToast(text, isLoopMsg = false) {
+            toastNotification.textContent = text;
+            if (isLoopMsg) {
+                toastNotification.classList.add('loop-toast');
+            } else {
+                toastNotification.classList.remove('loop-toast');
+            }
+            toastNotification.classList.add('show');
+            setTimeout(() => {
+                toastNotification.classList.remove('show');
+            }, 2200);
+        }
+
+        function resetTrackEndEffects() {
+            if (easterEgg.style.display === 'block' || easterEgg.style.display === '') {
+                easterEgg.style.display = 'none';
+            }
+        }
+
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            } else {
+                audio.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            }
+        });
+
+        restartBtn.addEventListener('click', () => {
+            audio.currentTime = 0;
+            hasRepeatedOnce = false; 
+            resetTrackEndEffects(); 
+            if (audio.paused) {
+                audio.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            }
+        });
+
+        loopBtn.addEventListener('click', () => {
+            loopState = (loopState + 1) % 3;
+            loopBtn.classList.remove('loop-once', 'loop-infinite');
+            
+            if (loopState === 0) {
+                audio.loop = false;
+                loopGraphicsContainer.innerHTML = renderLoopIcon(0);
+                loopBtn.setAttribute('title', 'Bucle: Desactivado');
+                showToast('🔀 Bucle desactivado', true);
+            } else if (loopState === 1) {
+                audio.loop = false; 
+                hasRepeatedOnce = false;
+                loopBtn.classList.add('loop-once');
+                loopGraphicsContainer.innerHTML = renderLoopIcon(1);
+                loopBtn.setAttribute('title', 'Bucle: Repetir 1 vez');
+                showToast('🔂 Se repetirá solo una vez', true);
+            } else if (loopState === 2) {
+                audio.loop = true; 
+                loopBtn.classList.add('loop-infinite');
+                loopGraphicsContainer.innerHTML = renderLoopIcon(2);
+                loopBtn.setAttribute('title', 'Bucle: Infinito');
+                showToast('🔁 Repetición infinita activada', true);
+            }
+        });
+
+        rewindBtn.addEventListener('click', () => { 
+            audio.currentTime = Math.max(0, audio.currentTime - 10); 
+            if (audio.currentTime === 0) resetTrackEndEffects();
+        });
+        
+        forwardBtn.addEventListener('click', () => { audio.currentTime = Math.min(audio.duration, audio.currentTime + 10); });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration && !isSeeking) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progressSlider.value = percent;
+                progressFill.style.width = `${percent}%`;
+                currentTimeLabel.textContent = formatTime(audio.currentTime);
+                if (audio.currentTime === 0) resetTrackEndEffects();
+            }
+        });
+
+        progressSlider.addEventListener('input', (e) => {
+            isSeeking = true;
+            const percent = e.target.value;
+            progressFill.style.width = `${percent}%`;
+            currentTimeLabel.textContent = formatTime((percent / 100) * audio.duration);
+        });
+
+        progressSlider.addEventListener('change', (e) => {
+            audio.currentTime = (e.target.value / 100) * audio.duration;
+            if (audio.currentTime === 0) {
+                resetTrackEndEffects();
+                hasRepeatedOnce = false;
+            }
+            isSeeking = false;
+        });
+
+        audio.addEventListener('progress', updateBufferTrack);
+        audio.addEventListener('timeupdate', updateBufferTrack);
+
+        function updateBufferTrack() {
+            if (audio.duration && audio.buffered.length > 0) {
+                let bufferedEnd = 0;
+                for (let i = 0; i < audio.buffered.length; i++) {
+                    if (audio.buffered.start(i) <= audio.currentTime && audio.buffered.end(i) >= audio.currentTime) {
+                        bufferedEnd = audio.buffered.end(i);
+                        break;
+                    }
+                }
+                if (bufferedEnd === 0) {
+                    bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
+                }
+                const bufferPercent = (bufferedEnd / audio.duration) * 100;
+                progressBuffer.style.width = `${bufferPercent}%`;
+            }
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            totalDurationLabel.textContent = formatTime(audio.duration);
+            updateBufferTrack();
+        });
+
+        function updateVolumeSliderBackground(value) {
+            const percentage = value * 100;
+            volumeSlider.style.background = `linear-gradient(to right, #2ebd85 0%, #2ebd85 ${percentage}%, #1e2d29 ${percentage}%, #1e2d29 100%)`;
+            volumePercentage.textContent = `${Math.round(percentage)}%`;
+        }
+
+        volumeSlider.addEventListener('input', (e) => {
+            const vol = parseFloat(e.target.value);
+            audio.volume = vol;
+            updateVolumeSliderBackground(vol);
+            if (vol === 0) volumeBtn.textContent = '🔇';
+            else if (vol < 0.5) volumeBtn.textContent = '🔉';
+            else volumeBtn.textContent = '🔊';
+        });
+
+        volumeBtn.addEventListener('click', () => {
+            if (audio.volume > 0) {
+                lastVolume = audio.volume;
+                audio.volume = 0;
+                volumeSlider.value = 0;
+                updateVolumeSliderBackground(0);
+                volumeBtn.textContent = '🔇';
+            } else {
+                audio.volume = lastVolume;
+                volumeSlider.value = lastVolume;
+                updateVolumeSliderBackground(lastVolume);
+                volumeBtn.textContent = lastVolume < 0.5 ? '🔉' : '🔊';
+            }
+        });
+
+        speedSelect.addEventListener('change', (e) => { audio.playbackRate = parseFloat(e.target.value); });
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function launchConfetti() {
+            confetti({ particleCount: 100, spread: 70, origin: { x: 0.1, y: 0.8 } });
+            confetti({ particleCount: 100, spread: 70, origin: { x: 0.9, y: 0.8 } });
+        }
+
+        // Nueva lógica de acordeón optimizada dinámicamente con hardware GPU
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            
+            if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+                content.style.maxHeight = "0px";
+                content.style.opacity = "0";
+            } else {
+                // Mide el contenido interno exacto renderizado en tiempo real
+                content.style.maxHeight = content.scrollHeight + "px";
+                content.style.opacity = "1";
+            }
+        }
+
+        audio.addEventListener('ended', () => {
+            if (loopState === 1) {
+                if (!hasRepeatedOnce) {
+                    hasRepeatedOnce = true;
+                    audio.currentTime = 0;
+                    audio.play();
+                } else {
+                    loopState = 0;
+                    hasRepeatedOnce = false;
+                    loopBtn.classList.remove('loop-once');
+                    loopGraphicsContainer.innerHTML = renderLoopIcon(0);
+                    loopBtn.setAttribute('title', 'Bucle: Desactivado');
+                    triggerTrackEndEffects();
+                }
+            } else if (loopState === 0) {
+                triggerTrackEndEffects();
+            }
+        });
+
+        function triggerTrackEndEffects() {
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            easterEgg.style.display = 'block';
+            launchConfetti();
+        }
+    </script>
+</body>
+</html>
