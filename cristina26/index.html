@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)</title>
     
     <meta property="og:title" content="¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)">
@@ -10,6 +10,12 @@
     <meta property="og:image" content="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.png">
     <meta property="og:url" content="https://capibarasound00.github.io/cristina26/">
     <meta property="og:type" content="music.song">
+    <meta property="og:site_name" content="Capibara Sound">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)">
+    <meta name="twitter:description" content="Escucha el homenaje especial para Cristina por sus 26 primaveras. ¡Un regalo de sus amigos de siempre! 🎂🎵">
+    <meta name="twitter:image" content="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.png">
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
@@ -20,10 +26,17 @@
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
+        /* EVITAR SCROLL HORIZONTAL GENERAL */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         /* SCROLLBAR GENERAL DEL NAVEGADOR */
         ::-webkit-scrollbar {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
         }
 
         ::-webkit-scrollbar-track {
@@ -34,16 +47,14 @@
         ::-webkit-scrollbar-thumb {
             background: #226b50;
             border-radius: 10px;
-            border: 3px solid #040807;
-            transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #040807;
         }
 
         ::-webkit-scrollbar-thumb:hover {
             background: #2ebd85;
-            box-shadow: 0 0 8px rgba(46, 189, 133, 0.6);
         }
 
-        /* FONDO PREMIUM con iluminación ambiental */
+        /* FONDO PREMIUM */
         body {
             background: radial-gradient(circle at center, #1b352b 0%, #091310 70%, #050a08 100%);
             background-attachment: fixed;
@@ -52,37 +63,8 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 20px 15px;
             position: relative;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: absolute;
-            width: 350px;
-            height: 350px;
-            background: rgba(46, 189, 133, 0.15);
-            border-radius: 50%;
-            top: 10%;
-            left: -100px;
-            filter: blur(100px);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        body::after {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: rgba(229, 192, 123, 0.08);
-            border-radius: 50%;
-            bottom: 10%;
-            right: -150px;
-            filter: blur(120px);
-            pointer-events: none;
-            z-index: 0;
         }
 
         /* Contenedor adaptativo premium */
@@ -94,19 +76,16 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(46, 189, 133, 0.2);
             width: 100%;
             max-width: 460px;
-            padding: 30px;
+            padding: 20px;
             text-align: center;
             border: 1px solid rgba(45, 66, 59, 0.6);
             position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
             z-index: 1;
         }
 
-        @media (min-width: 1024px) {
+        @media (min-width: 480px) {
             .card-container {
-                max-width: 500px;
-                padding: 40px;
+                padding: 30px;
             }
         }
 
@@ -114,32 +93,36 @@
         .badge-birthday {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             background: linear-gradient(135deg, rgba(197, 160, 89, 0.15) 0%, rgba(171, 132, 60, 0.15) 100%);
             color: #e5c07b;
-            padding: 8px 18px;
+            padding: 8px 14px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: bold;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             border: 1px solid #c5a059;
-            letter-spacing: 1px;
-            animation: pulse 2s infinite;
+            letter-spacing: 0.5px;
+            max-width: 100%;
+            word-wrap: break-word;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
+        @media (min-width: 410px) {
+            .badge-birthday {
+                font-size: 0.85rem;
+                padding: 8px 18px;
+                letter-spacing: 1px;
+            }
         }
 
-        /* Portada con pulso de luz de neón */
+        /* Portada */
         .cover-wrapper {
             position: relative;
             width: 100%;
             aspect-ratio: 1 / 1;
             border-radius: 16px;
             overflow: hidden;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
             border: 2px solid #c5a059;
             background: #0d1110;
@@ -160,12 +143,14 @@
 
         /* Bloque de títulos principal */
         .track-header-block {
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             padding: 0 5px;
+            width: 100%;
+            overflow: hidden;
         }
 
         .track-main-title {
-            font-size: 1.85rem;
+            font-size: 1.5rem;
             color: #e5c07b;
             margin-bottom: 10px;
             letter-spacing: 0.3px;
@@ -175,12 +160,13 @@
             background: linear-gradient(135deg, #ffffff 40%, #e5c07b 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            white-space: nowrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
-        @media (max-width: 400px) {
+        @media (min-width: 400px) {
             .track-main-title {
-                font-size: 1.6rem;
+                font-size: 1.85rem;
             }
         }
 
@@ -191,11 +177,17 @@
             padding: 6px 14px;
             border-radius: 30px;
             color: #40dd9f;
-            font-size: 0.92rem;
+            font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 12px;
-            letter-spacing: 0.3px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            max-width: 100%;
+            overflow-wrap: break-word;
+        }
+
+        @media (min-width: 400px) {
+            .track-dedication-badge {
+                font-size: 0.92rem;
+            }
         }
 
         .track-dedication-badge span {
@@ -234,14 +226,14 @@
         .dedication-box {
             background: rgba(28, 40, 36, 0.5);
             border-left: 3px solid #2ebd85;
-            padding: 18px;
+            padding: 15px;
             border-radius: 8px;
             text-align: left;
             margin-bottom: 24px;
         }
 
         .dedication-box h3 {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #e5c07b;
             margin-bottom: 8px;
             display: flex;
@@ -250,10 +242,16 @@
         }
 
         .dedication-box p {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #cbdad5;
             line-height: 1.5;
             font-style: italic;
+        }
+
+        @media (min-width: 400px) {
+            .dedication-box { padding: 18px; }
+            .dedication-box h3 { font-size: 0.95rem; }
+            .dedication-box p { font-size: 0.9rem; }
         }
 
         /* REPRODUCTOR DE AUDIO AVANZADO */
@@ -261,18 +259,27 @@
             background: linear-gradient(135deg, #172420 0%, #101816 100%);
             border: 1px solid #2d423b;
             border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 24px;
+            padding: 15px;
+            margin-bottom: 20px;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
         }
 
-        /* BOTONERA PREMIUM */
+        @media (min-width: 400px) {
+            .custom-player { padding: 20px; }
+        }
+
+        /* BOTONERA PRINCIPAL REPRODUCTOR */
         .player-controls {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            gap: 12px;
             margin-bottom: 18px;
+            width: 100%;
+        }
+
+        @media (min-width: 380px) {
+            .player-controls { gap: 16px; }
         }
 
         .nav-btn {
@@ -284,10 +291,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            position: relative;
+            flex-shrink: 0;
         }
 
         .nav-btn:hover {
@@ -297,25 +304,13 @@
         }
 
         .nav-btn svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             fill: currentColor;
             display: block;
-            transition: fill 0.2s, filter 0.2s;
         }
 
-        /* ESTADOS DEL BOTÓN BUCLE */
-        .nav-btn#loopBtn.loop-once {
-            color: #e5c07b;
-            filter: drop-shadow(0 0 3px rgba(229, 192, 123, 0.4));
-        }
-
-        .nav-btn#loopBtn.loop-infinite {
-            color: #2ebd85;
-            filter: drop-shadow(0 0 5px rgba(46, 189, 133, 0.5));
-        }
-
-        /* Botón de reproducción principal */
+        /* EVITAR COMPRESIÓN DEL BOTÓN PLAY */
         .play-btn {
             width: 58px;
             height: 58px;
@@ -328,6 +323,7 @@
             justify-content: center;
             box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
             transition: all 0.2s ease;
+            flex-shrink: 0; /* Impide que flexbox lo colapse */
         }
 
         .play-btn:hover {
@@ -335,35 +331,34 @@
             box-shadow: 0 6px 20px rgba(197, 160, 89, 0.6);
         }
 
-        .play-icon {
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 10px 0 10px 18px;
-            border-color: transparent transparent transparent #0d1110;
-            margin-left: 4px;
+        /* Iconos rediseñados limpios dentro del play button */
+        .play-icon-svg, .pause-icon-svg {
+            width: 22px;
+            height: 22px;
+            fill: #0d1110;
+            display: block;
         }
 
-        .pause-icon {
+        .pause-icon-svg {
             display: none;
-            width: 14px;
-            height: 18px;
-            justify-content: space-between;
         }
 
-        .pause-icon::before, .pause-icon::after {
-            content: '';
-            width: 4px;
-            height: 100%;
-            background: #0d1110;
-            border-radius: 2px;
+        /* ESTADOS BUCLE */
+        .nav-btn#loopBtn.loop-once {
+            color: #e5c07b;
+            filter: drop-shadow(0 0 3px rgba(229, 192, 123, 0.4));
+        }
+
+        .nav-btn#loopBtn.loop-infinite {
+            color: #2ebd85;
+            filter: drop-shadow(0 0 5px rgba(46, 189, 133, 0.5));
         }
 
         /* Barra de progreso */
         .progress-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             width: 100%;
             margin-bottom: 18px;
         }
@@ -371,7 +366,7 @@
         .time-label {
             font-size: 0.75rem;
             color: #8fa39b;
-            min-width: 38px;
+            min-width: 35px;
             font-variant-numeric: tabular-nums;
         }
 
@@ -392,7 +387,6 @@
             background: rgba(46, 189, 133, 0.25);
             border-radius: 4px;
             z-index: 1;
-            pointer-events: none;
         }
 
         .progress-fill {
@@ -404,7 +398,6 @@
             background: linear-gradient(90deg, #2ebd85 0%, #40dd9f 100%);
             border-radius: 4px;
             z-index: 2;
-            pointer-events: none;
         }
 
         .progress-slider {
@@ -431,29 +424,27 @@
             border: 2px solid #2ebd85;
             box-shadow: 0 0 5px rgba(0,0,0,0.6);
             cursor: pointer;
-            transition: transform 0.1s;
         }
 
-        .progress-slider::-webkit-slider-thumb:hover {
-            transform: scale(1.25);
-        }
-
-        /* Herramientas de audio */
+        /* HERRAMIENTAS DE AUDIO ADAPTATIVAS (RESPONSIVE FLEX) */
         .player-tools-row {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 8px;
+            gap: 12px;
             border-top: 1px solid #23352f;
             padding-top: 15px;
+            width: 100%;
         }
 
+        /* Contenedor de volumen fluido y accesible en móvil */
         .volume-container {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             flex: 1;
-            max-width: 145px;
+            min-width: 140px; /* Asegura un ancho estable para tocar con el dedo */
         }
 
         .volume-btn {
@@ -465,10 +456,7 @@
             display: flex;
             align-items: center;
             width: 24px;
-        }
-
-        .volume-btn:hover {
-            color: #ffffff;
+            flex-shrink: 0;
         }
 
         .volume-slider-wrapper {
@@ -491,58 +479,60 @@
 
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 14px;
-            height: 14px;
+            width: 16px; /* Ligeramente más grande para facilitar pulsación móvil */
+            height: 16px;
             border-radius: 50%;
             background: #ffffff;
             border: 2px solid #2ebd85;
             cursor: pointer;
             box-shadow: 0 0 5px rgba(0,0,0,0.5);
-            transition: transform 0.1s;
-        }
-
-        .volume-slider::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
         }
 
         .volume-percentage {
             font-size: 0.72rem;
             color: #8fa39b;
-            min-width: 28px;
+            min-width: 32px;
             text-align: right;
             font-variant-numeric: tabular-nums;
+        }
+
+        .speed-select-container {
+            flex-shrink: 0;
         }
 
         .speed-select {
             background: #1c2824;
             color: #cbdad5;
             border: 1px solid #2d3f39;
-            padding: 5px 8px;
+            padding: 6px 10px;
             border-radius: 6px;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             outline: none;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
-        .speed-select:hover {
-            border-color: #2ebd85;
-            color: #ffffff;
+        /* BOTÓN DE DESCARGA BAJADO DE POSICIÓN EXTERNO */
+        .download-wrapper {
+            width: 100%;
+            margin-top: 15px;
+            margin-bottom: 5px;
         }
 
         .download-action-btn {
-            background: rgba(46, 189, 133, 0.1);
+            background: rgba(46, 189, 133, 0.08);
             border: 1px solid rgba(46, 189, 133, 0.3);
             color: #2ebd85;
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 0.85rem;
             text-decoration: none;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            justify-content: center;
+            gap: 6px;
             transition: all 0.2s;
+            width: 100%; /* Ocupa el ancho completo del reproductor de forma elegante */
         }
 
         .download-action-btn:hover {
@@ -553,19 +543,19 @@
 
         /* Estilos de Acordeones */
         .accordion-container {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            width: 100%;
         }
 
         .btn-accordion {
             background: none;
             border: 1px dashed #4a635a;
             color: #8fa39b;
-            padding: 10px 20px;
+            padding: 10px 16px;
             border-radius: 20px;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             cursor: pointer;
             width: 100%;
-            transition: all 0.2s ease-in-out;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -584,63 +574,40 @@
             transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
             background: #0d1412;
             border-radius: 12px;
-            margin-top: 10px;
+            margin-top: 8px;
             text-align: left;
+            width: 100%;
         }
 
         .track-info-extended {
-            padding: 20px;
-            font-size: 0.85rem;
+            padding: 15px;
+            font-size: 0.8rem;
             color: #a3b8b0;
         }
 
         .track-info-row {
             display: flex;
             justify-content: space-between;
+            gap: 10px;
             padding: 8px 0;
             border-bottom: 1px solid rgba(46, 117, 89, 0.1);
         }
 
-        .track-info-row:last-child {
-            border-bottom: none;
-        }
-
-        .track-info-row span:first-child {
-            color: #7a8f87;
-            font-weight: 500;
-        }
-
         .track-info-row span:last-child {
-            color: #cbdad5;
-            font-weight: 600;
             text-align: right;
+            font-weight: 600;
+            color: #cbdad5;
         }
 
-        /* DISEÑO MEJORADO DE LAS LYRICS CON SCROLL INTERNO */
+        /* LYRICS CON SCROLL INTERNO AJUSTADO */
         .lyrics-text {
-            padding: 22px;
-            font-size: 0.94rem;
+            padding: 15px;
+            font-size: 0.9rem;
             color: #b3c7c0;
-            line-height: 1.8;
-            max-height: 380px;
+            line-height: 1.7;
+            max-height: 300px;
             overflow-y: auto;
             text-align: center;
-        }
-
-        .lyrics-text::-webkit-scrollbar {
-            width: 10px;
-        }
-        .lyrics-text::-webkit-scrollbar-track {
-            background: rgba(13, 20, 18, 0.6);
-            border-radius: 8px;
-        }
-        .lyrics-text::-webkit-scrollbar-thumb {
-            background: #226b50;
-            border-radius: 8px;
-            border: 2px solid rgba(13, 20, 18, 0.6);
-        }
-        .lyrics-text::-webkit-scrollbar-thumb:hover {
-            background: #2ebd85;
         }
 
         .lyrics-tag {
@@ -648,74 +615,60 @@
             color: #e5c07b;
             background: rgba(229, 192, 123, 0.08);
             border: 1px solid rgba(229, 192, 123, 0.2);
-            padding: 3px 12px;
+            padding: 3px 10px;
             border-radius: 12px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-top: 24px;
-            margin-bottom: 12px;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            margin-bottom: 10px;
         }
         
-        .lyrics-text .lyrics-tag:first-child {
-            margin-top: 0;
-        }
-
-        .lyrics-line {
-            margin-bottom: 4px;
-            transition: color 0.2s ease;
-        }
-
-        .lyrics-line:hover {
-            color: #ffffff;
-        }
+        .lyrics-text .lyrics-tag:first-child { margin-top: 0; }
+        .lyrics-line { margin-bottom: 4px; }
 
         /* Botón de Celebración */
         .btn-celebrate {
             display: block;
             width: 100%;
-            padding: 16px;
+            padding: 15px;
             background: linear-gradient(135deg, #c5a059 0%, #ab843c 100%);
             color: #0d1110;
             border: none;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
-            transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(171, 132, 60, 0.3);
             margin: 20px 0;
-        }
-
-        .btn-celebrate:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(171, 132, 60, 0.5);
         }
 
         /* Compartir */
         .share-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             margin-top: 10px;
+            width: 100%;
         }
 
         .share-btn {
             background: #1c2824;
             border: 1px solid #2d3f39;
             color: #cbdad5;
-            padding: 8px 16px;
+            padding: 8px 14px;
             border-radius: 30px;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            transition: all 0.2s;
+            flex: 1;
+            justify-content: center;
         }
 
         .share-btn:hover {
@@ -730,16 +683,15 @@
             color: #0d1110;
             padding: 12px;
             border-radius: 12px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
             margin-top: 15px;
-            animation: pulse 1.5s infinite;
         }
 
-        /* Notificaciones Dinámicas Flotantes */
+        /* NOTIFICACIONES DINÁMICAS FLOTANTES COMPLETAMENTE CENTRADAS */
         .toast-notification {
             position: fixed;
-            bottom: 20px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: #2ebd85;
@@ -748,10 +700,13 @@
             border-radius: 30px;
             font-size: 0.85rem;
             font-weight: bold;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            z-index: 10;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            text-align: center;
+            white-space: nowrap;
             pointer-events: none;
+            max-width: 90%; /* Evita desbordamiento en pantallas minúsculas */
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .toast-notification.show {
@@ -811,8 +766,12 @@
                 </button>
                 
                 <button class="play-btn" id="customPlayBtn" title="Reproducir">
-                    <div class="play-icon" id="playIcon"></div>
-                    <div class="pause-icon" id="pauseIcon"></div>
+                    <svg class="play-icon-svg" id="playIcon" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <svg class="pause-icon-svg" id="pauseIcon" viewBox="0 0 24 24">
+                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                    </svg>
                 </button>
                 
                 <button class="nav-btn" id="forwardBtn" title="Adelantar 10 segundos">
@@ -847,7 +806,7 @@
                     <span class="volume-percentage" id="volumePercentage">100%</span>
                 </div>
 
-                <div>
+                <div class="speed-select-container">
                     <select class="speed-select" id="speedSelect">
                         <option value="0.5">0.5x</option>
                         <option value="0.75">0.75x</option>
@@ -857,9 +816,11 @@
                         <option value="2">2x</option>
                     </select>
                 </div>
+            </div>
 
+            <div class="download-wrapper">
                 <a href="https://capibarasound00.github.io/cristina26/assets/sound/Cristina - La Guerrera Silenciosa (Flamenco v2).mp3" download="Cristina - La Guerrera Silenciosa.mp3" class="download-action-btn">
-                    📥 Descargar
+                    📥 Descargar Archivo Oficial (Audio HQ)
                 </a>
             </div>
         </div>
@@ -1016,7 +977,7 @@
                 <span>💬</span> WhatsApp
             </button>
             <button class="share-btn" id="shareInstagramBtn">
-                <span>📸</span> Compartir / Link
+                <span>🔗</span> Compartir Link
             </button>
         </div>
 
@@ -1038,7 +999,6 @@
         const currentTimeLabel = document.getElementById('currentTime');
         const totalDurationLabel = document.getElementById('totalDuration');
         
-        // Elementos de navegación
         const restartBtn = document.getElementById('restartBtn');
         const loopBtn = document.getElementById('loopBtn');
         const loopGraphicsContainer = document.getElementById('loopGraphicsContainer');
@@ -1057,7 +1017,6 @@
 
         let lastVolume = 1.0;
         let isSeeking = false;
-        
         let loopState = 0; 
         let hasRepeatedOnce = false; 
 
@@ -1067,15 +1026,14 @@
                     <path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/>
                 </g>
             `;
-            
-            if (state === 0) {
-                return basePaths;
-            } else if (state === 1) {
+            if (state === 0) return basePaths;
+            if (state === 1) {
                 return basePaths + `
                     <rect x="14" y="13" width="7" height="9" rx="1.5" fill="#e5c07b" />
                     <text x="17.5" y="20.5" font-family="'Segoe UI', Arial, sans-serif" font-size="8" font-weight="900" fill="#0d1110" text-anchor="middle">1</text>
                 `;
-            } else if (state === 2) {
+            }
+            if (state === 2) {
                 return basePaths + `
                     <rect x="13" y="13" width="9" height="9" rx="1.5" fill="#2ebd85" />
                     <text x="17.5" y="20" font-family="'Segoe UI', Arial, sans-serif" font-size="9" font-weight="900" fill="#0d1110" text-anchor="middle">∞</text>
@@ -1090,7 +1048,6 @@
             updateVolumeSliderBackground(audio.volume);
             loopGraphicsContainer.innerHTML = renderLoopIcon(0);
             
-            // Función auxiliar para obtener la URL real o una limpia si estás en local
             function getShareableUrl() {
                 if (window.location.protocol === 'file:') {
                     return 'https://capibarasound00.github.io/cristina26/';
@@ -1110,11 +1067,11 @@
                     try {
                         await navigator.share({
                             title: '¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)',
-                            text: 'Escucha el homenaje especial para Cristina por sus 26 primaveras. 🎂🎵',
+                            text: '¡Escucha el tema de cumpleaños que le hemos hecho a Cristina! 🎂🎵',
                             url: currentUrl
                         });
                     } catch (err) {
-                        console.log("Compartición cancelada");
+                        console.log("Compartición cancelada o cerrada");
                     }
                 } else {
                     navigator.clipboard.writeText(currentUrl).then(() => {
@@ -1134,7 +1091,7 @@
             toastNotification.classList.add('show');
             setTimeout(() => {
                 toastNotification.classList.remove('show');
-            }, 2000);
+            }, 2200);
         }
 
         function resetTrackEndEffects() {
@@ -1147,11 +1104,10 @@
             if (audio.paused) {
                 audio.play();
                 playIcon.style.display = 'none';
-                pauseIcon.style.display = 'flex';
+                pauseIcon.style.display = 'block';
             } else {
                 audio.pause();
                 playIcon.style.display = 'block';
-                pauseIcon.style.none;
                 pauseIcon.style.display = 'none';
             }
         });
@@ -1163,7 +1119,7 @@
             if (audio.paused) {
                 audio.play();
                 playIcon.style.display = 'none';
-                pauseIcon.style.display = 'flex';
+                pauseIcon.style.display = 'block';
             }
         });
 
