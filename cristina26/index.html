@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)</title>
+    
+    <meta property="og:title" content="¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)">
+    <meta property="og:description" content="Escucha el homenaje especial para Cristina por sus 26 primaveras. ¡Un regalo de sus amigos de siempre! 🎂🎵">
+    <meta property="og:image" content="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.png">
+    <meta property="og:url" content="https://capibarasound00.github.io/cristina26/">
+    <meta property="og:type" content="music.song">
+
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * {
@@ -13,26 +20,26 @@
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* SCROLLBAR GENERAL DEL NAVEGADOR (AMPLIADO Y MÁS NOTABLE) */
+        /* SCROLLBAR GENERAL DEL NAVEGADOR */
         ::-webkit-scrollbar {
-            width: 12px; /* Más ancho y accesible */
+            width: 12px;
             height: 12px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #040807; /* Fondo ultra oscuro para dar contraste */
+            background: #040807;
             border-radius: 10px;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #226b50; /* Verde esmeralda mate bien visible en reposo */
+            background: #226b50;
             border-radius: 10px;
-            border: 3px solid #040807; /* Espaciado premium tipo cápsula */
+            border: 3px solid #040807;
             transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #2ebd85; /* Cambio drástico a verde neón brillante al pasar el ratón */
+            background: #2ebd85;
             box-shadow: 0 0 8px rgba(46, 189, 133, 0.6);
         }
 
@@ -609,7 +616,7 @@
             text-align: right;
         }
 
-        /* DISEÑO MEJORADO DE LAS LYRICS CON SCROLL INTERNO REDISEÑADO COHERENTE */
+        /* DISEÑO MEJORADO DE LAS LYRICS CON SCROLL INTERNO */
         .lyrics-text {
             padding: 22px;
             font-size: 0.94rem;
@@ -620,7 +627,6 @@
             text-align: center;
         }
 
-        /* SCROLL INTERNO PARA LA CAJA DE TEXTO (A juego con el del navegador) */
         .lyrics-text::-webkit-scrollbar {
             width: 10px;
         }
@@ -637,7 +643,6 @@
             background: #2ebd85;
         }
 
-        /* Etiquetas estructuradas premium para secciones musicales */
         .lyrics-tag {
             display: inline-block;
             color: #e5c07b;
@@ -1085,16 +1090,16 @@
             updateVolumeSliderBackground(audio.volume);
             loopGraphicsContainer.innerHTML = renderLoopIcon(0);
             
-			// Función auxiliar para obtener la URL real o una limpia si estás en local
-			function getShareableUrl() {
-				// Si se abre como archivo local, evitamos enviar la ruta del disco duro
-				if (window.location.protocol === 'file:') {
-					return 'https://capibarasound00.github.io/cristina26/'; // Puedes cambiar esto por tu enlace definitivo
-				}
-				return window.location.href; // En producción, toma la URL automática de la web
-			}
-			
+            // Función auxiliar para obtener la URL real o una limpia si estás en local
+            function getShareableUrl() {
+                if (window.location.protocol === 'file:') {
+                    return 'https://capibarasound00.github.io/cristina26/';
+                }
+                return window.location.href;
+            }
+            
             const currentUrl = getShareableUrl();
+            
             shareWhatsAppBtn.addEventListener('click', () => {
                 const text = encodeURIComponent(`¡Escucha el tema oficial de cumpleaños que le hemos hecho a Cristina! 🎂🎵: ${currentUrl}`);
                 window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
@@ -1104,8 +1109,8 @@
                 if (navigator.share) {
                     try {
                         await navigator.share({
-                            title: 'Canción de Cumpleaños para Cristina',
-                            text: '¡Mira el homenaje especial para Cristina por sus 26 primaveras! 🎂',
+                            title: '¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)',
+                            text: 'Escucha el homenaje especial para Cristina por sus 26 primaveras. 🎂🎵',
                             url: currentUrl
                         });
                     } catch (err) {
@@ -1146,6 +1151,7 @@
             } else {
                 audio.pause();
                 playIcon.style.display = 'block';
+                pauseIcon.style.none;
                 pauseIcon.style.display = 'none';
             }
         });
