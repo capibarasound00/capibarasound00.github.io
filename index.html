@@ -1085,7 +1085,16 @@
             updateVolumeSliderBackground(audio.volume);
             loopGraphicsContainer.innerHTML = renderLoopIcon(0);
             
-            const currentUrl = window.location.href;
+			// Función auxiliar para obtener la URL real o una limpia si estás en local
+			function getShareableUrl() {
+				// Si se abre como archivo local, evitamos enviar la ruta del disco duro
+				if (window.location.protocol === 'file:') {
+					return 'https://capibarasound00.github.io/'; // Puedes cambiar esto por tu enlace definitivo
+				}
+				return window.location.href; // En producción, toma la URL automática de la web
+			}
+			
+            const currentUrl = getShareableUrl();
             shareWhatsAppBtn.addEventListener('click', () => {
                 const text = encodeURIComponent(`¡Escucha el tema oficial de cumpleaños que le hemos hecho a Cristina! 🎂🎵: ${currentUrl}`);
                 window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
