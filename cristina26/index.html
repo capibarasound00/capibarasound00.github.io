@@ -232,7 +232,7 @@
             border-left: 3px solid #2ebd85;
             padding: 15px;
             border-radius: 8px;
-            text-align: left;
+ text-align: left;
             margin-bottom: 24px;
         }
 
@@ -299,7 +299,7 @@
             height: 38px;
             border-radius: 50%;
             flex-shrink: 0;
-            touch-action: manipulation;
+            touch-action: manipulation; /* Remueve los 300ms delay en móvil */
         }
 
         .nav-btn:hover {
@@ -312,8 +312,8 @@
         }
 
         .nav-btn svg {
-            width: 22px;
-            height: 22px;
+            width: 18px;
+            height: 18px;
             fill: currentColor;
             display: block;
         }
@@ -556,7 +556,7 @@
             border-color: #2ebd85;
         }
 
-        /* Estilos de Acordeones */
+        /* Estilos de Acordeones (HIGH PERFORMANCE GPU GRAPHICS) */
         .accordion-container {
             margin-bottom: 12px;
             width: 100%;
@@ -589,7 +589,7 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease;
-            will-change: max-height, opacity;
+            will-change: max-height, opacity; /* Fuerza al móvil a preparar aceleración gráfica */
             opacity: 0;
             background: #0d1412;
             border-radius: 12px;
@@ -788,7 +788,7 @@
 
                 <button class="nav-btn" id="rewindBtn" title="Retroceder 10 segundos">
                     <svg viewBox="0 0 24 24">
-                        <path d="M12 5V1l-7 6 7 6V9c3.31 0 6 2.69 6 6 0 3.31-2.69 6-6 6s-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8zm-1.33 9.73c-.15-.22-.23-.52-.23-.9s.08-.69.23-.92c.15-.23.38-.34.69-.34s.54.11.69.34c.15.23.22.54.22.92s-.07.68-.22.9c-.15.22-.38.33-.69.33s-.54-.11-.69-.33zm-.03-2.45h-.83v-.37c.21-.18.44-.41.71-.71.26-.29.45-.53.56-.71.12-.18.17-.34.17-.48 0-.17-.06-.31-.17-.41-.11-.1-.27-.15-.49-.15-.21 0-.38.05-.5.15-.12.1-.2.25-.23.44l-.84-.11c.07-.37.24-.67.5-.89.27-.22.62-.33 1.07-.33.48 0 .86.13 1.13.38.27.25.4.58.4.98 0 .28-.07.54-.2.79-.13.24-.34.52-.63.84l-.39.43h1.49v.74h-2.29z"/>
+                        <path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/>
                     </svg>
                 </button>
                 
@@ -803,7 +803,7 @@
                 
                 <button class="nav-btn" id="forwardBtn" title="Adelantar 10 segundos">
                     <svg viewBox="0 0 24 24">
-                        <path d="M12 5V1l7 6-7 6V9c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6s6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8zm-1.33 9.73c-.15-.22-.23-.52-.23-.9s.08-.69.23-.92c.15-.23.38-.34.69-.34s.54.11.69.34c.15.23.22.54.22.92s-.07.68-.22.9c-.15.22-.38.33-.69.33s-.54-.11-.69-.33zm-.03-2.45h-.83v-.37c.21-.18.44-.41.71-.71.26-.29.45-.53.56-.71.12-.18.17-.34.17-.48 0-.17-.06-.31-.17-.41-.11-.1-.27-.15-.49-.15-.21 0-.38.05-.5.15-.12.1-.2.25-.23.44l-.84-.11c.07-.37.24-.67.5-.89.27-.22.62-.33 1.07-.33.48 0 .86.13 1.13.38.27.25.4.58.4.98 0 .28-.07.54-.2.79-.13.24-.34.52-.63.84l-.39.43h1.49v.74h-2.29z"/>
+                        <path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/>
                     </svg>
                 </button>
 
@@ -1106,47 +1106,7 @@
                     });
                 }
             });
-
-            // MEDIA SESSION API (Barra de notificaciones, pantalla de bloqueo y auriculares)
-            if ('mediaSession' in navigator) {
-                navigator.mediaSession.metadata = new MediaMetadata({
-                    title: 'La Guerrera Silenciosa',
-                    artist: 'Dra. Cristina (Homenaje Especial)',
-                    album: 'Las 26 Primaveras',
-                    artwork: [
-                        { src: 'https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.png', sizes: '512x512', type: 'image/png' }
-                    ]
-                });
-
-                navigator.mediaSession.setActionHandler('play', () => {
-                    audio.play();
-                    playIcon.style.display = 'none';
-                    pauseIcon.style.display = 'block';
-                });
-                navigator.mediaSession.setActionHandler('pause', () => {
-                    audio.pause();
-                    playIcon.style.display = 'block';
-                    pauseIcon.style.display = 'none';
-                });
-                navigator.mediaSession.setActionHandler('seekbackward', (details) => {
-                    const offset = details.seekOffset || 10;
-                    audio.currentTime = Math.max(audio.currentTime - offset, 0);
-                });
-                navigator.mediaSession.setActionHandler('seekforward', (details) => {
-                    const offset = details.seekOffset || 10;
-                    audio.currentTime = Math.min(audio.currentTime + offset, audio.duration);
-                });
-                navigator.mediaSession.setActionHandler('stop', () => {
-                    audio.pause();
-                    audio.currentTime = 0;
-                });
-            }
         });
-
-        if ('mediaSession' in navigator) {
-            audio.addEventListener('play', () => { navigator.mediaSession.playbackState = 'playing'; });
-            audio.addEventListener('pause', () => { navigator.mediaSession.playbackState = 'paused'; });
-        }
 
         function showToast(text, isLoopMsg = false) {
             toastNotification.textContent = text;
@@ -1215,15 +1175,12 @@
             }
         });
 
-        // Eventos físicos para los botones de retroceder y adelantar 10 segundos
         rewindBtn.addEventListener('click', () => { 
             audio.currentTime = Math.max(0, audio.currentTime - 10); 
             if (audio.currentTime === 0) resetTrackEndEffects();
         });
         
-        forwardBtn.addEventListener('click', () => { 
-            audio.currentTime = Math.min(audio.duration, audio.currentTime + 10); 
-        });
+        forwardBtn.addEventListener('click', () => { audio.currentTime = Math.min(audio.duration, audio.currentTime + 10); });
 
         audio.addEventListener('timeupdate', () => {
             if (audio.duration && !isSeeking) {
@@ -1320,12 +1277,15 @@
             confetti({ particleCount: 100, spread: 70, origin: { x: 0.9, y: 0.8 } });
         }
 
+        // Nueva lógica de acordeón optimizada dinámicamente con hardware GPU
         function toggleAccordion(id) {
             const content = document.getElementById(id);
+            
             if (content.style.maxHeight && content.style.maxHeight !== "0px") {
                 content.style.maxHeight = "0px";
                 content.style.opacity = "0";
             } else {
+                // Mide el contenido interno exacto renderizado en tiempo real
                 content.style.maxHeight = content.scrollHeight + "px";
                 content.style.opacity = "1";
             }
