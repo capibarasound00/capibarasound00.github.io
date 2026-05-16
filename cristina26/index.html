@@ -2,44 +2,30 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)</title>
     
-    <meta property="og:title" content="¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa">
-    <meta property="og:description" content="Escucha el homenaje especial para Cristina por sus 26 primaveras. 🎂🎵">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="¡Feliz Cumpleaños Cristina! - 26 Primaveras 🎂">
+    <meta property="og:description" content="Escucha 'La Guerrera Silenciosa', el tema oficial homenaje dedicado a la niña buena del hospital. 🩺🎵">
     <meta property="og:image" content="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.png">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="400">
-    <meta property="og:image:height" content="400">
-    <meta property="og:url" content="https://capibarasound00.github.io/cristina26/">
-    <meta property="og:type" content="music.song">
-    <meta property="og:site_name" content="Capibara Sound">
-
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
     
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
 
-        /* EVITAR SCROLL HORIZONTAL Y CORREGIR FONDO BLANCO EN MÓVILES (OVERSCROLL) */
-        html, body {
-            max-width: 100%;
-            overflow-x: hidden;
-            width: 100%;
-            min-height: 100dvh; /* Altura dinámica para navegadores móviles */
-            background-color: #050a08;
-        }
-
-        /* SCROLLBAR GENERAL */
+        /* SCROLLBAR GENERAL DEL NAVEGADOR */
         ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+            width: 12px;
+            height: 12px;
         }
 
         ::-webkit-scrollbar-track {
@@ -50,14 +36,15 @@
         ::-webkit-scrollbar-thumb {
             background: #226b50;
             border-radius: 10px;
-            border: 2px solid #040807;
+            border: 3px solid #040807;
+            transition: background 0.3s ease;
         }
 
         ::-webkit-scrollbar-thumb:hover {
             background: #2ebd85;
         }
 
-        /* FONDO PREMIUM ADAPTATIVO SIN REBOTES EN BLANCO */
+        /* FONDO PREMIUM con iluminación ambiental */
         body {
             background: radial-gradient(circle at center, #1b352b 0%, #091310 70%, #050a08 100%);
             background-attachment: fixed;
@@ -65,73 +52,115 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px 15px;
+            min-height: 100vh;
+            padding: 40px 20px;
             position: relative;
+            overflow-x: hidden;
         }
 
+        body::before {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: rgba(46, 189, 133, 0.15);
+            border-radius: 50%;
+            top: 10%;
+            left: -100px;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(229, 192, 123, 0.08);
+            border-radius: 50%;
+            bottom: 10%;
+            right: -150px;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Contenedor adaptativo premium */
         .card-container {
             background: rgba(19, 28, 25, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(46, 189, 133, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(46, 189, 133, 0.2);
             width: 100%;
             max-width: 460px;
-            padding: 20px;
+            padding: 30px;
             text-align: center;
             border: 1px solid rgba(45, 66, 59, 0.6);
             position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
             z-index: 1;
-            contain: content; /* Optimización de rendimiento para el navegador */
         }
 
-        @media (min-width: 480px) {
-            .card-container { padding: 30px; }
-        }
-
-        /* Insignia */
-        .badge-birthday {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(197, 160, 89, 0.15) 0%, rgba(171, 132, 60, 0.15) 100%);
-            color: #e5c07b;
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            border: 1px solid #c5a059;
-            letter-spacing: 0.5px;
-            max-width: 100%;
-        }
-
-        @media (min-width: 410px) {
-            .badge-birthday {
-                font-size: 0.85rem;
-                padding: 8px 18px;
-                letter-spacing: 1px;
+        @media (min-width: 1024px) {
+            .card-container {
+                max-width: 500px;
+                padding: 40px;
             }
         }
 
-        /* Portada optimizada */
+        /* Insignia de Cumpleaños - ANIMACIÓN OPTIMIZADA CON TRANSFORM */
+        .badge-birthday {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(197, 160, 89, 0.15) 0%, rgba(171, 132, 60, 0.15) 100%);
+            color: #e5c07b;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 24px;
+            border: 1px solid #c5a059;
+            letter-spacing: 1px;
+            will-change: transform;
+            animation: pulse-light 2.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse-light {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        /* Portada - ANIMACIÓN OPTIMIZADA (Usa opacidad en lugar de redibujar sombras complejas) */
         .cover-wrapper {
             position: relative;
             width: 100%;
             aspect-ratio: 1 / 1;
             border-radius: 16px;
             overflow: hidden;
-            margin-bottom: 24px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            margin-bottom: 28px;
             border: 2px solid #c5a059;
             background: #0d1110;
-            transform: translateZ(0); /* Forzar aceleración por hardware */
-            animation: neonGlow 4s infinite alternate;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
         }
 
-        @keyframes neonGlow {
-            0% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 10px rgba(46, 189, 133, 0.1); }
-            100% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(46, 189, 133, 0.35); }
+        .cover-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 14px;
+            box-shadow: inset 0 0 20px rgba(46, 189, 133, 0.5);
+            pointer-events: none;
+            will-change: opacity;
+            animation: neonFade 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes neonFade {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
         }
 
         .cover-art {
@@ -141,16 +170,14 @@
             display: block;
         }
 
-        /* Bloque de títulos */
+        /* Bloque de títulos principal */
         .track-header-block {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             padding: 0 5px;
-            width: 100%;
-            overflow: hidden;
         }
 
         .track-main-title {
-            font-size: 1.5rem;
+            font-size: 1.85rem;
             color: #e5c07b;
             margin-bottom: 10px;
             letter-spacing: 0.3px;
@@ -160,11 +187,13 @@
             background: linear-gradient(135deg, #ffffff 40%, #e5c07b 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            overflow-wrap: break-word;
+            white-space: nowrap;
         }
 
-        @media (min-width: 400px) {
-            .track-main-title { font-size: 1.85rem; }
+        @media (max-width: 400px) {
+            .track-main-title {
+                font-size: 1.6rem;
+            }
         }
 
         .track-dedication-badge {
@@ -174,10 +203,11 @@
             padding: 6px 14px;
             border-radius: 30px;
             color: #40dd9f;
-            font-size: 0.85rem;
+            font-size: 0.92rem;
             font-weight: 600;
             margin-bottom: 12px;
-            max-width: 100%;
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .track-dedication-badge span {
@@ -207,20 +237,23 @@
             max-width: 40px;
         }
 
-        .track-meta-subtitle .separator { color: #c5a059; font-size: 0.7rem; }
+        .track-meta-subtitle .separator {
+            color: #c5a059;
+            font-size: 0.7rem;
+        }
 
         /* Caja de Dedicatoria */
         .dedication-box {
             background: rgba(28, 40, 36, 0.5);
             border-left: 3px solid #2ebd85;
-            padding: 15px;
+            padding: 18px;
             border-radius: 8px;
             text-align: left;
             margin-bottom: 24px;
         }
 
         .dedication-box h3 {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #e5c07b;
             margin-bottom: 8px;
             display: flex;
@@ -229,62 +262,69 @@
         }
 
         .dedication-box p {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #cbdad5;
             line-height: 1.5;
             font-style: italic;
         }
 
-        /* REPRODUCTOR */
+        /* REPRODUCTOR DE AUDIO AVANZADO */
         .custom-player {
             background: linear-gradient(135deg, #172420 0%, #101816 100%);
             border: 1px solid #2d423b;
             border-radius: 20px;
-            padding: 15px;
-            margin-bottom: 20px;
+            padding: 20px;
+            margin-bottom: 24px;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
         }
 
-        @media (min-width: 400px) { .custom-player { padding: 20px; } }
-
+        /* BOTONERA PREMIUM */
         .player-controls {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 20px;
             margin-bottom: 18px;
-            width: 100%;
         }
-
-        @media (min-width: 380px) { .player-controls { gap: 16px; } }
 
         .nav-btn {
             background: none;
             border: none;
             color: #8fa39b;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            flex-shrink: 0;
+            position: relative;
         }
 
-        .nav-btn:hover, .nav-btn:active {
+        .nav-btn:hover {
             color: #ffffff;
             background: rgba(46, 189, 133, 0.1);
+            transform: scale(1.05);
         }
 
         .nav-btn svg {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             fill: currentColor;
             display: block;
         }
 
+        /* ESTADOS DEL BOTÓN BUCLE */
+        .nav-btn#loopBtn.loop-once {
+            color: #e5c07b;
+        }
+
+        .nav-btn#loopBtn.loop-infinite {
+            color: #2ebd85;
+        }
+
+        /* Botón de reproducción principal */
         .play-btn {
             width: 58px;
             height: 58px;
@@ -296,29 +336,43 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            flex-shrink: 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .play-btn:active { transform: scale(0.95); }
-
-        .play-icon-svg, .pause-icon-svg {
-            width: 22px;
-            height: 22px;
-            fill: #0d1110;
-            display: block;
+        .play-btn:hover {
+            transform: scale(1.06);
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.6);
         }
 
-        .pause-icon-svg { display: none; }
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 18px;
+            border-color: transparent transparent transparent #0d1110;
+            margin-left: 4px;
+        }
 
-        .nav-btn#loopBtn.loop-once { color: #e5c07b; filter: drop-shadow(0 0 3px rgba(229, 192, 123, 0.4)); }
-        .nav-btn#loopBtn.loop-infinite { color: #2ebd85; filter: drop-shadow(0 0 5px rgba(46, 189, 133, 0.5)); }
+        .pause-icon {
+            display: none;
+            width: 14px;
+            height: 18px;
+            justify-content: space-between;
+        }
 
-        /* Progreso */
+        .pause-icon::before, .pause-icon::after {
+            content: '';
+            width: 4px;
+            height: 100%;
+            background: #0d1110;
+            border-radius: 2px;
+        }
+
+        /* Barra de progreso */
         .progress-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
             margin-bottom: 18px;
         }
@@ -326,7 +380,7 @@
         .time-label {
             font-size: 0.75rem;
             color: #8fa39b;
-            min-width: 35px;
+            min-width: 38px;
             font-variant-numeric: tabular-nums;
         }
 
@@ -347,6 +401,7 @@
             background: rgba(46, 189, 133, 0.25);
             border-radius: 4px;
             z-index: 1;
+            pointer-events: none;
         }
 
         .progress-fill {
@@ -358,6 +413,7 @@
             background: linear-gradient(90deg, #2ebd85 0%, #40dd9f 100%);
             border-radius: 4px;
             z-index: 2;
+            pointer-events: none;
         }
 
         .progress-slider {
@@ -383,26 +439,30 @@
             background: #ffffff;
             border: 2px solid #2ebd85;
             box-shadow: 0 0 5px rgba(0,0,0,0.6);
+            cursor: pointer;
+            transition: transform 0.1s ease;
         }
 
-        /* Herramientas inferiores del reproductor */
+        .progress-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.25);
+        }
+
+        /* Herramientas de audio */
         .player-tools-row {
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            gap: 8px;
             border-top: 1px solid #23352f;
             padding-top: 15px;
-            width: 100%;
         }
 
         .volume-container {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             flex: 1;
-            min-width: 140px;
+            max-width: 145px;
         }
 
         .volume-btn {
@@ -414,7 +474,10 @@
             display: flex;
             align-items: center;
             width: 24px;
-            flex-shrink: 0;
+        }
+
+        .volume-btn:hover {
+            color: #ffffff;
         }
 
         .volume-slider-wrapper {
@@ -437,212 +500,243 @@
 
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             background: #ffffff;
             border: 2px solid #2ebd85;
+            cursor: pointer;
             box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            transition: transform 0.1s ease;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
         }
 
         .volume-percentage {
             font-size: 0.72rem;
             color: #8fa39b;
-            min-width: 32px;
+            min-width: 28px;
             text-align: right;
             font-variant-numeric: tabular-nums;
         }
-
-        .speed-select-container { flex-shrink: 0; }
 
         .speed-select {
             background: #1c2824;
             color: #cbdad5;
             border: 1px solid #2d3f39;
-            padding: 6px 10px;
+            padding: 5px 8px;
             border-radius: 6px;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             outline: none;
             cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
         }
 
-        /* Contenedor Botón Descarga */
-        .download-wrapper {
-            width: 100%;
-            margin-top: 15px;
-            margin-bottom: 5px;
+        .speed-select:hover {
+            border-color: #2ebd85;
+            color: #ffffff;
         }
 
         .download-action-btn {
-            background: rgba(46, 189, 133, 0.08);
+            background: rgba(46, 189, 133, 0.1);
             border: 1px solid rgba(46, 189, 133, 0.3);
             color: #2ebd85;
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-size: 0.85rem;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
             text-decoration: none;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 6px;
-            transition: all 0.2s;
-            width: 100%;
+            gap: 4px;
+            transition: all 0.2s ease;
         }
 
-        .download-action-btn:hover, .download-action-btn:active {
+        .download-action-btn:hover {
             background: #2ebd85;
             color: #0d1110;
             border-color: #2ebd85;
         }
 
-        /* ACORDEONES CON ANIMACIÓN ULTRA FLUIDA (CSS OPTIMIZADO) */
+        /* Estilos de Acordeones */
         .accordion-container {
-            margin-bottom: 12px;
-            width: 100%;
+            margin-bottom: 15px;
         }
 
         .btn-accordion {
             background: none;
             border: 1px dashed #4a635a;
             color: #8fa39b;
-            padding: 12px 16px;
+            padding: 10px 20px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             cursor: pointer;
             width: 100%;
+            transition: all 0.2s ease-in-out;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 8px;
-            transition: background 0.2s, border-color 0.2s, color 0.2s;
         }
 
-        .btn-accordion:hover, .btn-accordion:active {
+        .btn-accordion:hover {
             border-color: #2ebd85;
             color: #ffffff;
             background: rgba(46, 189, 133, 0.05);
         }
 
-        /* Ajuste estructural para transiciones perfectas sin tirones */
+        /* ACORDEÓN ULTRA FLUIDO CON CSS TRANSFORMS Y OPACIDAD */
         .accordion-content {
             max-height: 0;
             opacity: 0;
             overflow: hidden;
-            visibility: hidden;
+            transform: translateY(-10px);
+            transition: max-height 0.3s ease-out, opacity 0.25s ease-out, transform 0.25s ease-out;
             background: #0d1412;
             border-radius: 12px;
-            margin-top: 0;
-            text-align: left;
-            width: 100%;
-            transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), 
-                        opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                        margin-top 0.3s ease,
-                        visibility 0.45s;
         }
 
-        /* Clase activa lanzada por JS */
         .accordion-content.open {
             opacity: 1;
-            visibility: visible;
-            margin-top: 8px;
+            transform: translateY(0);
+            margin-top: 10px;
         }
 
         .track-info-extended {
-            padding: 15px;
-            font-size: 0.8rem;
+            padding: 20px;
+            font-size: 0.85rem;
             color: #a3b8b0;
         }
 
         .track-info-row {
             display: flex;
             justify-content: space-between;
-            gap: 10px;
             padding: 8px 0;
             border-bottom: 1px solid rgba(46, 117, 89, 0.1);
         }
 
-        .track-info-row span:last-child {
-            text-align: right;
-            font-weight: 600;
-            color: #cbdad5;
+        .track-info-row:last-child {
+            border-bottom: none;
         }
 
-        /* Letra de la canción */
+        .track-info-row span:first-child {
+            color: #7a8f87;
+            font-weight: 500;
+        }
+
+        .track-info-row span:last-child {
+            color: #cbdad5;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* DISEÑO MEJORADO DE LAS LYRICS CON SCROLL INTERNO REDISEÑADO COHERENTE */
         .lyrics-text {
-            padding: 15px;
-            font-size: 0.9rem;
+            padding: 22px;
+            font-size: 0.94rem;
             color: #b3c7c0;
-            line-height: 1.7;
-            max-height: 280px;
+            line-height: 1.8;
+            max-height: 380px;
             overflow-y: auto;
             text-align: center;
         }
 
+        /* SCROLL INTERNO PARA LA CAJA DE TEXTO */
+        .lyrics-text::-webkit-scrollbar {
+            width: 10px;
+        }
+        .lyrics-text::-webkit-scrollbar-track {
+            background: rgba(13, 20, 18, 0.6);
+            border-radius: 8px;
+        }
+        .lyrics-text::-webkit-scrollbar-thumb {
+            background: #226b50;
+            border-radius: 8px;
+            border: 2px solid rgba(13, 20, 18, 0.6);
+        }
+        .lyrics-text::-webkit-scrollbar-thumb:hover {
+            background: #2ebd85;
+        }
+
+        /* Etiquetas estructuradas premium para secciones musicales */
         .lyrics-tag {
             display: inline-block;
             color: #e5c07b;
             background: rgba(229, 192, 123, 0.08);
             border: 1px solid rgba(229, 192, 123, 0.2);
-            padding: 3px 10px;
+            padding: 3px 12px;
             border-radius: 12px;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 20px;
-            margin-bottom: 10px;
+            letter-spacing: 1.5px;
+            margin-top: 24px;
+            margin-bottom: 12px;
         }
         
-        .lyrics-text .lyrics-tag:first-child { margin-top: 0; }
-        .lyrics-line { margin-bottom: 4px; }
+        .lyrics-text .lyrics-tag:first-child {
+            margin-top: 0;
+        }
 
-        /* Botón Celebrar */
+        .lyrics-line {
+            margin-bottom: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .lyrics-line:hover {
+            color: #ffffff;
+        }
+
+        /* Botón de Celebración - ANIMACIÓN OPTIMIZADA */
         .btn-celebrate {
             display: block;
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             background: linear-gradient(135deg, #c5a059 0%, #ab843c 100%);
             color: #0d1110;
             border: none;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(171, 132, 60, 0.3);
             margin: 20px 0;
-            transition: transform 0.1s;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
         }
-        .btn-celebrate:active { transform: scale(0.98); }
+
+        .btn-celebrate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(171, 132, 60, 0.5);
+        }
 
         /* Compartir */
         .share-container {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 15px;
             margin-top: 10px;
-            width: 100%;
         }
 
         .share-btn {
             background: #1c2824;
             border: 1px solid #2d3f39;
             color: #cbdad5;
-            padding: 10px 14px;
+            padding: 8px 16px;
             border-radius: 30px;
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            flex: 1;
-            justify-content: center;
+            transition: all 0.2s ease;
         }
 
-        .share-btn:hover, .share-btn:active {
+        .share-btn:hover {
             background: #2ebd85;
             color: #0d1110;
             border-color: #2ebd85;
@@ -654,15 +748,15 @@
             color: #0d1110;
             padding: 12px;
             border-radius: 12px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: bold;
             margin-top: 15px;
         }
 
-        /* NOTIFICACIONES FLOTANTES PERFECTAMENTE CENTRADAS Y ADAPTATIVAS */
+        /* Notificaciones Dinámicas Flotantes - OPTIMIZADA CON GPU TRANSFORMS */
         .toast-notification {
             position: fixed;
-            bottom: 30px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: #2ebd85;
@@ -671,16 +765,11 @@
             border-radius: 30px;
             font-size: 0.85rem;
             font-weight: bold;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-            text-align: center;
-            width: auto;
-            max-width: 85%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            z-index: 10;
+            will-change: transform;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             pointer-events: none;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .toast-notification.show {
@@ -696,7 +785,7 @@
 </head>
 <body>
 
-    <audio id="birthday-song" preload="metadata" playsinline>
+    <audio id="birthday-song" preload="metadata">
         <source src="https://capibarasound00.github.io/cristina26/assets/sound/Cristina - La Guerrera Silenciosa (Flamenco v2).mp3" type="audio/mpeg">
     </audio>
 
@@ -706,7 +795,7 @@
         </div>
 
         <div class="cover-wrapper">
-            <img class="cover-art" src="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.png" alt="La Guerrera Silenciosa" loading="eager" decoding="async">
+            <img class="cover-art" src="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.png" alt="La Guerrera Silenciosa" loading="eager" fetchpriority="high">
         </div>
 
         <div class="track-header-block">
@@ -726,25 +815,34 @@
 
         <div class="custom-player">
             <div class="player-controls">
+                
                 <button class="nav-btn" id="restartBtn" title="Volver al principio">
-                    <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6V6zm11.5 12l-8.5-6 8.5-6v12z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 6h2v12H6V6zm11.5 12l-8.5-6 8.5-6v12z"/>
+                    </svg>
                 </button>
 
                 <button class="nav-btn" id="rewindBtn" title="Retroceder 10 segundos">
-                    <svg viewBox="0 0 24 24"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/>
+                    </svg>
                 </button>
                 
                 <button class="play-btn" id="customPlayBtn" title="Reproducir">
-                    <svg class="play-icon-svg" id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    <svg class="pause-icon-svg" id="pauseIcon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    <div class="play-icon" id="playIcon"></div>
+                    <div class="pause-icon" id="pauseIcon"></div>
                 </button>
                 
                 <button class="nav-btn" id="forwardBtn" title="Adelantar 10 segundos">
-                    <svg viewBox="0 0 24 24"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/>
+                    </svg>
                 </button>
 
                 <button class="nav-btn" id="loopBtn" title="Bucle: Desactivado">
-                    <svg viewBox="0 0 24 24" id="loopSvg"><g id="loopGraphicsContainer"></g></svg>
+                    <svg viewBox="0 0 24 24" id="loopSvg">
+                        <g id="loopGraphicsContainer"></g>
+                    </svg>
                 </button>
             </div>
             
@@ -767,7 +865,7 @@
                     <span class="volume-percentage" id="volumePercentage">100%</span>
                 </div>
 
-                <div class="speed-select-container">
+                <div>
                     <select class="speed-select" id="speedSelect">
                         <option value="0.5">0.5x</option>
                         <option value="0.75">0.75x</option>
@@ -777,11 +875,9 @@
                         <option value="2">2x</option>
                     </select>
                 </div>
-            </div>
 
-            <div class="download-wrapper">
                 <a href="https://capibarasound00.github.io/cristina26/assets/sound/Cristina - La Guerrera Silenciosa (Flamenco v2).mp3" download="Cristina - La Guerrera Silenciosa.mp3" class="download-action-btn">
-                    📥 Descargar Archivo Oficial (Audio HQ)
+                    📥 Descargar
                 </a>
             </div>
         </div>
@@ -792,14 +888,38 @@
             </button>
             <div class="accordion-content" id="infoContent">
                 <div class="track-info-extended">
-                    <div class="track-info-row"><span>Título:</span><span>La Guerrera Silenciosa (Flamenco v2)</span></div>
-                    <div class="track-info-row"><span>Artista:</span><span>Dra. Cristina</span></div>
-                    <div class="track-info-row"><span>Género:</span><span>Flamenco Urbano / Regalo</span></div>
-                    <div class="track-info-row"><span>Producción:</span><span>Tus amigos de siempre</span></div>
-                    <div class="track-info-row"><span>Álbum:</span><span>Las 26 Primaveras (Single)</span></div>
-                    <div class="track-info-row"><span>Fecha:</span><span>Mayo 2026</span></div>
-                    <div class="track-info-row"><span>Calidad:</span><span>MP3 HQ (322kbps)</span></div>
-                    <div class="track-info-row"><span>Licencia:</span><span>Amistad Eterna ❤️</span></div>
+                    <div class="track-info-row">
+                        <span>Título:</span>
+                        <span>La Guerrera Silenciosa (Flamenco v2)</span>
+                    </div>
+                    <div class="track-info-row">
+                        <span>Artista / Dedicatoria:</span>
+                        <span>Dra. Cristina</span>
+                    </div>
+                    <div class="track-info-row">
+                        <span>Género:</span>
+                        <span>Flamenco Urbano / Regalo Especial</span>
+                    </div>
+                    <div class="track-info-row">
+                        <span>Producción:</span>
+                        <span>Tus amigos de siempre con IA</span>
+                    </div>
+                    <div class="track-info-row">
+                        <span>Álbum:</span>
+                        <span>Las 26 Primaveras (Single)</span>
+                    </div>
+                    <div class="track-info-row">
+                        <span>Fecha de Lanzamiento:</span>
+                        <span>Mayo 2026</span>
+                    </div>
+                    <div class="track-info-row">
+                        <span>Calidad del Archivo:</span>
+                        <span>MP3 High Quality (322kbps)</span>
+                    </div>
+                    <div class="track-info-row">
+                        <span>Licencia:</span>
+                        <span>Uso Personal / Amistad Eterna ❤️</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -910,8 +1030,12 @@
         <button class="btn-celebrate" onclick="launchConfetti()">¡Felicitar a lo grande! 🥳</button>
 
         <div class="share-container">
-            <button class="share-btn" id="shareWhatsAppBtn"><span>💬</span> WhatsApp</button>
-            <button class="share-btn" id="shareInstagramBtn"><span>🔗</span> Compartir Link</button>
+            <button class="share-btn" id="shareWhatsAppBtn">
+                <span>💬</span> WhatsApp
+            </button>
+            <button class="share-btn" id="shareInstagramBtn">
+                <span>📸</span> Compartir / Link
+            </button>
         </div>
 
         <div class="easter-egg-toast" id="easterEgg">
@@ -950,33 +1074,47 @@
 
         let lastVolume = 1.0;
         let isSeeking = false;
+        
         let loopState = 0; 
         let hasRepeatedOnce = false; 
 
         function renderLoopIcon(state) {
-            let basePaths = `<g transform="scale(0.85)" transform-origin="12 12"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></g>`;
-            if (state === 0) return basePaths;
-            if (state === 1) {
-                return basePaths + `<rect x="14" y="13" width="7" height="9" rx="1.5" fill="#e5c07b" /><text x="17.5" y="20.5" font-family="'Segoe UI', Arial, sans-serif" font-size="8" font-weight="900" fill="#0d1110" text-anchor="middle">1</text>`;
-            }
-            if (state === 2) {
-                return basePaths + `<rect x="13" y="13" width="9" height="9" rx="1.5" fill="#2ebd85" /><text x="17.5" y="20" font-family="'Segoe UI', Arial, sans-serif" font-size="9" font-weight="900" fill="#0d1110" text-anchor="middle">∞</text>`;
+            let basePaths = `
+                <g transform="scale(0.85)" transform-origin="12 12">
+                    <path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/>
+                </g>
+            `;
+            
+            if (state === 0) {
+                return basePaths;
+            } else if (state === 1) {
+                return basePaths + `
+                    <rect x="14" y="13" width="7" height="9" rx="1.5" fill="#e5c07b" />
+                    <text x="17.5" y="20.5" font-family="'Segoe UI', Arial, sans-serif" font-size="8" font-weight="900" fill="#0d1110" text-anchor="middle">1</text>
+                `;
+            } else if (state === 2) {
+                return basePaths + `
+                    <rect x="13" y="13" width="9" height="9" rx="1.5" fill="#2ebd85" />
+                    <text x="17.5" y="20" font-family="'Segoe UI', Arial, sans-serif" font-size="9" font-weight="900" fill="#0d1110" text-anchor="middle">∞</text>
+                `;
             }
         }
 
         audio.volume = 1.0;
 
         window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(launchConfetti, 400);
+            setTimeout(launchConfetti, 500);
             updateVolumeSliderBackground(audio.volume);
             loopGraphicsContainer.innerHTML = renderLoopIcon(0);
             
-            function getShareableUrl() {
-                return window.location.protocol === 'file:' ? 'https://capibarasound00.github.io/cristina26/' : window.location.href;
-            }
-            
+			function getShareableUrl() {
+				if (window.location.protocol === 'file:') {
+					return 'https://capibarasound00.github.io/cristina26/'; 
+				}
+				return window.location.href; 
+			}
+			
             const currentUrl = getShareableUrl();
-            
             shareWhatsAppBtn.addEventListener('click', () => {
                 const text = encodeURIComponent(`¡Escucha el tema oficial de cumpleaños que le hemos hecho a Cristina! 🎂🎵: ${currentUrl}`);
                 window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
@@ -986,11 +1124,13 @@
                 if (navigator.share) {
                     try {
                         await navigator.share({
-                            title: '¡Feliz Cumpleaños Cristina!',
-                            text: '¡Escucha su tema oficial! 🎂🎵',
+                            title: 'Canción de Cumpleaños para Cristina',
+                            text: '¡Mira el homenaje especial para Cristina por sus 26 primaveras! 🎂',
                             url: currentUrl
                         });
-                    } catch (err) { console.log("Compartición cerrada"); }
+                    } catch (err) {
+                        console.log("Compartición cancelada");
+                    }
                 } else {
                     navigator.clipboard.writeText(currentUrl).then(() => {
                         showToast('Enlace copiado al portapapeles 📋', false);
@@ -1001,11 +1141,15 @@
 
         function showToast(text, isLoopMsg = false) {
             toastNotification.textContent = text;
-            if (isLoopMsg) toastNotification.classList.add('loop-toast');
-            else toastNotification.classList.remove('loop-toast');
-            
+            if (isLoopMsg) {
+                toastNotification.classList.add('loop-toast');
+            } else {
+                toastNotification.classList.remove('loop-toast');
+            }
             toastNotification.classList.add('show');
-            setTimeout(() => { toastNotification.classList.remove('show'); }, 2000);
+            setTimeout(() => {
+                toastNotification.classList.remove('show');
+            }, 2000);
         }
 
         function resetTrackEndEffects() {
@@ -1016,9 +1160,9 @@
 
         playBtn.addEventListener('click', () => {
             if (audio.paused) {
-                audio.play().catch(() => console.log("Interacción de audio bloqueada por el navegador"));
+                audio.play();
                 playIcon.style.display = 'none';
-                pauseIcon.style.display = 'block';
+                pauseIcon.style.display = 'flex';
             } else {
                 audio.pause();
                 playIcon.style.display = 'block';
@@ -1031,9 +1175,9 @@
             hasRepeatedOnce = false; 
             resetTrackEndEffects(); 
             if (audio.paused) {
-                audio.play().catch(() => {});
+                audio.play();
                 playIcon.style.display = 'none';
-                pauseIcon.style.display = 'block';
+                pauseIcon.style.display = 'flex';
             }
         });
 
@@ -1107,7 +1251,9 @@
                         break;
                     }
                 }
-                if (bufferedEnd === 0) bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
+                if (bufferedEnd === 0) {
+                    bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
+                }
                 const bufferPercent = (bufferedEnd / audio.duration) * 100;
                 progressBuffer.style.width = `${bufferPercent}%`;
             }
@@ -1158,28 +1304,19 @@
         }
 
         function launchConfetti() {
-            confetti({ particleCount: 70, spread: 60, origin: { x: 0.1, y: 0.85 } });
-            confetti({ particleCount: 70, spread: 60, origin: { x: 0.9, y: 0.85 } });
+            confetti({ particleCount: 100, spread: 70, origin: { x: 0.1, y: 0.8 } });
+            confetti({ particleCount: 100, spread: 70, origin: { x: 0.9, y: 0.8 } });
         }
 
-        // CONTROL DE ACORDEONES FLUIDO CON RE-CÁLCULO DINÁMICO
+        /* JAVASCRIPT CORREGIDO PARA ANIMACIÓN FLUIDA DEL ACORDEÓN */
         function toggleAccordion(id) {
             const content = document.getElementById(id);
-            
             if (content.classList.contains('open')) {
-                // Animación de cierre fluida
                 content.style.maxHeight = "0px";
                 content.classList.remove('open');
             } else {
-                // Cerrar otros acordeones abiertos de forma limpia antes de abrir
-                document.querySelectorAll('.accordion-content').forEach(acc => {
-                    acc.style.maxHeight = "0px";
-                    acc.classList.remove('open');
-                });
-                
-                // Abrir el acordeón calculando su altura exacta
                 content.classList.add('open');
-                content.style.maxHeight = content.scrollHeight + "px";
+                content.style.maxHeight = id === 'infoContent' ? "400px" : "800px";
             }
         }
 
@@ -1188,7 +1325,7 @@
                 if (!hasRepeatedOnce) {
                     hasRepeatedOnce = true;
                     audio.currentTime = 0;
-                    audio.play().catch(() => {});
+                    audio.play();
                 } else {
                     loopState = 0;
                     hasRepeatedOnce = false;
