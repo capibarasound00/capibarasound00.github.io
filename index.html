@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* SCROLLBAR GENERAL DEL NAVEGADOR (AMPLIADO Y MÁS NOTABLE) */
+        ::-webkit-scrollbar {
+            width: 12px; /* Más ancho y accesible */
+            height: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #040807; /* Fondo ultra oscuro para dar contraste */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #226b50; /* Verde esmeralda mate bien visible en reposo */
+            border-radius: 10px;
+            border: 3px solid #040807; /* Espaciado premium tipo cápsula */
+            transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2ebd85; /* Cambio drástico a verde neón brillante al pasar el ratón */
+            box-shadow: 0 0 8px rgba(46, 189, 133, 0.6);
+        }
+
+        /* FONDO PREMIUM con iluminación ambiental */
+        body {
+            background: radial-gradient(circle at center, #1b352b 0%, #091310 70%, #050a08 100%);
+            background-attachment: fixed;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: rgba(46, 189, 133, 0.15);
+            border-radius: 50%;
+            top: 10%;
+            left: -100px;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(229, 192, 123, 0.08);
+            border-radius: 50%;
+            bottom: 10%;
+            right: -150px;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Contenedor adaptativo premium */
+        .card-container {
+            background: rgba(19, 28, 25, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(46, 189, 133, 0.2);
+            width: 100%;
+            max-width: 460px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(45, 66, 59, 0.6);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        @media (min-width: 1024px) {
+            .card-container {
+                max-width: 500px;
+                padding: 40px;
+            }
+        }
+
+        /* Insignia de Cumpleaños */
+        .badge-birthday {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(197, 160, 89, 0.15) 0%, rgba(171, 132, 60, 0.15) 100%);
+            color: #e5c07b;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 24px;
+            border: 1px solid #c5a059;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* Portada con pulso de luz de neón */
+        .cover-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            border: 2px solid #c5a059;
+            background: #0d1110;
+            animation: neonGlow 4s infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 10px rgba(46, 189, 133, 0.1); }
+            100% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 25px rgba(46, 189, 133, 0.4); }
+        }
+
+        .cover-art {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Bloque de títulos principal */
+        .track-header-block {
+            margin-bottom: 24px;
+            padding: 0 5px;
+        }
+
+        .track-main-title {
+            font-size: 1.85rem;
+            color: #e5c07b;
+            margin-bottom: 10px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            font-weight: 800;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+            background: linear-gradient(135deg, #ffffff 40%, #e5c07b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 400px) {
+            .track-main-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        .track-dedication-badge {
+            display: inline-block;
+            background: rgba(46, 189, 133, 0.08);
+            border: 1px solid rgba(46, 189, 133, 0.25);
+            padding: 6px 14px;
+            border-radius: 30px;
+            color: #40dd9f;
+            font-size: 0.92rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .track-dedication-badge span {
+            color: #e5c07b;
+            margin-right: 4px;
+        }
+
+        .track-meta-subtitle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #7a8f87;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .track-meta-subtitle::before,
+        .track-meta-subtitle::after {
+            content: '';
+            display: block;
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #2d423b, transparent);
+            max-width: 40px;
+        }
+
+        .track-meta-subtitle .separator {
+            color: #c5a059;
+            font-size: 0.7rem;
+        }
+
+        /* Caja de Dedicatoria */
+        .dedication-box {
+            background: rgba(28, 40, 36, 0.5);
+            border-left: 3px solid #2ebd85;
+            padding: 18px;
+            border-radius: 8px;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .dedication-box h3 {
+            font-size: 0.95rem;
+            color: #e5c07b;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dedication-box p {
+            font-size: 0.9rem;
+            color: #cbdad5;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        /* REPRODUCTOR DE AUDIO AVANZADO */
+        .custom-player {
+            background: linear-gradient(135deg, #172420 0%, #101816 100%);
+            border: 1px solid #2d423b;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+        }
+
+        /* BOTONERA PREMIUM */
+        .player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 18px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #8fa39b;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .nav-btn:hover {
+            color: #ffffff;
+            background: rgba(46, 189, 133, 0.1);
+            transform: scale(1.05);
+        }
+
+        .nav-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            display: block;
+            transition: fill 0.2s, filter 0.2s;
+        }
+
+        /* ESTADOS DEL BOTÓN BUCLE */
+        .nav-btn#loopBtn.loop-once {
+            color: #e5c07b;
+            filter: drop-shadow(0 0 3px rgba(229, 192, 123, 0.4));
+        }
+
+        .nav-btn#loopBtn.loop-infinite {
+            color: #2ebd85;
+            filter: drop-shadow(0 0 5px rgba(46, 189, 133, 0.5));
+        }
+
+        /* Botón de reproducción principal */
+        .play-btn {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e5c07b 0%, #c5a059 100%);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.06);
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.6);
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 18px;
+            border-color: transparent transparent transparent #0d1110;
+            margin-left: 4px;
+        }
+
+        .pause-icon {
+            display: none;
+            width: 14px;
+            height: 18px;
+            justify-content: space-between;
+        }
+
+        .pause-icon::before, .pause-icon::after {
+            content: '';
+            width: 4px;
+            height: 100%;
+            background: #0d1110;
+            border-radius: 2px;
+        }
+
+        /* Barra de progreso */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            margin-bottom: 18px;
+        }
+
+        .time-label {
+            font-size: 0.75rem;
+            color: #8fa39b;
+            min-width: 38px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .progress-bar-wrapper {
+            flex: 1;
+            position: relative;
+            height: 8px;
+            background: #1e2d29;
+            border-radius: 4px;
+        }
+
+        .progress-buffer {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: rgba(46, 189, 133, 0.25);
+            border-radius: 4px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .progress-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #2ebd85 0%, #40dd9f 100%);
+            border-radius: 4px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .progress-slider {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            margin: 0;
+            z-index: 3;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .progress-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 2px solid #2ebd85;
+            box-shadow: 0 0 5px rgba(0,0,0,0.6);
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .progress-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.25);
+        }
+
+        /* Herramientas de audio */
+        .player-tools-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            border-top: 1px solid #23352f;
+            padding-top: 15px;
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex: 1;
+            max-width: 145px;
+        }
+
+        .volume-btn {
+            background: none;
+            border: none;
+            color: #8fa39b;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            width: 24px;
+        }
+
+        .volume-btn:hover {
+            color: #ffffff;
+        }
+
+        .volume-slider-wrapper {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .volume-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+            background: linear-gradient(to right, #2ebd85 100%, #1e2d29 0%);
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 2px solid #2ebd85;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            transition: transform 0.1s;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .volume-percentage {
+            font-size: 0.72rem;
+            color: #8fa39b;
+            min-width: 28px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .speed-select {
+            background: #1c2824;
+            color: #cbdad5;
+            border: 1px solid #2d3f39;
+            padding: 5px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .speed-select:hover {
+            border-color: #2ebd85;
+            color: #ffffff;
+        }
+
+        .download-action-btn {
+            background: rgba(46, 189, 133, 0.1);
+            border: 1px solid rgba(46, 189, 133, 0.3);
+            color: #2ebd85;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s;
+        }
+
+        .download-action-btn:hover {
+            background: #2ebd85;
+            color: #0d1110;
+            border-color: #2ebd85;
+        }
+
+        /* Estilos de Acordeones */
+        .accordion-container {
+            margin-bottom: 15px;
+        }
+
+        .btn-accordion {
+            background: none;
+            border: 1px dashed #4a635a;
+            color: #8fa39b;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-accordion:hover {
+            border-color: #2ebd85;
+            color: #ffffff;
+            background: rgba(46, 189, 133, 0.05);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+            background: #0d1412;
+            border-radius: 12px;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .track-info-extended {
+            padding: 20px;
+            font-size: 0.85rem;
+            color: #a3b8b0;
+        }
+
+        .track-info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(46, 117, 89, 0.1);
+        }
+
+        .track-info-row:last-child {
+            border-bottom: none;
+        }
+
+        .track-info-row span:first-child {
+            color: #7a8f87;
+            font-weight: 500;
+        }
+
+        .track-info-row span:last-child {
+            color: #cbdad5;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* DISEÑO MEJORADO DE LAS LYRICS CON SCROLL INTERNO REDISEÑADO COHERENTE */
+        .lyrics-text {
+            padding: 22px;
+            font-size: 0.94rem;
+            color: #b3c7c0;
+            line-height: 1.8;
+            max-height: 380px;
+            overflow-y: auto;
+            text-align: center;
+        }
+
+        /* SCROLL INTERNO PARA LA CAJA DE TEXTO (A juego con el del navegador) */
+        .lyrics-text::-webkit-scrollbar {
+            width: 10px;
+        }
+        .lyrics-text::-webkit-scrollbar-track {
+            background: rgba(13, 20, 18, 0.6);
+            border-radius: 8px;
+        }
+        .lyrics-text::-webkit-scrollbar-thumb {
+            background: #226b50;
+            border-radius: 8px;
+            border: 2px solid rgba(13, 20, 18, 0.6);
+        }
+        .lyrics-text::-webkit-scrollbar-thumb:hover {
+            background: #2ebd85;
+        }
+
+        /* Etiquetas estructuradas premium para secciones musicales */
+        .lyrics-tag {
+            display: inline-block;
+            color: #e5c07b;
+            background: rgba(229, 192, 123, 0.08);
+            border: 1px solid rgba(229, 192, 123, 0.2);
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+        
+        .lyrics-text .lyrics-tag:first-child {
+            margin-top: 0;
+        }
+
+        .lyrics-line {
+            margin-bottom: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .lyrics-line:hover {
+            color: #ffffff;
+        }
+
+        /* Botón de Celebración */
+        .btn-celebrate {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #c5a059 0%, #ab843c 100%);
+            color: #0d1110;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(171, 132, 60, 0.3);
+            margin: 20px 0;
+        }
+
+        .btn-celebrate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(171, 132, 60, 0.5);
+        }
+
+        /* Compartir */
+        .share-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .share-btn {
+            background: #1c2824;
+            border: 1px solid #2d3f39;
+            color: #cbdad5;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .share-btn:hover {
+            background: #2ebd85;
+            color: #0d1110;
+            border-color: #2ebd85;
+        }
+
+        .easter-egg-toast {
+            display: none;
+            background: #2ebd85;
+            color: #0d1110;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: 15px;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Notificaciones Dinámicas Flotantes */
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2ebd85;
+            color: #0d1110;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            z-index: 10;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+        }
+
+        .toast-notification.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast-notification.loop-toast {
+            background: #131c19;
+            color: #cbdad5;
+            border: 1px solid #2ebd85;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="birthday-song" preload="metadata">
+        <source src="https://cdn1.suno.ai/f1428dfb-36de-4a2f-ac61-72a1e01c2c45.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="card-container">
+        <div class="badge-birthday">
+            🎂 ¡FELIZ CUMPLE CRISTINA, 26 PRIMAVERAS! 🎉
+        </div>
+
+        <div class="cover-wrapper">
+            <img class="cover-art" src="https://i.ibb.co/9dM2NVy/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.png" alt="La Guerrera Silenciosa">
+        </div>
+
+        <div class="track-header-block">
+            <h1 class="track-main-title">La Guerrera Silenciosa</h1>
+            <div class="track-dedication-badge">
+                <span>🩺</span> Dedicado a la niña buena del hospital
+            </div>
+            <div class="track-meta-subtitle">
+                Homenaje Especial <span class="separator">•</span> Flamenco v2
+            </div>
+        </div>
+
+        <div class="dedication-box">
+            <h3>💌 De tus amigos con todo el corazón:</h3>
+            <p>"A la que cura con abrazos y nunca deja a nadie atrás. Que sigas brillando e inundando el hospital y nuestras vidas con tu magia. ¡Te queremos un mundo, Cris!"</p>
+        </div>
+
+        <div class="custom-player">
+            <div class="player-controls">
+                
+                <button class="nav-btn" id="restartBtn" title="Volver al principio">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 6h2v12H6V6zm11.5 12l-8.5-6 8.5-6v12z"/>
+                    </svg>
+                </button>
+
+                <button class="nav-btn" id="rewindBtn" title="Retroceder 10 segundos">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/>
+                    </svg>
+                </button>
+                
+                <button class="play-btn" id="customPlayBtn" title="Reproducir">
+                    <div class="play-icon" id="playIcon"></div>
+                    <div class="pause-icon" id="pauseIcon"></div>
+                </button>
+                
+                <button class="nav-btn" id="forwardBtn" title="Adelantar 10 segundos">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/>
+                    </svg>
+                </button>
+
+                <button class="nav-btn" id="loopBtn" title="Bucle: Desactivado">
+                    <svg viewBox="0 0 24 24" id="loopSvg">
+                        <g id="loopGraphicsContainer"></g>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="progress-container">
+                <span class="time-label" id="currentTime">0:00</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-buffer" id="progressBuffer"></div>
+                    <div class="progress-fill" id="progressFill"></div>
+                    <input type="range" class="progress-slider" id="progressSlider" min="0" max="100" value="0">
+                </div>
+                <span class="time-label" id="totalDuration">0:00</span>
+            </div>
+
+            <div class="player-tools-row">
+                <div class="volume-container">
+                    <button class="volume-btn" id="volumeBtn">🔊</button>
+                    <div class="volume-slider-wrapper">
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+                    </div>
+                    <span class="volume-percentage" id="volumePercentage">100%</span>
+                </div>
+
+                <div>
+                    <select class="speed-select" id="speedSelect">
+                        <option value="0.5">0.5x</option>
+                        <option value="0.75">0.75x</option>
+                        <option value="1" selected>Normal</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="2">2x</option>
+                    </select>
+                </div>
+
+                <a href="https://cdn1.suno.ai/f1428dfb-36de-4a2f-ac61-72a1e01c2c45.mp3" download="Cristina - La Guerrera Silenciosa.mp3" class="download-action-btn">
+                    📥 Descargar
+                </a>
+            </div>
+        </div>
+
+        <div class="accordion-container">
+            <button class="btn-accordion" onclick="toggleAccordion('infoContent')">
+                <span>📊</span> Ver detalles de la canción
+            </button>
+            <div class="accordion-content" id="infoContent">
+                <div class="track-info-extended">
+                    <div class="track-info-row">
+                        <span>Título:</span>
+                        <span>La Guerrera Silenciosa (Flamenco v2)</span>
+                    </div>
+                    <div class="track-info-row">
+                        <span>Artista / Dedicatoria:</span>
+                        <span>Dra. Cristina</span>
+                    </div>
+                    <div class="track-info-row">
+                        <span>Género:</span>
+                        <span>Flamenco Urbano / Regalo Especial</span>
+                    </div>
+                    <div class="track-info-row">
+                        <span>Producción:</span>
+                        <span>Tus amigos de siempre con IA</span>
+                    </div>
+                    <div class="track-info-row">
+                        <span>Álbum:</span>
+                        <span>Las 26 Primaveras (Single)</span>
+                    </div>
+                    <div class="track-info-row">
+                        <span>Fecha de Lanzamiento:</span>
+                        <span>Mayo 2026</span>
+                    </div>
+                    <div class="track-info-row">
+                        <span>Calidad del Archivo:</span>
+                        <span>MP3 High Quality (322kbps)</span>
+                    </div>
+                    <div class="track-info-row">
+                        <span>Licencia:</span>
+                        <span>Uso Personal / Amistad Eterna ❤️</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-container">
+            <button class="btn-accordion" onclick="toggleAccordion('lyricsContent')">
+                <span>🎵</span> Ver la letra completa
+            </button>
+            <div class="accordion-content" id="lyricsContent">
+                <div class="lyrics-text">
+                    <div class="lyrics-tag">[Intro]</div>
+                    <div class="lyrics-line">Yeah-eh</div>
+                    <div class="lyrics-line">Pa’ la niña del hospital</div>
+                    <div class="lyrics-line">La que nunca deja a nadie atrás</div>
+                    <div class="lyrics-line">Cristina… 26 ya</div>
+                    <div class="lyrics-line">Dale palmas, eh</div>
+
+                    <div class="lyrics-tag">[Verso 1]</div>
+                    <div class="lyrics-line">Sale temprano aunque no haya dormío’</div>
+                    <div class="lyrics-line">Siempre cuidando corazones partíos’</div>
+                    <div class="lyrics-line">Tiene ojeras pero nunca se rinde</div>
+                    <div class="lyrics-line">Mientras otros hablan, ella siempre asiste</div>
+                    <div class="lyrics-line">Va con la bata y con arte en la mirada</div>
+                    <div class="lyrics-line">Media vida arreglando madrugadas</div>
+                    <div class="lyrics-line">Y aunque el mundo a veces pese demasiado</div>
+                    <div class="lyrics-line">Ella sigue dando luz sin pedir nada a cambio</div>
+
+                    <div class="lyrics-line" style="margin-top: 12px;">Y dime quién</div>
+                    <div class="lyrics-line">Se queda cuando todo va mal</div>
+                    <div class="lyrics-line">Quién abraza aunque ella esté fatal</div>
+                    <div class="lyrics-line">Quién sonríe pa’ que otro pueda aguantar</div>
+                    <div class="lyrics-line">Cristina lo hace natural</div>
+
+                    <div class="lyrics-tag">[Pre-Coro]</div>
+                    <div class="lyrics-line">Y aunque el tiempo vaya rápido</div>
+                    <div class="lyrics-line">Tú sigues brillando igual</div>
+                    <div class="lyrics-line">26 vueltas al mundo</div>
+                    <div class="lyrics-line">Y todavía te queda magia pa’ regalar</div>
+
+                    <div class="lyrics-tag">[Estribillo]</div>
+                    <div class="lyrics-line">Que suenen palmas por Cristina</div>
+                    <div class="lyrics-line">La niña buena del hospital</div>
+                    <div class="lyrics-line">La que cura con abrazos</div>
+                    <div class="lyrics-line">Y tiene un corazón que no se puede explicar</div>
+                    <div class="lyrics-line">26 primaveras</div>
+                    <div class="lyrics-line">Y sigue siendo especial</div>
+                    <div class="lyrics-line">Tiene fuerza pa’ salvarte</div>
+                    <div class="lyrics-line">Y locura pa’ ponerse a bailar</div>
+                    <div class="lyrics-line">Eh-eh</div>
+                    <div class="lyrics-line">Cristina no cambia</div>
+                    <div class="lyrics-line">Aunque la vida le apriete el compás</div>
+                    <div class="lyrics-line">Eh-eh</div>
+                    <div class="lyrics-line">Siempre pa’lante</div>
+                    <div class="lyrics-line">Con el alma llena de verdad</div>
+
+                    <div class="lyrics-tag">[Verso 2]</div>
+                    <div class="lyrics-line">Le gusta ayudar aunque nadie lo vea</div>
+                    <div class="lyrics-line">Nunca presume de todo lo que pelea</div>
+                    <div class="lyrics-line">Tiene algo puro difícil de encontrar</div>
+                    <div class="lyrics-line">De esas personas que te arreglan el día sin hablar</div>
+
+                    <div class="lyrics-line" style="margin-top: 12px;">Y mírala</div>
+                    <div class="lyrics-line">Riéndose fuerte con sus amigas</div>
+                    <div class="lyrics-line">Aunque por dentro lleve mil movidas</div>
+                    <div class="lyrics-line">Pero ella nunca deja caer a los suyos</div>
+                    <div class="lyrics-line">Por eso el mundo se le queda pequeño</div>
+                    <div class="lyrics-line">Tiene duende, tiene calma</div>
+                    <div class="lyrics-line">Tiene fuego dentro del alma</div>
+                    <div class="lyrics-line">Y aunque a veces dude de sí misma</div>
+                    <div class="lyrics-line">Vale más de lo que imagina</div>
+
+                    <div class="lyrics-tag">[Puente Flamenco]</div>
+                    <div class="lyrics-line">Ay Cristina</div>
+                    <div class="lyrics-line">Que la vida te devuelva</div>
+                    <div class="lyrics-line">To’ lo bueno que has dejao’</div>
+                    <div class="lyrics-line">En cada planta y cada puerta</div>
+                    <div class="lyrics-line">Donde alguien te necesitó</div>
+                    <div class="lyrics-line">Porque hay personas que trabajan</div>
+                    <div class="lyrics-line">Y otras que dejan huella</div>
+                    <div class="lyrics-line">Y tú naciste pa’ lo segundo</div>
+                    <div class="lyrics-line">Aunque no te des cuenta de ella</div>
+
+                    <div class="lyrics-tag">[Último Estribillo]</div>
+                    <div class="lyrics-line">Que suenen palmas por Cristina</div>
+                    <div class="lyrics-line">Hoy nadie la puede parar</div>
+                    <div class="lyrics-line">26 y más bonita</div>
+                    <div class="lyrics-line">Con esa forma suya de cuidar</div>
+                    <div class="lyrics-line">Que baile toda la noche</div>
+                    <div class="lyrics-line">Que hoy le toca celebrar</div>
+                    <div class="lyrics-line">La que salva corazones</div>
+                    <div class="lyrics-line">También merece felicidad</div>
+                    <div class="lyrics-line">Eh-eh</div>
+                    <div class="lyrics-line">Cristina sonríe</div>
+                    <div class="lyrics-line">Que hoy el mundo canta pa’ ti</div>
+                    <div class="lyrics-line">Eh-eh</div>
+                    <div class="lyrics-line">Brindo esta noche</div>
+                    <div class="lyrics-line">Por todo lo que haces sin pedir</div>
+
+                    <div class="lyrics-tag">[Outro]</div>
+                    <div class="lyrics-line">Pa’ Cristina</div>
+                    <div class="lyrics-line">La guerrera silenciosa</div>
+                    <div class="lyrics-line">26 años</div>
+                    <div class="lyrics-line" style="color: #e5c07b;">Y lo mejor todavía no ha empezao’…</div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-celebrate" onclick="launchConfetti()">¡Felicitar a lo grande! 🥳</button>
+
+        <div class="share-container">
+            <button class="share-btn" id="shareWhatsAppBtn">
+                <span>💬</span> WhatsApp
+            </button>
+            <button class="share-btn" id="shareInstagramBtn">
+                <span>📸</span> Compartir / Link
+            </button>
+        </div>
+
+        <div class="easter-egg-toast" id="easterEgg">
+            🎁 ¡Fin del tema! Ahora ve corriendo y dale un abrazo gigante a la cumpleañera ❤️
+        </div>
+    </div>
+
+    <div class="toast-notification" id="toastNotification">Enlace copiado al portapapeles 📋</div>
+
+    <script>
+        const audio = document.getElementById('birthday-song');
+        const playBtn = document.getElementById('customPlayBtn');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const progressFill = document.getElementById('progressFill');
+        const progressBuffer = document.getElementById('progressBuffer');
+        const progressSlider = document.getElementById('progressSlider');
+        const currentTimeLabel = document.getElementById('currentTime');
+        const totalDurationLabel = document.getElementById('totalDuration');
+        
+        // Elementos de navegación
+        const restartBtn = document.getElementById('restartBtn');
+        const loopBtn = document.getElementById('loopBtn');
+        const loopGraphicsContainer = document.getElementById('loopGraphicsContainer');
+        const rewindBtn = document.getElementById('rewindBtn');
+        const forwardBtn = document.getElementById('forwardBtn');
+        
+        const volumeBtn = document.getElementById('volumeBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumePercentage = document.getElementById('volumePercentage');
+        const speedSelect = document.getElementById('speedSelect');
+
+        const shareWhatsAppBtn = document.getElementById('shareWhatsAppBtn');
+        const shareInstagramBtn = document.getElementById('shareInstagramBtn');
+        const toastNotification = document.getElementById('toastNotification');
+        const easterEgg = document.getElementById('easterEgg');
+
+        let lastVolume = 1.0;
+        let isSeeking = false;
+        
+        let loopState = 0; 
+        let hasRepeatedOnce = false; 
+
+        function renderLoopIcon(state) {
+            let basePaths = `
+                <g transform="scale(0.85)" transform-origin="12 12">
+                    <path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/>
+                </g>
+            `;
+            
+            if (state === 0) {
+                return basePaths;
+            } else if (state === 1) {
+                return basePaths + `
+                    <rect x="14" y="13" width="7" height="9" rx="1.5" fill="#e5c07b" />
+                    <text x="17.5" y="20.5" font-family="'Segoe UI', Arial, sans-serif" font-size="8" font-weight="900" fill="#0d1110" text-anchor="middle">1</text>
+                `;
+            } else if (state === 2) {
+                return basePaths + `
+                    <rect x="13" y="13" width="9" height="9" rx="1.5" fill="#2ebd85" />
+                    <text x="17.5" y="20" font-family="'Segoe UI', Arial, sans-serif" font-size="9" font-weight="900" fill="#0d1110" text-anchor="middle">∞</text>
+                `;
+            }
+        }
+
+        audio.volume = 1.0;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(launchConfetti, 500);
+            updateVolumeSliderBackground(audio.volume);
+            loopGraphicsContainer.innerHTML = renderLoopIcon(0);
+            
+            const currentUrl = window.location.href;
+            shareWhatsAppBtn.addEventListener('click', () => {
+                const text = encodeURIComponent(`¡Escucha el tema oficial de cumpleaños que le hemos hecho a Cristina! 🎂🎵: ${currentUrl}`);
+                window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+            });
+
+            shareInstagramBtn.addEventListener('click', async () => {
+                if (navigator.share) {
+                    try {
+                        await navigator.share({
+                            title: 'Canción de Cumpleaños para Cristina',
+                            text: '¡Mira el homenaje especial para Cristina por sus 26 primaveras! 🎂',
+                            url: currentUrl
+                        });
+                    } catch (err) {
+                        console.log("Compartición cancelada");
+                    }
+                } else {
+                    navigator.clipboard.writeText(currentUrl).then(() => {
+                        showToast('Enlace copiado al portapapeles 📋', false);
+                    });
+                }
+            });
+        });
+
+        function showToast(text, isLoopMsg = false) {
+            toastNotification.textContent = text;
+            if (isLoopMsg) {
+                toastNotification.classList.add('loop-toast');
+            } else {
+                toastNotification.classList.remove('loop-toast');
+            }
+            toastNotification.classList.add('show');
+            setTimeout(() => {
+                toastNotification.classList.remove('show');
+            }, 2000);
+        }
+
+        function resetTrackEndEffects() {
+            if (easterEgg.style.display === 'block' || easterEgg.style.display === '') {
+                easterEgg.style.display = 'none';
+            }
+        }
+
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'flex';
+            } else {
+                audio.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            }
+        });
+
+        restartBtn.addEventListener('click', () => {
+            audio.currentTime = 0;
+            hasRepeatedOnce = false; 
+            resetTrackEndEffects(); 
+            if (audio.paused) {
+                audio.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'flex';
+            }
+        });
+
+        loopBtn.addEventListener('click', () => {
+            loopState = (loopState + 1) % 3;
+            loopBtn.classList.remove('loop-once', 'loop-infinite');
+            
+            if (loopState === 0) {
+                audio.loop = false;
+                loopGraphicsContainer.innerHTML = renderLoopIcon(0);
+                loopBtn.setAttribute('title', 'Bucle: Desactivado');
+                showToast('🔀 Bucle desactivado', true);
+            } else if (loopState === 1) {
+                audio.loop = false; 
+                hasRepeatedOnce = false;
+                loopBtn.classList.add('loop-once');
+                loopGraphicsContainer.innerHTML = renderLoopIcon(1);
+                loopBtn.setAttribute('title', 'Bucle: Repetir 1 vez');
+                showToast('🔂 Se repetirá solo una vez', true);
+            } else if (loopState === 2) {
+                audio.loop = true; 
+                loopBtn.classList.add('loop-infinite');
+                loopGraphicsContainer.innerHTML = renderLoopIcon(2);
+                loopBtn.setAttribute('title', 'Bucle: Infinito');
+                showToast('🔁 Repetición infinita activada', true);
+            }
+        });
+
+        rewindBtn.addEventListener('click', () => { 
+            audio.currentTime = Math.max(0, audio.currentTime - 10); 
+            if (audio.currentTime === 0) resetTrackEndEffects();
+        });
+        
+        forwardBtn.addEventListener('click', () => { audio.currentTime = Math.min(audio.duration, audio.currentTime + 10); });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration && !isSeeking) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progressSlider.value = percent;
+                progressFill.style.width = `${percent}%`;
+                currentTimeLabel.textContent = formatTime(audio.currentTime);
+                if (audio.currentTime === 0) resetTrackEndEffects();
+            }
+        });
+
+        progressSlider.addEventListener('input', (e) => {
+            isSeeking = true;
+            const percent = e.target.value;
+            progressFill.style.width = `${percent}%`;
+            currentTimeLabel.textContent = formatTime((percent / 100) * audio.duration);
+        });
+
+        progressSlider.addEventListener('change', (e) => {
+            audio.currentTime = (e.target.value / 100) * audio.duration;
+            if (audio.currentTime === 0) {
+                resetTrackEndEffects();
+                hasRepeatedOnce = false;
+            }
+            isSeeking = false;
+        });
+
+        audio.addEventListener('progress', updateBufferTrack);
+        audio.addEventListener('timeupdate', updateBufferTrack);
+
+        function updateBufferTrack() {
+            if (audio.duration && audio.buffered.length > 0) {
+                let bufferedEnd = 0;
+                for (let i = 0; i < audio.buffered.length; i++) {
+                    if (audio.buffered.start(i) <= audio.currentTime && audio.buffered.end(i) >= audio.currentTime) {
+                        bufferedEnd = audio.buffered.end(i);
+                        break;
+                    }
+                }
+                if (bufferedEnd === 0) {
+                    bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
+                }
+                const bufferPercent = (bufferedEnd / audio.duration) * 100;
+                progressBuffer.style.width = `${bufferPercent}%`;
+            }
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            totalDurationLabel.textContent = formatTime(audio.duration);
+            updateBufferTrack();
+        });
+
+        function updateVolumeSliderBackground(value) {
+            const percentage = value * 100;
+            volumeSlider.style.background = `linear-gradient(to right, #2ebd85 0%, #2ebd85 ${percentage}%, #1e2d29 ${percentage}%, #1e2d29 100%)`;
+            volumePercentage.textContent = `${Math.round(percentage)}%`;
+        }
+
+        volumeSlider.addEventListener('input', (e) => {
+            const vol = parseFloat(e.target.value);
+            audio.volume = vol;
+            updateVolumeSliderBackground(vol);
+            if (vol === 0) volumeBtn.textContent = '🔇';
+            else if (vol < 0.5) volumeBtn.textContent = '🔉';
+            else volumeBtn.textContent = '🔊';
+        });
+
+        volumeBtn.addEventListener('click', () => {
+            if (audio.volume > 0) {
+                lastVolume = audio.volume;
+                audio.volume = 0;
+                volumeSlider.value = 0;
+                updateVolumeSliderBackground(0);
+                volumeBtn.textContent = '🔇';
+            } else {
+                audio.volume = lastVolume;
+                volumeSlider.value = lastVolume;
+                updateVolumeSliderBackground(lastVolume);
+                volumeBtn.textContent = lastVolume < 0.5 ? '🔉' : '🔊';
+            }
+        });
+
+        speedSelect.addEventListener('change', (e) => { audio.playbackRate = parseFloat(e.target.value); });
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function launchConfetti() {
+            confetti({ particleCount: 100, spread: 70, origin: { x: 0.1, y: 0.8 } });
+            confetti({ particleCount: 100, spread: 70, origin: { x: 0.9, y: 0.8 } });
+        }
+
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+                content.style.maxHeight = "0px";
+            } else {
+                content.style.maxHeight = id === 'infoContent' ? "400px" : "800px";
+            }
+        }
+
+        audio.addEventListener('ended', () => {
+            if (loopState === 1) {
+                if (!hasRepeatedOnce) {
+                    hasRepeatedOnce = true;
+                    audio.currentTime = 0;
+                    audio.play();
+                } else {
+                    loopState = 0;
+                    hasRepeatedOnce = false;
+                    loopBtn.classList.remove('loop-once');
+                    loopGraphicsContainer.innerHTML = renderLoopIcon(0);
+                    loopBtn.setAttribute('title', 'Bucle: Desactivado');
+                    triggerTrackEndEffects();
+                }
+            } else if (loopState === 0) {
+                triggerTrackEndEffects();
+            }
+        });
+
+        function triggerTrackEndEffects() {
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            easterEgg.style.display = 'block';
+            launchConfetti();
+        }
+    </script>
+</body>
+</html>
