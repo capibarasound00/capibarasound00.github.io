@@ -4,17 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)</title>
-    
-    <meta property="og:type" content="music.song">
-    <meta property="og:title" content="¡Feliz Cumpleaños Cristina! - 26 Primaveras 🎂">
-    <meta property="og:description" content="Escucha 'La Guerrera Silenciosa', el homenaje especial en Flamenco v2 para la niña buena del hospital. ❤️🎵">
-    <meta property="og:image" content="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.png">
-    <meta property="og:image:secure_url" content="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="300">
-    <meta property="og:image:height" content="300">
-    <meta property="og:url" content="https://capibarasound00.github.io/cristina26/">
-
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * {
@@ -774,7 +763,7 @@
 <body>
 
     <audio id="birthday-song" preload="metadata">
-        <source src="https://capibarasound00.github.io/cristina26/assets/sound/Cristina - La Guerrera Silenciosa (Flamenco v2).mp3" type="audio/mpeg">
+        <source src="https://cdn1.suno.ai/f1428dfb-36de-4a2f-ac61-72a1e01c2c45.mp3" type="audio/mpeg">
     </audio>
 
     <div class="card-container">
@@ -783,7 +772,7 @@
         </div>
 
         <div class="cover-wrapper">
-            <img class="cover-art" src="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.png" alt="La Guerrera Silenciosa">
+            <img class="cover-art" src="https://i.ibb.co/9dM2NVy/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.png" alt="La Guerrera Silenciosa">
         </div>
 
         <div class="track-header-block">
@@ -864,7 +853,7 @@
                     </select>
                 </div>
 
-                <a href="https://capibarasound00.github.io/cristina26/assets/sound/Cristina - La Guerrera Silenciosa (Flamenco v2).mp3" download="Cristina - La Guerrera Silenciosa.mp3" class="download-action-btn">
+                <a href="https://cdn1.suno.ai/f1428dfb-36de-4a2f-ac61-72a1e01c2c45.mp3" download="Cristina - La Guerrera Silenciosa.mp3" class="download-action-btn">
                     📥 Descargar
                 </a>
             </div>
@@ -972,7 +961,7 @@
                     <div class="lyrics-line" style="margin-top: 12px;">Y mírala</div>
                     <div class="lyrics-line">Riéndose fuerte con sus amigas</div>
                     <div class="lyrics-line">Aunque por dentro lleve mil movidas</div>
-                    <div class="lyrics-line">But ella nunca deja caer a los suyos</div>
+                    <div class="lyrics-line">Pero ella nunca deja caer a los suyos</div>
                     <div class="lyrics-line">Por eso el mundo se le queda pequeño</div>
                     <div class="lyrics-line">Tiene duende, tiene calma</div>
                     <div class="lyrics-line">Tiene fuego dentro del alma</div>
@@ -1010,7 +999,7 @@
                     <div class="lyrics-line">Pa’ Cristina</div>
                     <div class="lyrics-line">La guerrera silenciosa</div>
                     <div class="lyrics-line">26 años</div>
-                    <div class="lyrics-line" style="color: #e5c07b;">Y lo mejor todavía no ha emopezó’…</div>
+                    <div class="lyrics-line" style="color: #e5c07b;">Y lo mejor todavía no ha empezao’…</div>
                 </div>
             </div>
         </div>
@@ -1098,10 +1087,11 @@
             
 			// Función auxiliar para obtener la URL real o una limpia si estás en local
 			function getShareableUrl() {
+				// Si se abre como archivo local, evitamos enviar la ruta del disco duro
 				if (window.location.protocol === 'file:') {
-					return 'https://capibarasound00.github.io/cristina26/'; 
+					return 'https://capibarasound00.github.io/cristina26/'; // Puedes cambiar esto por tu enlace definitivo
 				}
-				return window.location.href; 
+				return window.location.href; // En producción, toma la URL automática de la web
 			}
 			
             const currentUrl = getShareableUrl();
@@ -1286,7 +1276,6 @@
 
         speedSelect.addEventListener('change', (e) => { audio.playbackRate = parseFloat(e.target.value); });
 
-        // Formateador de tiempo
         function formatTime(seconds) {
             if (isNaN(seconds)) return "0:00";
             const mins = Math.floor(seconds / 60);
