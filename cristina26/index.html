@@ -2,8 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)</title>
+    <meta name="description" content="Escucha el homenaje especial para Cristina por sus 26 primaveras. ¡Un regalo de sus amigos de siempre! 🎂🎵">
     
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     
@@ -33,14 +34,26 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* EVITAR SCROLL HORIZONTAL GENERAL */
         html, body {
             max-width: 100%;
-            overflow-x: hidden;
             width: 100%;
+            min-height: 100vh;
+            background-color: #050a08;
+            color: #ffffff;
         }
 
-        /* SCROLLBAR GENERAL DEL NAVEGADOR */
+        /* FONDO OPTIMIZADO: Soluciona franja blanca en móvil y ahorra GPU */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1b352b 0%, #091310 70%, #050a08 100%);
+            z-index: -1;
+        }
+
         ::-webkit-scrollbar {
             width: 10px;
             height: 10px;
@@ -61,42 +74,31 @@
             background: #2ebd85;
         }
 
-        /* FONDO PREMIUM DINÁMICO MEJORADO */
         body {
-            background: radial-gradient(circle at var(--bg-x, 50%) var(--bg-y, 50%), #1b352b 0%, #091310 70%, #050a08 100%);
-            background-attachment: fixed;
-            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             padding: 20px 15px;
-            position: relative;
-            transition: background 0.6s ease-out; /* Movimiento suave de luces del fondo */
         }
 
-        /* Contenedor adaptativo premium */
         .card-container {
-            background: rgba(19, 28, 25, 0.85);
+            background: rgba(19, 28, 25, 0.9);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(46, 189, 133, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(46, 189, 133, 0.15);
             width: 100%;
             max-width: 460px;
             padding: 20px;
             text-align: center;
             border: 1px solid rgba(45, 66, 59, 0.6);
-            position: relative;
-            z-index: 1;
         }
 
-        /* Insignia de Cumpleaños */
         .badge-birthday {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, rgba(197, 160, 89, 0.15) 0%, rgba(171, 132, 60, 0.15) 100%);
+            background: rgba(197, 160, 89, 0.1);
             color: #e5c07b;
             padding: 8px 14px;
             border-radius: 20px;
@@ -117,7 +119,7 @@
             }
         }
 
-        /* 🎨 SKELETON LOADING PARA LA PORTADA */
+        /* CONTENEDOR DE LA PORTADA Y SKELETON CORREGIDO */
         .cover-wrapper {
             position: relative;
             width: 100%;
@@ -127,22 +129,28 @@
             margin-bottom: 24px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
             border: 2px solid #c5a059;
-            animation: neonGlow 4s infinite alternate;
-            
-            /* Animación del esqueleto en CSS puro */
-            background: linear-gradient(90deg, #101816 25%, #1c2b26 50%, #101816 75%);
-            background-size: 200% 100%;
-            animation: skeletonShimmer 1.5s infinite linear, neonGlow 4s infinite alternate;
+            background: #101816; /* Fondo oscuro inicial */
         }
 
-        @keyframes skeletonShimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        /* El brillo verde de carga solo aparece MIENTRAS la imagen NO tenga la clase .loaded */
+        .cover-wrapper:not(.image-is-loaded)::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(46, 189, 133, 0.15), transparent);
+            transform: translateX(-100%);
+            animation: skeletonHardware 1.6s infinite ease-in-out;
+            will-change: transform;
         }
 
-        @keyframes neonGlow {
-            0% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 10px rgba(46, 189, 133, 0.1); }
-            100% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 25px rgba(46, 189, 133, 0.4); }
+        /* Cuando la imagen se carga, eliminamos el fondo de carga para evitar franjas o bordes residuales */
+        .cover-wrapper.image-is-loaded {
+            background: transparent !important;
+        }
+
+        @keyframes skeletonHardware {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .cover-art {
@@ -151,19 +159,17 @@
             object-fit: cover;
             display: block;
             opacity: 0;
-            transition: opacity 0.4s ease-in-out; /* Desvanecimiento suave al cargar */
+            transition: opacity 0.3s ease-in-out;
         }
 
         .cover-art.loaded {
             opacity: 1;
         }
 
-        /* Bloque de títulos principal */
         .track-header-block {
             margin-bottom: 20px;
             padding: 0 5px;
             width: 100%;
-            overflow: hidden;
         }
 
         .track-main-title {
@@ -182,15 +188,13 @@
         }
 
         @media (min-width: 400px) {
-            .track-main-title {
-                font-size: 1.85rem;
-            }
+            .track-main-title { font-size: 1.85rem; }
         }
 
         .track-dedication-badge {
             display: inline-block;
             background: rgba(46, 189, 133, 0.08);
-            border: 1px solid rgba(46, 189, 133, 0.25);
+            border: 1px solid rgba(46, 189, 133, 0.3);
             padding: 6px 14px;
             border-radius: 30px;
             color: #40dd9f;
@@ -199,12 +203,6 @@
             margin-bottom: 12px;
             max-width: 100%;
             overflow-wrap: break-word;
-        }
-
-        @media (min-width: 400px) {
-            .track-dedication-badge {
-                font-size: 0.92rem;
-            }
         }
 
         .track-dedication-badge span {
@@ -217,7 +215,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            color: #7a8f87;
+            color: #9cb0a8;
             font-size: 0.82rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
@@ -239,7 +237,6 @@
             font-size: 0.7rem;
         }
 
-        /* Caja de Dedicatoria */
         .dedication-box {
             background: rgba(28, 40, 36, 0.5);
             border-left: 3px solid #2ebd85;
@@ -249,7 +246,7 @@
             margin-bottom: 24px;
         }
 
-        .dedication-box h3 {
+        .dedication-box h2 {
             font-size: 0.9rem;
             color: #e5c07b;
             margin-bottom: 8px;
@@ -267,11 +264,10 @@
 
         @media (min-width: 400px) {
             .dedication-box { padding: 18px; }
-            .dedication-box h3 { font-size: 0.95rem; }
+            .dedication-box h2 { font-size: 0.95rem; }
             .dedication-box p { font-size: 0.9rem; }
         }
 
-        /* REPRODUCTOR DE AUDIO AVANZADO */
         .custom-player {
             background: linear-gradient(135deg, #172420 0%, #101816 100%);
             border: 1px solid #2d423b;
@@ -285,7 +281,6 @@
             .custom-player { padding: 20px; }
         }
 
-        /* BOTONERA PRINCIPAL REPRODUCTOR (TOUCH OPTIMIZED + RIPPLE) */
         .player-controls {
             display: flex;
             align-items: center;
@@ -302,19 +297,17 @@
         .nav-btn {
             background: none;
             border: none;
-            color: #8fa39b;
+            color: #a2b5ae;
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), color 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 38px;
-            height: 38px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             flex-shrink: 0;
             touch-action: manipulation;
-            position: relative;
-            overflow: hidden; /* Requerido para el efecto de onda táctil */
         }
 
         .nav-btn:hover {
@@ -331,11 +324,8 @@
             height: 18px;
             fill: currentColor;
             display: block;
-            position: relative;
-            z-index: 2;
         }
 
-        /* EVITAR COMPRESIÓN DEL BOTÓN PLAY */
         .play-btn {
             width: 58px;
             height: 58px;
@@ -347,11 +337,9 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
-            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
             flex-shrink: 0;
             touch-action: manipulation;
-            position: relative;
-            overflow: hidden;
         }
 
         .play-btn:hover {
@@ -363,54 +351,25 @@
             transform: scale(0.93);
         }
 
-        /* Iconos dentro del play button */
         .play-icon-svg, .pause-icon-svg {
             width: 22px;
             height: 22px;
             fill: #0d1110;
             display: block;
-            position: relative;
-            z-index: 2;
         }
 
         .pause-icon-svg {
             display: none;
         }
 
-        /* 🎨 EFECTO RIPPLE (ONDA TÁCTIL) */
-        .ripple {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 50%;
-            transform: scale(0);
-            animation: rippleEffect 0.5s linear;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .play-btn .ripple {
-            background: rgba(13, 17, 16, 0.25); /* Color oscuro para contraste en play */
-        }
-
-        @keyframes rippleEffect {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-
-        /* ESTADOS BUCLE */
         .nav-btn#loopBtn.loop-once {
             color: #e5c07b;
-            filter: drop-shadow(0 0 3px rgba(229, 192, 123, 0.4));
         }
 
         .nav-btn#loopBtn.loop-infinite {
             color: #2ebd85;
-            filter: drop-shadow(0 0 5px rgba(46, 189, 133, 0.5));
         }
 
-        /* Barra de progreso */
         .progress-container {
             display: flex;
             align-items: center;
@@ -421,7 +380,7 @@
 
         .time-label {
             font-size: 0.75rem;
-            color: #8fa39b;
+            color: #a2b5ae;
             min-width: 35px;
             font-variant-numeric: tabular-nums;
         }
@@ -442,7 +401,6 @@
             width: 0%;
             background: rgba(46, 189, 133, 0.25);
             border-radius: 4px;
-            z-index: 1;
         }
 
         .progress-fill {
@@ -453,7 +411,6 @@
             width: 0%;
             background: linear-gradient(90deg, #2ebd85 0%, #40dd9f 100%);
             border-radius: 4px;
-            z-index: 2;
         }
 
         .progress-slider {
@@ -473,8 +430,8 @@
 
         .progress-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             background: #ffffff;
             border: 2px solid #2ebd85;
@@ -482,7 +439,6 @@
             cursor: pointer;
         }
 
-        /* HERRAMIENTAS DE AUDIO ADAPTATIVAS */
         .player-tools-row {
             display: flex;
             flex-wrap: wrap;
@@ -494,7 +450,6 @@
             width: 100%;
         }
 
-        /* Contenedor de volumen */
         .volume-container {
             display: flex;
             align-items: center;
@@ -506,7 +461,7 @@
         .volume-btn {
             background: none;
             border: none;
-            color: #8fa39b;
+            color: #a2b5ae;
             font-size: 1.1rem;
             cursor: pointer;
             display: flex;
@@ -547,7 +502,7 @@
 
         .volume-percentage {
             font-size: 0.72rem;
-            color: #8fa39b;
+            color: #a2b5ae;
             min-width: 32px;
             text-align: right;
             font-variant-numeric: tabular-nums;
@@ -568,7 +523,6 @@
             cursor: pointer;
         }
 
-        /* BOTÓN DE DESCARGA EXTERNO */
         .download-wrapper {
             width: 100%;
             margin-top: 15px;
@@ -577,9 +531,9 @@
 
         .download-action-btn {
             background: rgba(46, 189, 133, 0.08);
-            border: 1px solid rgba(46, 189, 133, 0.3);
+            border: 1px solid rgba(46, 189, 133, 0.4);
             color: #2ebd85;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: 12px;
             font-size: 0.85rem;
             text-decoration: none;
@@ -588,7 +542,7 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: background 0.2s ease, color 0.2s ease;
             width: 100%;
             touch-action: manipulation;
         }
@@ -599,7 +553,6 @@
             border-color: #2ebd85;
         }
 
-        /* Estilos de Acordeones (GPU ACCELERATED) */
         .accordion-container {
             margin-bottom: 12px;
             width: 100%;
@@ -608,8 +561,8 @@
         .btn-accordion {
             background: none;
             border: 1px dashed #4a635a;
-            color: #8fa39b;
-            padding: 10px 16px;
+            color: #a2b5ae;
+            padding: 12px 16px;
             border-radius: 20px;
             font-size: 0.85rem;
             cursor: pointer;
@@ -618,7 +571,7 @@
             justify-content: center;
             align-items: center;
             gap: 8px;
-            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: border-color 0.2s ease, color 0.2s ease;
             touch-action: manipulation;
         }
 
@@ -641,7 +594,6 @@
             width: 100%;
         }
 
-        /* LYRICS CON SCROLL INTERNO AJUSTADO */
         .lyrics-text {
             padding: 15px;
             font-size: 0.9rem;
@@ -690,7 +642,6 @@
         .lyrics-text .lyrics-tag:first-child { margin-top: 0; }
         .lyrics-line { margin-bottom: 4px; }
 
-        /* Botón de Celebración */
         .btn-celebrate {
             display: block;
             width: 100%;
@@ -706,17 +657,14 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(171, 132, 60, 0.3);
             margin: 20px 0;
-            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.2s ease;
             touch-action: manipulation;
-            position: relative;
-            overflow: hidden;
         }
 
         .btn-celebrate:active {
             transform: scale(0.96);
         }
 
-        /* Compartir */
         .share-container {
             display: flex;
             justify-content: center;
@@ -729,7 +677,7 @@
             background: #1c2824;
             border: 1px solid #2d3f39;
             color: #cbdad5;
-            padding: 8px 14px;
+            padding: 10px 14px;
             border-radius: 30px;
             font-size: 0.78rem;
             text-decoration: none;
@@ -739,7 +687,7 @@
             cursor: pointer;
             flex: 1;
             justify-content: center;
-            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: background 0.2s ease, color 0.2s ease;
             touch-action: manipulation;
         }
 
@@ -760,7 +708,6 @@
             margin-top: 15px;
         }
 
-        /* NOTIFICACIONES DINÁMICAS FLOTANTES COMPLETAMENTE CENTRADAS */
         .toast-notification {
             position: fixed;
             bottom: 30px;
@@ -803,8 +750,8 @@
             🎂 ¡FELIZ CUMPLE CRISTINA, 26 PRIMAVERAS! 🎉
         </div>
 
-        <div class="cover-wrapper">
-            <img class="cover-art" id="coverImage" src="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.webp" alt="La Guerrera Silenciosa">
+        <div class="cover-wrapper" id="coverWrapper">
+            <img class="cover-art" id="coverImage" src="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.webp" alt="Portada de la canción La Guerrera Silenciosa" width="418" height="418">
         </div>
 
         <div class="track-header-block">
@@ -818,42 +765,42 @@
         </div>
 
         <div class="dedication-box">
-            <h3>💌 De tus amigos con todo el corazón:</h3>
+            <h2>💌 De tus amigos con todo el corazón:</h2>
             <p>"A la que cura con abrazos y nunca deja a nadie atrás. Que sigas brillando e inundando el hospital y nuestras vidas con tu magia. ¡Te queremos un mundo, Cris!"</p>
         </div>
 
         <div class="custom-player">
             <div class="player-controls">
                 
-                <button class="nav-btn ripple-target" id="restartBtn" title="Volver al principio">
-                    <svg viewBox="0 0 24 24">
+                <button class="nav-btn" id="restartBtn" title="Volver al principio" aria-label="Volver al principio de la canción">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M6 6h2v12H6V6zm11.5 12l-8.5-6 8.5-6v12z"/>
                     </svg>
                 </button>
 
-                <button class="nav-btn ripple-target" id="rewindBtn" title="Retroceder 10 segundos">
-                    <svg viewBox="0 0 24 24">
+                <button class="nav-btn" id="rewindBtn" title="Retroceder 10 segundos" aria-label="Retroceder 10 segundos">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/>
                     </svg>
                 </button>
                 
-                <button class="play-btn ripple-target" id="customPlayBtn" title="Reproducir">
-                    <svg class="play-icon-svg" id="playIcon" viewBox="0 0 24 24">
+                <button class="play-btn" id="customPlayBtn" title="Reproducir" aria-label="Reproducir canción">
+                    <svg class="play-icon-svg" id="playIcon" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M8 5v14l11-7z"/>
                     </svg>
-                    <svg class="pause-icon-svg" id="pauseIcon" viewBox="0 0 24 24">
+                    <svg class="pause-icon-svg" id="pauseIcon" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
                     </svg>
                 </button>
                 
-                <button class="nav-btn ripple-target" id="forwardBtn" title="Adelantar 10 segundos">
-                    <svg viewBox="0 0 24 24">
+                <button class="nav-btn" id="forwardBtn" title="Adelantar 10 segundos" aria-label="Adelantar 10 segundos">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/>
                     </svg>
                 </button>
 
-                <button class="nav-btn ripple-target" id="loopBtn" title="Bucle: Desactivado">
-                    <svg viewBox="0 0 24 24" id="loopSvg">
+                <button class="nav-btn" id="loopBtn" title="Bucle: Desactivado" aria-label="Cambiar modo de repetición">
+                    <svg viewBox="0 0 24 24" id="loopSvg" aria-hidden="true">
                         <g id="loopGraphicsContainer"></g>
                     </svg>
                 </button>
@@ -864,22 +811,22 @@
                 <div class="progress-bar-wrapper">
                     <div class="progress-buffer" id="progressBuffer"></div>
                     <div class="progress-fill" id="progressFill"></div>
-                    <input type="range" class="progress-slider" id="progressSlider" min="0" max="100" value="0">
+                    <input type="range" class="progress-slider" id="progressSlider" min="0" max="100" value="0" aria-label="Progreso de la reproducción">
                 </div>
                 <span class="time-label" id="totalDuration">0:00</span>
             </div>
 
             <div class="player-tools-row">
                 <div class="volume-container">
-                    <button class="volume-btn" id="volumeBtn">🔊</button>
+                    <button class="volume-btn" id="volumeBtn" aria-label="Silenciar o activar sonido">🔊</button>
                     <div class="volume-slider-wrapper">
-                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1" aria-label="Control de volumen">
                     </div>
                     <span class="volume-percentage" id="volumePercentage">100%</span>
                 </div>
 
                 <div class="speed-select-container">
-                    <select class="speed-select" id="speedSelect">
+                    <select class="speed-select" id="speedSelect" aria-label="Velocidad de reproducción">
                         <option value="0.5">0.5x</option>
                         <option value="0.75">0.75x</option>
                         <option value="1" selected>Normal</option>
@@ -975,7 +922,7 @@
                     <div class="lyrics-line">Y todavía te queda magia pa’ regalar</div>
 
                     <div class="lyrics-tag">[Estribillo]</div>
-                    <div class="lyrics-line">Que suenen palmas por Cristina</div>
+                    <div class="lyrics-line">Que suennen palmas por Cristina</div>
                     <div class="lyrics-line">La niña buena del hospital</div>
                     <div class="lyrics-line">La que cura con abrazos</div>
                     <div class="lyrics-line">Y tiene un corazón que no se puede explicar</div>
@@ -1012,7 +959,7 @@
                     <div class="lyrics-line">To’ lo bueno que has dejao’</div>
                     <div class="lyrics-line">En cada planta y cada puerta</div>
                     <div class="lyrics-line">Donde alguien te necesitó</div>
-                    <div class="lyrics-line">Porque hay personas que trabajan</div>
+                    <div class="lyrics-line">Because hay personas que trabajan</div>
                     <div class="lyrics-line">Y otras que dejan huella</div>
                     <div class="lyrics-line">Y tú naciste pa’ lo segundo</div>
                     <div class="lyrics-line">Aunque no te des cuenta de ella</div>
@@ -1042,7 +989,7 @@
             </div>
         </div>
 
-        <button class="btn-celebrate ripple-target" onclick="launchConfetti()">¡Felicitar a lo grande! 🥳</button>
+        <button class="btn-celebrate" onclick="launchConfetti()">¡Felicitar a lo grande! 🥳</button>
 
         <div class="share-container">
             <button class="share-btn" id="shareWhatsAppBtn">
@@ -1086,7 +1033,10 @@
         const shareInstagramBtn = document.getElementById('shareInstagramBtn');
         const toastNotification = document.getElementById('toastNotification');
         const easterEgg = document.getElementById('easterEgg');
+        
+        // Elementos de la imagen corregidos
         const coverImage = document.getElementById('coverImage');
+        const coverWrapper = document.getElementById('coverWrapper');
 
         let lastVolume = 1.0;
         let isSeeking = false;
@@ -1116,69 +1066,25 @@
 
         audio.volume = 1.0;
 
+        // Función unificada para marcar la imagen como cargada y limpiar el Skeleton
+        function setCoverAsLoaded() {
+            coverImage.classList.add('loaded');
+            coverWrapper.classList.add('image-is-loaded');
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(launchConfetti, 500);
             updateVolumeSliderBackground(audio.volume);
             loopGraphicsContainer.innerHTML = renderLoopIcon(0);
             
-            // Gestión del Skeleton Loader al cargar la carátula
+            // Verificación del estado de carga de la imagen
             if (coverImage.complete) {
-                coverImage.classList.add('loaded');
+                setCoverAsLoaded();
             } else {
-                coverImage.addEventListener('load', () => {
-                    coverImage.classList.add('loaded');
-                });
+                coverImage.addEventListener('load', setCoverAsLoaded);
             }
 
-            // 🎨 Fondo Dinámico Interactivo (Parallax Orbital Sutil en Móvil)
-            if (window.DeviceOrientationEvent) {
-                window.addEventListener('deviceorientation', (event) => {
-                    // Mapeamos la inclinación del móvil a coordenadas de fondo CSS
-                    const tiltX = Math.min(Math.max(event.gamma, -30), 30); // Límite de giro -30deg a 30deg
-                    const tiltY = Math.min(Math.max(event.beta, 15), 75);   // Límite habitual de uso en mano
-                    
-                    const posX = 50 + (tiltX / 2);
-                    const posY = 50 + ((tiltY - 45) / 2);
-                    
-                    document.body.style.setProperty('--bg-x', `${posX}%`);
-                    document.body.style.setProperty('--bg-y', `${posY}%`);
-                });
-            }
-
-            // Fallback para PC: Movimiento del ratón sutil para el fondo parallax
-            window.addEventListener('mousemove', (e) => {
-                const posX = (e.clientX / window.innerWidth) * 100;
-                const posY = (e.clientY / window.innerHeight) * 100;
-                document.body.style.setProperty('--bg-x', `${posX}%`);
-                document.body.style.setProperty('--bg-y', `${posY}%`);
-            });
-
-            // 🎨 Implementación del Ripple Effect (Onda táctil) en botones
-            const rippleTargets = document.querySelectorAll('.ripple-target');
-            rippleTargets.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    const ripple = document.createElement('span');
-                    ripple.classList.add('ripple');
-                    ripple.style.left = `${x}px`;
-                    ripple.style.top = `${y}px`;
-                    
-                    const size = Math.max(rect.width, rect.height);
-                    ripple.style.width = `${size}px`;
-                    ripple.style.height = `${size}px`;
-                    
-                    this.appendChild(ripple);
-                    
-                    setTimeout(() => {
-                        ripple.remove();
-                    }, 500);
-                });
-            });
-
-            // 🎵 CONFIGURACIÓN DE MEDIA SESSION API (Control nativo pantalla de bloqueo)
+            // MEDIA SESSION API 
             if ('mediaSession' in navigator) {
                 navigator.mediaSession.metadata = new MediaMetadata({
                     title: 'La Guerrera Silenciosa (Single Oficial)',
@@ -1206,7 +1112,7 @@
             
             shareWhatsAppBtn.addEventListener('click', () => {
                 const text = encodeURIComponent(`¡Escucha el tema oficial de cumpleaños que le hemos hecho a Cristina! 🎂🎵: ${currentUrl}`);
-                window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+                window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank', 'noopener');
             });
 
             shareInstagramBtn.addEventListener('click', async () => {
@@ -1394,8 +1300,10 @@
         }
 
         function launchConfetti() {
-            confetti({ particleCount: 100, spread: 70, origin: { x: 0.1, y: 0.8 } });
-            confetti({ particleCount: 100, spread: 70, origin: { x: 0.9, y: 0.8 } });
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 60, spread: 50, origin: { x: 0.2, y: 0.8 } });
+                confetti({ particleCount: 60, spread: 50, origin: { x: 0.8, y: 0.8 } });
+            }
         }
 
         function toggleAccordion(id) {
