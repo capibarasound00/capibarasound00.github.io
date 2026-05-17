@@ -1175,6 +1175,7 @@
             }
         }
 
+        /* ======= PLAY/PAUSE ======= */
         function togglePlayAudio(forceState = null) {
             const shouldPlay = forceState !== null ? forceState : audio.paused;
             if (shouldPlay) {
@@ -1182,6 +1183,13 @@
                 playIcon.style.display = 'none';
                 pauseIcon.style.display = 'block';
                 if ('mediaSession' in navigator) navigator.mediaSession.playbackState = "playing";
+                // Count play
+                if (!hasCountedThisSession) {
+                    hasCountedThisSession = true;
+                    playCount++;
+                    localStorage.setItem('crisCumplePlayCount', playCount);
+                    updatePlayCountDisplay();
+                }
             } else {
                 audio.pause();
                 playIcon.style.display = 'block';
