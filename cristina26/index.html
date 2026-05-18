@@ -346,9 +346,12 @@
             touch-action: manipulation;
         }
 
-        .nav-btn:hover {
-            color: #ffffff;
-            background: rgba(46, 189, 133, 0.1);
+        /* CORRECCIÓN: Los efectos Hover solo se aplican si el dispositivo posee puntero (PC/Ratón) */
+        @media (hover: hover) {
+            .nav-btn:hover {
+                color: #ffffff;
+                background: rgba(46, 189, 133, 0.1);
+            }
         }
 
         .nav-btn:active {
@@ -369,6 +372,7 @@
             box-shadow: 0 6px 20px rgba(197,160,89,0.45);
             transition: transform 0.2s, box-shadow 0.2s; flex-shrink: 0;
             position: relative;
+            touch-action: manipulation;
         }
 
         .play-btn::after {
@@ -380,9 +384,21 @@
             transition: all 0.3s;
         }
 
-        .play-btn:hover { transform: scale(1.07); box-shadow: 0 8px 28px rgba(197,160,89,0.7); }
-        .play-btn:hover::after { inset: -8px; border-color: rgba(229,192,123,0.15); }
-        .play-btn:active { transform: scale(0.93); }
+        /* CORRECCIÓN: Evitamos que se quede agrandado o marcado en el móvil tras pulsar */
+        @media (hover: hover) {
+            .play-btn:hover { 
+                transform: scale(1.07); 
+                box-shadow: 0 8px 28px rgba(197,160,89,0.7); 
+            }
+            .play-btn:hover::after { 
+                inset: -8px; 
+                border-color: rgba(229,192,123,0.15); 
+            }
+        }
+        
+        .play-btn:active { 
+            transform: scale(0.93); 
+        }
 
         .play-icon-svg, .pause-icon-svg { width: 22px; height: 22px; fill: #0d1110; display: block; }
         .pause-icon-svg { display: none; }
@@ -572,10 +588,12 @@
             touch-action: manipulation;
         }
 
-        .download-action-btn:hover {
-            background: #2ebd85;
-            color: #0d1110;
-            border-color: #2ebd85;
+        @media (hover: hover) {
+            .download-action-btn:hover {
+                background: #2ebd85;
+                color: #0d1110;
+                border-color: #2ebd85;
+            }
         }
 
         .accordion-container {
@@ -600,10 +618,12 @@
             touch-action: manipulation;
         }
 
-        .btn-accordion:hover {
-            border-color: #2ebd85;
-            color: #ffffff;
-            background: rgba(46, 189, 133, 0.05);
+        @media (hover: hover) {
+            .btn-accordion:hover {
+                border-color: #2ebd85;
+                color: #ffffff;
+                background: rgba(46, 189, 133, 0.05);
+            }
         }
 
         .accordion-content {
@@ -702,10 +722,12 @@
             touch-action: manipulation;
         }
 
-        .share-btn:hover {
-            background: #2ebd85;
-            color: #0d1110;
-            border-color: #2ebd85;
+        @media (hover: hover) {
+            .share-btn:hover {
+                background: #2ebd85;
+                color: #0d1110;
+                border-color: #2ebd85;
+            }
         }
 
         .easter-egg-toast {
@@ -1183,13 +1205,6 @@
                 playIcon.style.display = 'none';
                 pauseIcon.style.display = 'block';
                 if ('mediaSession' in navigator) navigator.mediaSession.playbackState = "playing";
-                // Count play
-                if (!hasCountedThisSession) {
-                    hasCountedThisSession = true;
-                    playCount++;
-                    localStorage.setItem('crisCumplePlayCount', playCount);
-                    updatePlayCountDisplay();
-                }
             } else {
                 audio.pause();
                 playIcon.style.display = 'block';
