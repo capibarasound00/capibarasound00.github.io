@@ -358,7 +358,7 @@
             display: block;
         }
 
-        /* CORRECCIÓN BOTÓN PLAY: Por defecto está siempre estable en modo Imagen 2 */
+        /* ======= CORRECCIÓN COMPORTAMIENTO BOTÓN PLAY EN ESCRITORIO Y MÓVIL ======= */
         .play-btn {
             width: 60px;
             height: 60px;
@@ -370,9 +370,10 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 6px 20px rgba(197, 160, 89, 0.45);
-            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s ease;
             flex-shrink: 0;
             position: relative;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .play-btn::after {
@@ -381,10 +382,10 @@
             inset: -4px;
             border-radius: 50%;
             border: 2px solid rgba(229, 192, 123, 0.3);
-            transition: all 0.1s ease;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* SOLUCIÓN AL TRABADO EN MÓVIL: El efecto hover solo se activa si hay un ratón (Ordenadores PC) */
+        /* El hover se encapsula SÓLO para ordenadores (Dispositivos con puntero preciso) */
         @media (hover: hover) {
             .play-btn:hover {
                 transform: scale(1.07);
@@ -396,14 +397,17 @@
             }
         }
 
-        /* El estado al pulsar se controla en JS de forma instantánea y garantizada (Imagen 1) */
-        .play-btn.pressed {
-            transform: scale(0.92) !important;
-            box-shadow: 0 3px 10px rgba(197, 160, 89, 0.3) !important;
+        /* Regla unificada para Clic en PC o Toque Controlado en Móvil vía JS */
+        .play-btn:active,
+        .play-btn.active-press {
+            transform: scale(1.07);
+            box-shadow: 0 8px 28px rgba(197, 160, 89, 0.7);
         }
-        .play-btn.pressed::after {
-            inset: -2px !important;
-            border-color: rgba(229, 192, 123, 0.4) !important;
+        
+        .play-btn:active::after,
+        .play-btn.active-press::after {
+            inset: -8px;
+            border-color: rgba(229, 192, 123, 0.15);
         }
 
         .play-icon-svg, .pause-icon-svg { width: 22px; height: 22px; fill: #0d1110; display: block; }
@@ -1213,16 +1217,23 @@
             }
         }
 
-        // CONTROL EXCLUSIVO EN JAVASCRIPT: Se deprime y se restablece de forma 100% automática
         playBtn.addEventListener('click', () => {
-            playBtn.classList.add('pressed');
             togglePlayAudio();
-            
-            // Forzamos al navegador móvil a soltar el botón y regresar a la Imagen 2 en 120ms
-            setTimeout(() => {
-                playBtn.classList.remove('pressed');
-            }, 120);
         });
+
+        /* ======= GESTIÓN EXCLUSIVA DE EVENTOS TÁCTILES (MÓVILES) ======= */
+        playBtn.addEventListener('touchstart', function() {
+            this.classList.add('active-press');
+        }, { passive: true });
+
+        playBtn.addEventListener('touchend', function() {
+            this.classList.remove('active-press');
+        }, { passive: true });
+
+        playBtn.addEventListener('touchcancel', function() {
+            this.classList.remove('active-press');
+        }, { passive: true });
+
 
         restartBtn.addEventListener('click', () => {
             audio.currentTime = 0;
