@@ -346,16 +346,15 @@
             touch-action: manipulation;
         }
 
-        /* CORRECCIÓN: Los efectos Hover solo se aplican si el dispositivo posee puntero (PC/Ratón) */
+        .nav-btn:active {
+            transform: scale(0.9);
+        }
+
         @media (hover: hover) {
             .nav-btn:hover {
                 color: #ffffff;
                 background: rgba(46, 189, 133, 0.1);
             }
-        }
-
-        .nav-btn:active {
-            transform: scale(0.9);
         }
 
         .nav-btn svg {
@@ -365,14 +364,13 @@
             display: block;
         }
 
-       .play-btn {
+        .play-btn {
             width: 60px; height: 60px; border-radius: 50%;
             background: linear-gradient(145deg, #e5c07b 0%, #c5a059 100%);
             border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
             box-shadow: 0 6px 20px rgba(197,160,89,0.45);
             transition: transform 0.2s, box-shadow 0.2s; flex-shrink: 0;
             position: relative;
-            touch-action: manipulation;
         }
 
         .play-btn::after {
@@ -384,20 +382,20 @@
             transition: all 0.3s;
         }
 
-        /* CORRECCIÓN: Evitamos que se quede agrandado o marcado en el móvil tras pulsar */
+        .play-btn:active { 
+            transform: scale(0.93); 
+            box-shadow: 0 4px 10px rgba(197,160,89,0.3);
+        }
+
         @media (hover: hover) {
             .play-btn:hover { 
                 transform: scale(1.07); 
-                box-shadow: 0 8px 28px rgba(197,160,89,0.7); 
+                box-shadow: 0 8px 28px rgba(197, 160, 89, 0.7); 
             }
             .play-btn:hover::after { 
                 inset: -8px; 
                 border-color: rgba(229,192,123,0.15); 
             }
-        }
-        
-        .play-btn:active { 
-            transform: scale(0.93); 
         }
 
         .play-icon-svg, .pause-icon-svg { width: 22px; height: 22px; fill: #0d1110; display: block; }
@@ -1103,7 +1101,7 @@
             if (state === 2) {
                 return basePaths + `
                     <rect x="13" y="13" width="9" height="9" rx="1.5" fill="#2ebd85" />
-                    <text x="17.5" y="20" font-family="'Segoe UI', Arial, sans-serif" font-size="9" font-weight="900" fill="#0d1110" text-anchor="middle">∞</text>
+                    <text x="17.5" y="20" font-family="'Segoe UI', Arial, sans-serif" font-size="9" font-weight="900" fill="#0d1110" text-anchor="middle">?</text>
                 `;
             }
         }
@@ -1132,7 +1130,7 @@
             if ('mediaSession' in navigator) {
                 navigator.mediaSession.metadata = new MediaMetadata({
                     title: 'La Guerrera Silenciosa (Single Oficial)',
-                    artist: 'Homenaje a Dra. Cristina 🎂',
+                    artist: 'Homenaje a Dra. Cristina ?',
                     album: 'Las 26 Primaveras',
                     artwork: [
                         { src: 'https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.webp', sizes: '512x512', type: 'image/webp' }
@@ -1155,7 +1153,7 @@
             const currentUrl = getShareableUrl();
             
             shareWhatsAppBtn.addEventListener('click', () => {
-                const text = encodeURIComponent(`¡Escucha el tema oficial de cumpleaños que le hemos hecho a Cristina! 🎂🎵: ${currentUrl}`);
+                const text = encodeURIComponent(`¡Escucha el tema oficial de cumpleaños que le hemos hecho a Cristina! ??: ${currentUrl}`);
                 window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank', 'noopener');
             });
 
@@ -1164,7 +1162,7 @@
                     try {
                         await navigator.share({
                             title: '¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)',
-                            text: '¡Escucha el tema de cumpleaños que le hemos hecho a Cristina! 🎂🎵',
+                            text: '¡Escucha el tema de cumpleaños que le hemos hecho a Cristina! ??',
                             url: currentUrl
                         });
                     } catch (err) {
@@ -1172,7 +1170,7 @@
                     }
                 } else {
                     navigator.clipboard.writeText(currentUrl).then(() => {
-                        showToast('Enlace copiado al portapapeles 📋', false);
+                        showToast('Enlace copiado al portapapeles ?', false);
                     });
                 }
             });
@@ -1230,20 +1228,20 @@
                 audio.loop = false;
                 loopGraphicsContainer.innerHTML = renderLoopIcon(0);
                 loopBtn.setAttribute('title', 'Bucle: Desactivado');
-                showToast('🔀 Bucle desactivado', true);
+                showToast('? Bucle desactivado', true);
             } else if (loopState === 1) {
                 audio.loop = false; 
                 hasRepeatedOnce = false;
                 loopBtn.classList.add('loop-once');
                 loopGraphicsContainer.innerHTML = renderLoopIcon(1);
                 loopBtn.setAttribute('title', 'Bucle: Repetir 1 vez');
-                showToast('🔂 Se repetirá solo una vez', true);
+                showToast('? Se repetirá solo una vez', true);
             } else if (loopState === 2) {
                 audio.loop = true; 
                 loopBtn.classList.add('loop-infinite');
                 loopGraphicsContainer.innerHTML = renderLoopIcon(2);
                 loopBtn.setAttribute('title', 'Bucle: Infinito');
-                showToast('🔁 Repetición infinita activada', true);
+                showToast('? Repetición infinita activada', true);
             }
         });
 
@@ -1315,9 +1313,9 @@
             const vol = parseFloat(e.target.value);
             audio.volume = vol;
             updateVolumeSliderBackground(vol);
-            if (vol === 0) volumeBtn.textContent = '🔇';
-            else if (vol < 0.5) volumeBtn.textContent = '🔉';
-            else volumeBtn.textContent = '🔊';
+            if (vol === 0) volumeBtn.textContent = '?';
+            else if (vol < 0.5) volumeBtn.textContent = '?';
+            else volumeBtn.textContent = '?';
         });
 
         volumeBtn.addEventListener('click', () => {
@@ -1326,12 +1324,12 @@
                 audio.volume = 0;
                 volumeSlider.value = 0;
                 updateVolumeSliderBackground(0);
-                volumeBtn.textContent = '🔇';
+                volumeBtn.textContent = '?';
             } else {
                 audio.volume = lastVolume;
                 volumeSlider.value = lastVolume;
                 updateVolumeSliderBackground(lastVolume);
-                volumeBtn.textContent = lastVolume < 0.5 ? '🔉' : '🔊';
+                volumeBtn.textContent = lastVolume < 0.5 ? '?' : '?';
             }
         });
 
