@@ -133,17 +133,22 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: rgba(197, 160, 89, 0.1);
-            color: #e5c07b;
-            padding: 8px 14px;
+            background: linear-gradient(135deg, rgba(197,160,89,0.15), rgba(197,160,89,0.05));
+            color: var(--gold);
+            padding: 9px 18px;
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            border: 1px solid #c5a059;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 22px;
+            border: 1px solid rgba(197,160,89,0.5);
             letter-spacing: 0.5px;
-            max-width: 100%;
-            word-wrap: break-word;
+            font-family: 'DM Sans', sans-serif;
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(197,160,89,0.3); }
+            50% { box-shadow: 0 0 0 8px rgba(197,160,89,0); }
         }
 
         @media (min-width: 410px) {
@@ -679,28 +684,35 @@
         .lyrics-text .lyrics-tag:first-child { margin-top: 0; }
         .lyrics-line { margin-bottom: 4px; }
 
+        /* ========== CELEBRATE BTN ========== */
         .btn-celebrate {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #c5a059 0%, #ab843c 100%);
-            color: #0d1110;
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(171, 132, 60, 0.3);
-            margin: 20px 0;
-            transition: transform 0.2s ease;
-            touch-action: manipulation;
+            display: block; width: 100%; padding: 15px;
+            background: linear-gradient(135deg, #c5a059 0%, #a07a2a 100%);
+            color: #0d1110; border: none; border-radius: 50px;
+            font-weight: 800; font-size: 0.9rem; font-family: 'DM Sans', sans-serif;
+            text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer;
+            box-shadow: 0 6px 20px rgba(171,132,60,0.35);
+            margin: 18px 0 10px 0; transition: transform 0.2s, box-shadow 0.2s;
+            position: relative; overflow: hidden;
         }
 
-        .btn-celebrate:active {
-            transform: scale(0.96);
+        .btn-celebrate::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -60%;
+            width: 40%; height: 200%;
+            background: rgba(255,255,255,0.2);
+            transform: skewX(-20deg);
+            animation: shineSlide 3s ease-in-out infinite;
         }
+
+        @keyframes shineSlide {
+            0%, 60% { left: -60%; }
+            100% { left: 130%; }
+        }
+
+        .btn-celebrate:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(171,132,60,0.55); }
+        .btn-celebrate:active { transform: scale(0.97); }
 
         .share-container {
             display: flex;
@@ -891,7 +903,7 @@
                        <div class="track-info-section-title">🎵 Atributos del Single</div>
                         <div class="track-info-row"><span>Título Oficial:</span><span>La Guerrera Silenciosa</span></div>
                         <div class="track-info-row"><span>Versión / Edición:</span><span>Flamenco Urbano Mix (v2)</span></div>
-                        <div class="track-info-row"><span>Homenajeada:</span><span>Dra. Cristina (26º Aniversario)</span></div>
+                        <div class="track-info-row"><span>Homenajeada:</span><span>Dra. Cristina</span></div>
 						<div class="track-info-row"><span>Álbum:</span><span>Las 26 Primaveras (Single)</span></div>
 						<div class="track-info-row"><span>Fecha de Lanzamiento:</span><span>Mayo 2026</span></div>
                         <div class="track-info-row"><span>Duración Total:</span><span>03:10 (Aprox.)</span></div>
@@ -974,7 +986,7 @@
                     <div class="lyrics-line" style="margin-top: 12px;">Y mírala</div>
                     <div class="lyrics-line">Riéndose fuerte con sus amigas</div>
                     <div class="lyrics-line">Aunque por dentro lleve mil movidas</div>
-                    <div class="lyrics-line">But ella nunca deja caer a los suyos</div>
+                    <div class="lyrics-line">Pero ella nunca deja caer a los suyos</div>
                     <div class="lyrics-line">Por eso el mundo se le queda pequeño</div>
                     <div class="lyrics-line">Tiene duende, tiene calma</div>
                     <div class="lyrics-line">Tiene fuego dentro del alma</div>
