@@ -56,7 +56,6 @@
             color: #ffffff;
         }
 
-        /* FONDO OPTIMIZADO: Soluciona franja blanca en móvil y ahorra GPU */
         body::before {
             content: "";
             position: fixed;
@@ -155,7 +154,6 @@
             }
         }
 
-        /* CONTENEDOR DE LA PORTADA Y SKELETON CORREGIDO */
         .cover-wrapper {
             position: relative;
             width: 100%;
@@ -165,10 +163,9 @@
             margin-bottom: 24px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
             border: 2px solid #c5a059;
-            background: #101816; /* Fondo oscuro inicial */
+            background: #101816;
         }
 
-        /* El brillo verde de carga solo aparece MIENTRAS la imagen NO tenga la clase .loaded */
         .cover-wrapper:not(.image-is-loaded)::after {
             content: "";
             position: absolute;
@@ -179,7 +176,6 @@
             will-change: transform;
         }
 
-        /* Cuando la imagen se carga, eliminamos el fondo de carga para evitar franjas o bordes residuales */
         .cover-wrapper.image-is-loaded {
             background: transparent !important;
         }
@@ -362,12 +358,19 @@
             display: block;
         }
 
-       .play-btn {
-            width: 60px; height: 60px; border-radius: 50%;
+        /* CORRECCIÓN BOTÓN PLAY: Por defecto está siempre estable en modo Imagen 2 */
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             background: linear-gradient(145deg, #e5c07b 0%, #c5a059 100%);
-            border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 6px 20px rgba(197,160,89,0.45);
-            transition: transform 0.1s ease, box-shadow 0.1s ease; /* Transición más rápida y fluida */
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.45);
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
             flex-shrink: 0;
             position: relative;
         }
@@ -377,19 +380,30 @@
             position: absolute;
             inset: -4px;
             border-radius: 50%;
-            border: 2px solid rgba(229,192,123,0.3);
+            border: 2px solid rgba(229, 192, 123, 0.3);
             transition: all 0.1s ease;
         }
 
-        .play-btn:hover { transform: scale(1.07); box-shadow: 0 8px 28px rgba(197,160,89,0.7); }
-        .play-btn:hover::after { inset: -8px; border-color: rgba(229,192,123,0.15); }
-        
-        /* Clase controlada por JavaScript para una pulsación perfecta y limpia */
-        .play-btn.pressed { 
-            transform: scale(0.93); 
+        /* SOLUCIÓN AL TRABADO EN MÓVIL: El efecto hover solo se activa si hay un ratón (Ordenadores PC) */
+        @media (hover: hover) {
+            .play-btn:hover {
+                transform: scale(1.07);
+                box-shadow: 0 8px 28px rgba(197, 160, 89, 0.7);
+            }
+            .play-btn:hover::after {
+                inset: -8px;
+                border-color: rgba(229, 192, 123, 0.15);
+            }
+        }
+
+        /* El estado al pulsar se controla en JS de forma instantánea y garantizada (Imagen 1) */
+        .play-btn.pressed {
+            transform: scale(0.92) !important;
+            box-shadow: 0 3px 10px rgba(197, 160, 89, 0.3) !important;
         }
         .play-btn.pressed::after {
-            inset: -4px; /* Asegura que el aro exterior regrese al estado inicial por defecto */
+            inset: -2px !important;
+            border-color: rgba(229, 192, 123, 0.4) !important;
         }
 
         .play-icon-svg, .pause-icon-svg { width: 22px; height: 22px; fill: #0d1110; display: block; }
@@ -1018,7 +1032,7 @@
     <div class="toast-notification" id="toastNotification">Enlace copiado al portapapeles 📋</div>
 
     <script>
-	        /* ======= PARTICLES ======= */
+        /* ======= PARTICLES ======= */
         (function createParticles() {
             const container = document.getElementById('particlesBg');
             const colors = ['#2ebd85', '#e5c07b', '#c5a059', '#40dd9f', '#ffffff'];
@@ -1064,7 +1078,6 @@
         const toastNotification = document.getElementById('toastNotification');
         const easterEgg = document.getElementById('easterEgg');
         
-        // Elementos de la imagen corregidos
         const coverImage = document.getElementById('coverImage');
         const coverWrapper = document.getElementById('coverWrapper');
 
@@ -1096,10 +1109,15 @@
 
         audio.volume = 1.0;
 
-        // Función unificada para marcar la imagen como cargada y limpiar el Skeleton
         function setCoverAsLoaded() {
             coverImage.classList.add('loaded');
             coverWrapper.classList.add('image-is-loaded');
+        }
+
+        if (coverImage.complete) {
+            setCoverAsLoaded();
+        } else {
+            coverImage.addEventListener('load', setCoverAsLoaded);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -1107,14 +1125,10 @@
             updateVolumeSliderBackground(audio.volume);
             loopGraphicsContainer.innerHTML = renderLoopIcon(0);
             
-            // Verificación del estado de carga de la imagen
             if (coverImage.complete) {
                 setCoverAsLoaded();
-            } else {
-                coverImage.addEventListener('load', setCoverAsLoaded);
             }
 
-            // MEDIA SESSION API 
             if ('mediaSession' in navigator) {
                 navigator.mediaSession.metadata = new MediaMetadata({
                     title: 'La Guerrera Silenciosa (Single Oficial)',
@@ -1199,16 +1213,15 @@
             }
         }
 
+        // CONTROL EXCLUSIVO EN JAVASCRIPT: Se deprime y se restablece de forma 100% automática
         playBtn.addEventListener('click', () => {
-            // Activa visualmente el estado presionado (Imagen 1)
             playBtn.classList.add('pressed');
-            
             togglePlayAudio();
             
-            // Retira el estado tras 100ms volviendo limpiamente a la Imagen 2
+            // Forzamos al navegador móvil a soltar el botón y regresar a la Imagen 2 en 120ms
             setTimeout(() => {
                 playBtn.classList.remove('pressed');
-            }, 100);
+            }, 120);
         });
 
         restartBtn.addEventListener('click', () => {
