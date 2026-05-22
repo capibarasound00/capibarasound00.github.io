@@ -326,26 +326,6 @@
             .custom-player { padding: 20px; }
         }
 
-        /* --- NUEVO ESTILO: ECUALIZADOR VISUAL RÍTMICO --- */
-        .visual-eq-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 3px;
-            height: 35px;
-            margin-bottom: 15px;
-            padding: 0 10px;
-            overflow: hidden;
-        }
-        .eq-bar {
-            flex: 1;
-            max-width: 6px;
-            height: 3px;
-            background: linear-gradient(to top, var(--green) 30%, var(--green-dim) 70%, var(--gold) 100%);
-            border-radius: 3px 3px 0 0;
-            transition: height 0.15s ease;
-        }
-
         .player-controls {
             display: flex;
             align-items: center;
@@ -553,21 +533,12 @@
             width: 100%;
         }
 
-        /* --- REDISEÑO: CONTROL DE VOLUMEN MODERNO --- */
         .volume-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             flex: 1;
-            min-width: 150px;
-            background: rgba(13, 20, 18, 0.6);
-            padding: 6px 12px;
-            border-radius: 30px;
-            border: 1px solid rgba(45, 66, 59, 0.4);
-            transition: border-color 0.2s ease;
-        }
-        .volume-container:hover {
-            border-color: rgba(46, 189, 133, 0.5);
+            min-width: 140px;
         }
 
         .volume-btn {
@@ -578,17 +549,9 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
+            width: 24px;
             flex-shrink: 0;
             touch-action: manipulation;
-            transition: color 0.2s, background 0.2s;
-        }
-        .volume-btn:hover {
-            color: #fff;
-            background: rgba(46, 189, 133, 0.1);
         }
 
         .volume-slider-wrapper {
@@ -596,42 +559,36 @@
             flex: 1;
             display: flex;
             align-items: center;
-            height: 20px;
         }
 
         .volume-slider {
             width: 100%;
             -webkit-appearance: none;
             appearance: none;
-            height: 5px;
-            border-radius: 4px;
+            height: 6px;
+            border-radius: 3px;
             outline: none;
             cursor: pointer;
-            background: #1e2d29;
+            background: linear-gradient(to right, #2ebd85 100%, #1e2d29 0%);
         }
 
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             background: #ffffff;
             border: 2px solid #2ebd85;
             cursor: pointer;
-            box-shadow: 0 0 8px rgba(46, 189, 133, 0.6);
-            transition: transform 0.1s;
-        }
-        .volume-slider::-webkit-slider-thumb:hover {
-            transform: scale(1.25);
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
         }
 
         .volume-percentage {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: #a2b5ae;
-            min-width: 35px;
+            min-width: 32px;
             text-align: right;
             font-variant-numeric: tabular-nums;
-            font-weight: 600;
         }
 
         .speed-select-container {
@@ -863,6 +820,7 @@
             border: 1px solid #2ebd85;
         }
         
+        /* Modificación para el toast cuando es un mensaje de error */
         .toast-notification.error-toast {
             background: #9b2c2c;
             color: #ffffff;
@@ -903,10 +861,8 @@
         </div>
 
         <div class="custom-player">
-            <div class="visual-eq-container" id="visualEq">
-                </div>
-
             <div class="player-controls">
+                
                 <button class="nav-btn" id="restartBtn" title="Volver al principio" aria-label="Volver al principio de la canción">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M6 6h2v12H6V6zm11.5 12l-8.5-6 8.5-6v12z"/>
@@ -1213,41 +1169,10 @@
         let loopState = 0; 
         let hasRepeatedOnce = false; 
 
+        // Variables para la detección del "Long Press" (Mantener presionado)
         let pressTimer = null;
         let isLongPress = false;
-        const LONG_PRESS_DURATION = 700;
-
-        /* ======= GENERACIÓN E INSTALACIÓN DEL ECUALIZADOR VISUAL ======= */
-        const visualEqContainer = document.getElementById('visualEq');
-        const totalEqBars = 26; // Uno por cada primavera de Cris
-        let eqInterval = null;
-
-        for (let i = 0; i < totalEqBars; i++) {
-            const bar = document.createElement('div');
-            bar.className = 'eq-bar';
-            visualEqContainer.appendChild(bar);
-        }
-        const eqBarsElements = document.querySelectorAll('.eq-bar');
-
-        function startEqAnimation() {
-            if (eqInterval) clearInterval(eqInterval);
-            eqInterval = setInterval(() => {
-                if (!audio.paused) {
-                    eqBarsElements.forEach(bar => {
-                        // Genera alturas aleatorias orgánicas simulando ondas
-                        const randomHeight = Math.floor(Math.random() * 32) + 4;
-                        bar.style.height = `${randomHeight}px`;
-                    });
-                }
-            }, 120);
-        }
-
-        function stopEqAnimation() {
-            if (eqInterval) clearInterval(eqInterval);
-            eqBarsElements.forEach(bar => {
-                bar.style.height = '3px';
-            });
-        }
+        const LONG_PRESS_DURATION = 700; // Milisegundos requeridos para hacer STOP
 
         function renderLoopIcon(state) {
             let basePaths = `
@@ -1283,6 +1208,7 @@
             coverImage.addEventListener('load', setCoverAsLoaded);
         }
 
+        // --- SISTEMA DINÁMICO DE ICONOS DE ESTADO (Spinner / ⚡ / 🎵) ---
         function setAudioStatus(status) {
             if (status === 'loading') {
                 audioSpinner.style.display = 'inline-block';
@@ -1293,28 +1219,27 @@
                 audioCheckIcon.style.display = 'inline-block';
                 audioCheckIcon.textContent = '🎵';
                 audioStatusContainer.setAttribute('title', 'Reproduciendo');
-                startEqAnimation();
             } else if (status === 'paused') {
                 audioSpinner.style.display = 'none';
                 audioCheckIcon.style.display = 'inline-block';
                 audioCheckIcon.textContent = '🎵';
                 audioStatusContainer.setAttribute('title', 'Pausado');
-                stopEqAnimation();
             } else if (status === 'stopped' || status === 'ended') {
                 audioSpinner.style.display = 'none';
                 audioCheckIcon.style.display = 'inline-block';
                 audioCheckIcon.textContent = '⚡';
                 audioStatusContainer.setAttribute('title', 'Canción detenida');
-                stopEqAnimation();
             }
         }
 
+        // Listeners nativos del elemento Audio para cambiar los estados visuales automáticamente
         audio.addEventListener('waiting', () => setAudioStatus('loading'));
         audio.addEventListener('loadstart', () => setAudioStatus('loading'));
         audio.addEventListener('seeking', () => setAudioStatus('loading'));
         
         audio.addEventListener('canplay', () => {
             if (audio.paused) {
+                // Si está cargada pero parada al inicio de todo, muestra el rayo inicial
                 if(audio.currentTime === 0) setAudioStatus('stopped');
                 else setAudioStatus('paused');
             } else {
@@ -1335,6 +1260,8 @@
             setTimeout(launchConfetti, 500);
             updateVolumeSliderBackground(audio.volume);
             loopGraphicsContainer.innerHTML = renderLoopIcon(0);
+            
+            // Estado inicial antes de interactuar: "⚡" parado
             setAudioStatus('stopped');
 
             if (coverImage.complete) {
@@ -1392,6 +1319,8 @@
 
         function showToast(text, isLoopMsg = false, isError = false) {
             toastNotification.textContent = text;
+            
+            // Manejo de clases estilizadas según el tipo de mensaje
             if (isError) {
                 toastNotification.classList.add('error-toast');
                 toastNotification.classList.remove('loop-toast');
@@ -1414,6 +1343,7 @@
             }
         }
 
+        /* ======= PLAY/PAUSE ======= */
         function togglePlayAudio(forceState = null) {
             const shouldPlay = forceState !== null ? forceState : audio.paused;
             if (shouldPlay) {
@@ -1429,6 +1359,7 @@
             }
         }
 
+        // --- FUNCIONALIDAD: DETENER TOTALMENTE (STOP) ---
         function stopAudio() {
             audio.pause();
             audio.currentTime = 0;
@@ -1439,6 +1370,7 @@
             if ('mediaSession' in navigator) navigator.mediaSession.playbackState = "stopped";
         }
 
+        // --- MANEJO EXCLUSIVO DE LOGICA DE CLICK, TAP Y LONG PRESS EN PLAY_BTN ---
         function startPress() {
             isLongPress = false;
             playBtn.classList.add('active-press');
@@ -1451,10 +1383,14 @@
         function endPress(e) {
             if (pressTimer) clearTimeout(pressTimer);
             playBtn.classList.remove('active-press');
+            
+            // Si fue una pulsación larga, prevenimos que ejecute el click normal alternando play/pause
             if (isLongPress) {
                 if (e) e.preventDefault();
                 return;
             }
+            
+            // Si fue una pulsación normal corta, actúa normalmente cambiando el play/pause
             togglePlayAudio();
         }
 
@@ -1463,10 +1399,12 @@
             playBtn.classList.remove('active-press');
         }
 
+        // Eventos para Ratón (Escritorio)
         playBtn.addEventListener('mousedown', startPress);
         playBtn.addEventListener('mouseup', endPress);
         playBtn.addEventListener('mouseleave', cancelPress);
 
+        // Eventos Táctiles (Móviles)
         playBtn.addEventListener('touchstart', (e) => {
             startPress();
         }, { passive: true });
@@ -1476,6 +1414,7 @@
         }, { passive: false });
 
         playBtn.addEventListener('touchcancel', cancelPress);
+
 
         restartBtn.addEventListener('click', () => {
             audio.currentTime = 0;
@@ -1567,7 +1506,6 @@
             updateBufferTrack();
         });
 
-        /* ======= LÓGICA DE VOLUMEN INTELIGENTE CON MEMORIA ======= */
         function updateVolumeSliderBackground(value) {
             const percentage = value * 100;
             volumeSlider.style.background = `linear-gradient(to right, #2ebd85 0%, #2ebd85 ${percentage}%, #1e2d29 ${percentage}%, #1e2d29 100%)`;
@@ -1579,25 +1517,22 @@
             audio.volume = vol;
             updateVolumeSliderBackground(vol);
             if (vol === 0) volumeBtn.textContent = '🔇';
-            else if (vol < 0.4) volumeBtn.textContent = '🔈';
-            else if (vol < 0.7) volumeBtn.textContent = '🔉';
+            else if (vol < 0.5) volumeBtn.textContent = '🔉';
             else volumeBtn.textContent = '🔊';
         });
 
         volumeBtn.addEventListener('click', () => {
             if (audio.volume > 0) {
-                // Guarda el último volumen activo antes de silenciar
                 lastVolume = audio.volume;
                 audio.volume = 0;
                 volumeSlider.value = 0;
                 updateVolumeSliderBackground(0);
                 volumeBtn.textContent = '🔇';
             } else {
-                // Restaura exactamente el volumen previo en vez del 100% fijo
                 audio.volume = lastVolume;
                 volumeSlider.value = lastVolume;
                 updateVolumeSliderBackground(lastVolume);
-                volumeBtn.textContent = lastVolume < 0.4 ? '🔈' : (lastVolume < 0.7 ? '🔉' : '🔊');
+                volumeBtn.textContent = lastVolume < 0.5 ? '🔉' : '🔊';
             }
         });
 
@@ -1628,13 +1563,16 @@
             }
         }
 
+        /* ======= CONTROL EXCLUSIVO DEL ACORDEÓN DEL TRIVIA ======= */
         function toggleQuizAccordion() {
             const content = document.getElementById('quizContent');
             if (content.style.maxHeight && content.style.maxHeight !== "0px") {
                 content.style.maxHeight = "0px";
                 content.style.opacity = "0";
             } else {
+                // Primero renderizamos e inyectamos las preguntas para que el scrollHeight sea el real y sin límites
                 initQuiz();
+                // Forzamos un recalculado de altura real tras inyectar el HTML dinámico
                 setTimeout(() => {
                     content.style.maxHeight = content.scrollHeight + "px";
                     content.style.opacity = "1";
@@ -1661,11 +1599,15 @@
             }
         });
 		
-        const quizData = [
-            { q: "¿Cuántos años cumple hoy Cristina?", o: ["25 años", "26 años", "27 años"], a: 1 },
-            { q: "¿Dónde reparte su magia y cura con abrazos?", o: ["En el gimnasio", "En el hospital", "En la playa"], a: 1 },
-            { q: "¿Cómo se llama el single oficial lanzado hoy?", o: ["La Fiestera", "Flamenco Urbano", "La Guerrera Silenciosa"], a: 2 }
-        ];
+		// TRIVIA DE CRISTINA 100% CORREGIDO Y OPERATIVO
+		const quizData = [
+			{ q: "¿Cuántos años cumple hoy Cristina?", o: ["25 años", "26 años", "27 años"], a: 1 },
+			{ q: "¿Dónde reparte su magia y cura con abrazos?", o: ["En el gimnasio", "En el hospital", "En la playa"], a: 1 },
+			{ q: "¿Cómo se llama el single oficial lanzado hoy?", o: ["La Fiestera", "Flamenco Urbano", "La Guerrera Silenciosa"], a: 2 },
+			// NUEVAS PREGUNTAS:
+			{ q: "Si Cris tuviera que diagnosticar al grupo un sábado, ¿qué diría?", o: ["Delirio por falta de fiesta", "Arritmia por reggaetón", "Coma por exceso de risas"], a: 2 },
+			{ q: "¿Cuál es la muletilla favorita de Cris cuando se sorprende?", o: ["¡No me jodas!", "¡Madre mía!", "¡Hay que ver!"], a: 0 } // (0 sería la primera opción)
+		];
         let currentQuizIndex = 0;
 
         function initQuiz() {
@@ -1695,10 +1637,12 @@
                 currentQuizIndex++;
                 initQuiz();
                 
+                // Recalculamos dinámicamente la altura tras avanzar la pregunta para evitar recortes
                 if (content.style.maxHeight && content.style.maxHeight !== "0px") {
                     content.style.maxHeight = content.scrollHeight + "px";
                 }
             } else {
+                // Notificación de error estilizada en vez de un molesto alert nativo
                 showToast("❌ ¡Respuesta incorrecta! Seguro que conoces mejor a Cris, prueba otra vez.", false, true);
             }
         }
