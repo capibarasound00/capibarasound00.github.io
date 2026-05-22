@@ -711,13 +711,6 @@
         .lyrics-text .lyrics-tag:first-child { margin-top: 0; }
         .lyrics-line { margin-bottom: 4px; }
 
-        /* DISEÑO DE TRIVIA INTERACTIVO FUNCIONAL */
-        .quiz-card { padding: 20px; text-align: left; }
-        .quiz-q { font-size: 0.95rem; font-weight: bold; color: var(--gold); margin-bottom: 12px; line-height: 1.4; }
-        .quiz-options { display: flex; flex-direction: column; gap: 8px; }
-        .quiz-opt { background: #1c2824; border: 1px solid var(--border); padding: 10px 12px; border-radius: 8px; color: #fff; font-size: 0.85rem; cursor: pointer; text-align: left; transition: all 0.2s; }
-        .quiz-opt:hover { background: rgba(46,189,133,0.15); border-color: var(--green); }
-
         .btn-celebrate {
             display: block; width: 100%; padding: 15px;
             background: linear-gradient(135deg, #c5a059 0%, #a07a2a 100%);
@@ -818,13 +811,6 @@
             background: #131c19;
             color: #cbdad5;
             border: 1px solid #2ebd85;
-        }
-        
-        /* Modificación para el toast cuando es un mensaje de error */
-        .toast-notification.error-toast {
-            background: #9b2c2c;
-            color: #ffffff;
-            border: 1px solid #e53e3e;
         }
     </style>
 </head>
@@ -1080,19 +1066,7 @@
                 </div>
             </div>
         </div>
-        
-		<div class="accordion-container">
-            <button class="btn-accordion" onclick="toggleQuizAccordion()">
-                <span>🕹️</span> Jugar al Trivia de Cris
-            </button>
-            <div class="accordion-content" id="quizContent">
-                <div class="quiz-card" id="quizBox">
-                    <div class="quiz-q" id="quizQuestion">Cargando pregunta...</div>
-                    <div class="quiz-options" id="quizOptions"></div>
-                </div>
-            </div>
-        </div>
-		
+
         <button class="btn-celebrate" onclick="launchConfetti()">¡Felicitar a lo grande! 🥳</button>
 
         <div class="share-container">
@@ -1317,20 +1291,13 @@
             });
         });
 
-        function showToast(text, isLoopMsg = false, isError = false) {
+        function showToast(text, isLoopMsg = false) {
             toastNotification.textContent = text;
-            
-            // Manejo de clases estilizadas según el tipo de mensaje
-            if (isError) {
-                toastNotification.classList.add('error-toast');
-                toastNotification.classList.remove('loop-toast');
-            } else if (isLoopMsg) {
+            if (isLoopMsg) {
                 toastNotification.classList.add('loop-toast');
-                toastNotification.classList.remove('error-toast');
             } else {
-                toastNotification.classList.remove('loop-toast', 'error-toast');
+                toastNotification.classList.remove('loop-toast');
             }
-            
             toastNotification.classList.add('show');
             setTimeout(() => {
                 toastNotification.classList.remove('show');
@@ -1563,23 +1530,6 @@
             }
         }
 
-        /* ======= CONTROL EXCLUSIVO DEL ACORDEÓN DEL TRIVIA ======= */
-        function toggleQuizAccordion() {
-            const content = document.getElementById('quizContent');
-            if (content.style.maxHeight && content.style.maxHeight !== "0px") {
-                content.style.maxHeight = "0px";
-                content.style.opacity = "0";
-            } else {
-                // Primero renderizamos e inyectamos las preguntas para que el scrollHeight sea el real y sin límites
-                initQuiz();
-                // Forzamos un recalculado de altura real tras inyectar el HTML dinámico
-                setTimeout(() => {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                    content.style.opacity = "1";
-                }, 10);
-            }
-        }
-
         audio.addEventListener('ended', () => {
             if (loopState === 1) {
                 if (!hasRepeatedOnce) {
@@ -1598,54 +1548,6 @@
                 triggerTrackEndEffects();
             }
         });
-		
-		// TRIVIA DE CRISTINA 100% CORREGIDO Y OPERATIVO
-		const quizData = [
-			{ q: "¿Cuántos años cumple hoy Cristina?", o: ["25 años", "26 años", "27 años"], a: 1 },
-			{ q: "¿Dónde reparte su magia y cura con abrazos?", o: ["En el gimnasio", "En el hospital", "En la playa"], a: 1 },
-			{ q: "¿Cómo se llama el single oficial lanzado hoy?", o: ["La Fiestera", "Flamenco Urbano", "La Guerrera Silenciosa"], a: 2 },
-			// NUEVAS PREGUNTAS:
-			{ q: "Si Cris tuviera que diagnosticar al grupo un sábado, ¿qué diría?", o: ["Delirio por falta de fiesta", "Arritmia por reggaetón", "Coma por exceso de risas"], a: 2 },
-			{ q: "¿Cuál es la muletilla favorita de Cris cuando se sorprende?", o: ["¡No me jodas!", "¡Madre mía!", "¡Hay que ver!"], a: 0 } // (0 sería la primera opción)
-		];
-        let currentQuizIndex = 0;
-
-        function initQuiz() {
-            const box = document.getElementById('quizBox');
-            if (currentQuizIndex >= quizData.length) {
-                box.innerHTML = "<div class='quiz-q' style='text-align:center;'>🎉 ¡Has acertado todas las preguntas!<br><span style='color:var(--green);'>Eres el/la fan número uno de la Dra. Cristina.</span></div>";
-                return;
-            }
-            const data = quizData[currentQuizIndex];
-            document.getElementById('quizQuestion').textContent = `${currentQuizIndex + 1}. ${data.q}`;
-            const optionsContainer = document.getElementById('quizOptions');
-            optionsContainer.innerHTML = '';
-            
-            data.o.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = 'quiz-opt';
-                btn.textContent = opt;
-                btn.addEventListener('click', () => checkQuizAnswer(idx));
-                optionsContainer.appendChild(btn);
-            });
-        }
-
-        function checkQuizAnswer(idx) {
-            const content = document.getElementById('quizContent');
-            if (idx === quizData[currentQuizIndex].a) {
-                launchConfetti();
-                currentQuizIndex++;
-                initQuiz();
-                
-                // Recalculamos dinámicamente la altura tras avanzar la pregunta para evitar recortes
-                if (content.style.maxHeight && content.style.maxHeight !== "0px") {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }
-            } else {
-                // Notificación de error estilizada en vez de un molesto alert nativo
-                showToast("❌ ¡Respuesta incorrecta! Seguro que conoces mejor a Cris, prueba otra vez.", false, true);
-            }
-        }
 
         function triggerTrackEndEffects() {
             playIcon.style.display = 'block';
