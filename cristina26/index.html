@@ -196,7 +196,7 @@
             object-fit: cover;
             display: block;
             opacity: 0;
-            transition: opacity 0.2s ease-in-out; /* Más rápida la aparición de la portada */
+            transition: opacity 0.2s ease-in-out;
         }
 
         .cover-art.loaded {
@@ -344,7 +344,7 @@
             border: none;
             color: #a2b5ae;
             cursor: pointer;
-            transition: transform 0.08s ease, color 0.08s ease, background-color 0.08s ease; /* Transición ultra rápida */
+            transition: transform 0.08s ease, color 0.08s ease, background-color 0.08s ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -382,7 +382,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 6px 20px rgba(197, 160, 89, 0.45);
-            transition: transform 0.08s ease, box-shadow 0.08s ease; /* Feedback de clic instantáneo */
+            transition: transform 0.08s ease, box-shadow 0.08s ease;
             flex-shrink: 0;
             position: relative;
             -webkit-tap-highlight-color: transparent;
@@ -597,7 +597,7 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            transition: background-color 0.1s ease, color 0.1s ease, border-color 0.1s ease; /* Súper veloz */
+            transition: background-color 0.1s ease, color 0.1s ease, border-color 0.1s ease;
             width: 100%;
             touch-action: manipulation;
         }
@@ -608,7 +608,6 @@
             border-color: #2ebd85;
         }
 
-        /* ACORDEONES OPTIMIZADOS PARA MÁXIMA FLUIDEZ */
         .accordion-container {
             margin-bottom: 12px;
             width: 100%;
@@ -627,7 +626,7 @@
             justify-content: center;
             align-items: center;
             gap: 8px;
-            transition: border-color 0.1s ease, color 0.1s ease, background-color 0.1s ease; /* Acelerado */
+            transition: border-color 0.1s ease, color 0.1s ease, background-color 0.1s ease;
             touch-action: manipulation;
         }
 
@@ -637,7 +636,6 @@
             background: rgba(46, 189, 133, 0.05);
         }
 
-        /* Transición de CSS súper rápida y fluida usando hardware acceleration */
         .accordion-content {
             max-height: 0;
             overflow: hidden;
@@ -684,7 +682,7 @@
         .lyrics-text .lyrics-tag:first-child { margin-top: 0; }
         .lyrics-line { margin-bottom: 4px; }
 		
-        /* DISEÑO DE TRIVIA */
+        /* TRIVIA */
         .quiz-card { padding: 20px; text-align: left; }
         .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #23352f; padding-bottom: 6px; }
         .quiz-progress { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
@@ -709,7 +707,6 @@
         .btn-restart-quiz { background: none; border: 1px solid var(--green); color: var(--green); padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; cursor: pointer; transition: background-color 0.1s, color 0.1s; display: inline-flex; align-items: center; gap: 4px; }
         .btn-restart-quiz:hover { background: var(--green); color: #0d1110; }
 
-        /* ========== CELEBRATE BTN ========== */
         .btn-celebrate {
             display: block; width: 100%; padding: 15px;
             background: linear-gradient(135deg, #c5a059 0%, #a07a2a 100%);
@@ -717,7 +714,7 @@
             font-weight: 800; font-size: 0.9rem; font-family: 'DM Sans', sans-serif;
             text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer;
             box-shadow: 0 6px 20px rgba(171,132,60,0.35);
-            margin: 18px 0 10px 0; transition: transform 0.08s ease, box-shadow 0.08s ease; /* Más reactivo */
+            margin: 18px 0 10px 0; transition: transform 0.08s ease, box-shadow 0.08s ease;
             position: relative; overflow: hidden;
         }
 
@@ -761,7 +758,7 @@
             cursor: pointer;
             flex: 1;
             justify-content: center;
-            transition: background-color 0.08s ease, color 0.08s ease, border-color 0.08s ease; /* Rápido al tocar */
+            transition: background-color 0.08s ease, color 0.08s ease, border-color 0.08s ease;
             touch-action: manipulation;
         }
 
@@ -799,7 +796,7 @@
             white-space: nowrap;
             pointer-events: none;
             max-width: 90%;
-            transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1); /* Súper instantáneo al deslizarse arriba */
+            transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .toast-notification.show {
@@ -1390,7 +1387,6 @@
             }
         }
 
-        /* MANEJO DE ACORDEONES ULTRA-FLUIDOS */
         function toggleAccordion(id) {
             const content = document.getElementById(id);
             if (content.style.maxHeight && content.style.maxHeight !== "0px") {
@@ -1419,14 +1415,17 @@
             }
         });
 		
-        /* ======= SISTEMA DE TRIVIA COMPETITIVO EXTRA RÁPIDO ======= */
+        /* ======= SISTEMA DE TRIVIA COMPETITIVO DINÁMICO DE 8 PREGUNTAS ======= */
         const quizData = [
             { q: "¿Cuántos años cumple hoy Cristina?", o: ["25 años", "26 años", "27 años"], a: 1 },
-            { q: "@Dónde reparte su magia y cura con abrazos?", o: ["En el hospital", "En el gimnasio", "En la playa"], a: 0 },
-            { q: "@Cómo se llama el single oficial lanzado hoy?", o: ["La Fiestera", "Flamenco Urbano", "La Guerrera Silenciosa"], a: 2 },
-			{ q: "Si Cris tuviera que diagnosticar el estado del grupo de amigos un sábado por la noche, @cuál sería su veredicto definitivo?", o: ["Delirio agudo por falta de fiesta", "Arritmia producida por el reggaetón", "Coma inducido por exceso de risas"], a: 2 },
-            { q: "Empieza a sonar el estribillo de su canción oficial a mitad de la noche, @cuál es la reacción inmediata de Cris?", o: ["Dar palmas y venirse arriba con arte", "Ponerse roja de la vergüenza y esconderse", "Pasar olímpicamente e ir a pedir otra copa"], a: 1 },
-            { q: "En el hospital para sobrevivir a la jornada, @qué es lo primero que necesita Cristina?", o: ["Buscar un amuleto secreto en su bata", "Poner música fiestera en la sala de médicos", "Tomarse un buen café y quejarse del sueño"], a: 2 }
+            { q: "¿Dónde reparte su magia y cura con abrazos?", o: ["En el hospital", "En el gimnasio", "En la playa"], a: 0 },
+            { q: "¿Cómo se llama el single oficial lanzado hoy?", o: ["La Fiestera", "Flamenco Urbano", "La Guerrera Silenciosa"], a: 2 },
+			{ q: "Si Cris tuviera que diagnosticar el estado del grupo de amigos un sábado por la noche, ¿cuál sería su veredicto definitivo?", o: ["Delirio agudo por falta de fiesta", "Arritmia producida por el reggaetón", "Coma inducido por exceso de risas"], a: 2 },
+            { q: "Empieza a sonar el estribillo de su canción oficial a mitad de la noche, ¿cuál es la reacción inmediata de Cris?", o: ["Dar palmas y venirse arriba con arte", "Ponerse roja de la vergüenza y esconderse", "Pasar olímpicamente e ir a pedir otra copa"], a: 1 },
+            { q: "En el hospital para sobrevivir a la jornada, ¿qué es lo primero que necesita Cristina?", o: ["Buscar un amuleto secreto en su bata", "Poner música fiestera en la sala de médicos", "Tomarse un buen café y quejarse del sueño"], a: 2 },
+            // NUEVAS PREGUNTAS AÑADIDAS
+            { q: "En el vademécum personal de Cristina, ¿cuál es el tratamiento recomendado para un bajón de energía de sus amigos?", o: ["Una infusión de manzanilla y a la cama", "Un buen abrazo, palmas flamencas y un par de copas", "Reposo absoluto en silencio"], a: 2 },
+            { q: "¿Cuál es el superpoder secreto que usa Cris en las guardias interminables del hospital?", o: ["Café intravenoso en vena", "Su arte innata y una sonrisa que resucita a cualquiera", "Escabullirse a dormir en los almacenes"], a: 1 }
         ];
 
         let currentQuizIndex = 0;
@@ -1459,23 +1458,44 @@
             const box = document.getElementById('quizBox');
             
             if (currentQuizIndex >= quizData.length) {
-                let trophy = "🥉";
-                let title = "Conocedor/a Básico";
-                let textMessage = "Bueno, sabes quién es, pero te falta pasar más guardias o noches de fiesta con ella para enterarte de sus secretos. ¡A seguir ensayando!";
+                // Sistema escalado de mensajes personalizados según la puntuación exacta de aciertos (0 a 8)
+                let trophy = "🧐";
+                let title = "Resultados Analizados";
+                let textMessage = "¡Vaya! Parece que necesitas pasar un poco más de tiempo con ella o escuchar la canción un par de veces más. ¡Inténtalo de nuevo!";
                 
-                if (correctAnswersCount === quizData.length) {
+                if (correctAnswersCount === 8) {
                     trophy = "👑";
                     title = "¡MEJOR AMIGO/A NIVEL DIOS!";
-                    textMessage = "¡BRUTAL! Conoces a Cristina a la perfección. Sabes lo que piensa, lo que toma y cómo cura en el hospital. Te has ganado un abrazo VIP de su parte.";
+                    textMessage = "¡BRUTAL! Puntuación perfecta (8/8). Conoces a Cristina como si fueras su otra mitad. Sabes exactamente cómo cura, cómo vive y cómo disfruta. ¡Te has ganado un abrazo VIP gigante de su parte!";
                     launchConfetti();
-                } else if (correctAnswersCount >= 4) {
+                } else if (correctAnswersCount === 7) {
+                    trophy = "🥇";
+                    title = "¡Especialista en Crisología!";
+                    textMessage = "¡Casi perfecto (7/8)! Conoces prácticamente toda su historia, sus manías de hospital y su receta de felicidad. ¡Un fallo tonto lo tiene cualquiera!";
+                } else if (correctAnswersCount === 6) {
                     trophy = "🥈";
-                    title = "¡Fan de Primera Categoría!";
-                    textMessage = "¡Muy buena puntuación! Se nota que compartes grandes momentos con Cris y prestas atención a sus locuras. ¡Casi perfecto!";
+                    title = "¡Residente Experto/a!";
+                    textMessage = "¡Muy buena nota (6/8)! Eres del círculo cercano de confianza. Sabes de sobra lo que le alegra el alma a nuestra cumpleañera.";
+                } else if (correctAnswersCount === 5) {
+                    trophy = "🥉";
+                    title = "Conocedor/a de Primera!";
+                    textMessage = "¡Aprobado con nota (5/8)! Tienes una base muy sólida sobre sus gustos y su forma de ser. ¡No está nada mal!";
+                } else if (correctAnswersCount === 4) {
+                    trophy = "🩺";
+                    title = "Sanitario en Prácticas";
+                    textMessage = "Has acertado la mitad (4/8). Sabes lo esencial de Cris, pero te faltan algunas anécdotas clave de hospital o de fiesta por rellenar.";
+                } else if (correctAnswersCount === 3) {
+                    trophy = "🩹";
+                    title = "Amigo/a Despistado/a";
+                    textMessage = "Has conseguido 3 aciertos de 8. Te has dejado llevar por las opciones trampa. ¡Escucha el single otra vez con atención!";
+                } else if (correctAnswersCount === 2) {
+                    trophy = "☕";
+                    title = "Falta de Café Intravenoso";
+                    textMessage = "Solo 2 aciertos de 8. Estás más cansado que Cris saliendo de una guardia de 24 horas. ¡Espabila y vuelve a probar!";
                 } else if (correctAnswersCount <= 1) {
                     trophy = "👁️👄👁️";
                     title = "Desconocido de Incógnito";
-                    textMessage = "@Seguro que estás en la fiesta de la persona correcta? Cris sospecharía de ti ahora mismo. ¡Vuelve a escuchar su canción para aprenderte su historia!";
+                    textMessage = "¿Seguro que estás en la fiesta de cumpleaños correcta? Cris sospecharía de ti ahora mismo. ¡Vuelve a jugar para limpiar tu honor!";
                 }
 
                 box.innerHTML = `
@@ -1531,12 +1551,11 @@
 
             currentQuizIndex++;
 
-            // Pequeña espera visual óptima para ver la respuesta correcta y cambiar al instante
             setTimeout(() => {
                 renderCurrentQuizState();
                 content.style.maxHeight = content.scrollHeight + "px"; 
                 isAnsweringBlock = false;
-            }, 600); /* Reducido de 900ms a 600ms para más dinamismo */
+            }, 600);
         }
 
         function triggerTrackEndEffects() {
