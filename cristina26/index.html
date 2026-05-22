@@ -344,7 +344,7 @@
             border: none;
             color: #a2b5ae;
             cursor: pointer;
-            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), color 0.2s ease;
+            transition: transform 0.15s ease, color 0.15s ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -361,7 +361,7 @@
         }
 
         .nav-btn:active {
-            transform: scale(0.9);
+            transform: scale(0.92);
         }
 
         .nav-btn svg {
@@ -382,7 +382,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 6px 20px rgba(197, 160, 89, 0.45);
-            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s ease;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
             flex-shrink: 0;
             position: relative;
             -webkit-tap-highlight-color: transparent;
@@ -394,30 +394,24 @@
             inset: -4px;
             border-radius: 50%;
             border: 2px solid rgba(229, 192, 123, 0.3);
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: all 0.2s ease;
         }
 
         @media (hover: hover) {
             .play-btn:hover {
-                transform: scale(1.07);
+                transform: scale(1.05);
                 box-shadow: 0 8px 28px rgba(197, 160, 89, 0.7);
             }
             .play-btn:hover::after {
-                inset: -8px;
+                inset: -6px;
                 border-color: rgba(229, 192, 123, 0.15);
             }
         }
 
         .play-btn:active,
         .play-btn.active-press {
-            transform: scale(1.07);
+            transform: scale(1.05);
             box-shadow: 0 8px 28px rgba(197, 160, 89, 0.7);
-        }
-        
-        .play-btn:active::after,
-        .play-btn.active-press::after {
-            inset: -8px;
-            border-color: rgba(229, 192, 123, 0.15);
         }
 
         .play-icon-svg, .pause-icon-svg { width: 22px; height: 22px; fill: #0d1110; display: block; }
@@ -603,7 +597,7 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            transition: background 0.2s ease, color 0.2s ease;
+            transition: background 0.15s ease, color 0.15s ease;
             width: 100%;
             touch-action: manipulation;
         }
@@ -614,6 +608,7 @@
             border-color: #2ebd85;
         }
 
+        /* ACORDEONES OPTIMIZADOS PARA MÁXIMA FLUIDEZ */
         .accordion-container {
             margin-bottom: 12px;
             width: 100%;
@@ -632,7 +627,7 @@
             justify-content: center;
             align-items: center;
             gap: 8px;
-            transition: border-color 0.2s ease, color 0.2s ease;
+            transition: border-color 0.15s ease, color 0.15s ease;
             touch-action: manipulation;
         }
 
@@ -642,15 +637,15 @@
             background: rgba(46, 189, 133, 0.05);
         }
 
+        /* Transición de CSS súper rápida y fluida usando hardware acceleration */
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease;
+            transition: max-height 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
             will-change: max-height, opacity;
             opacity: 0;
             background: #0d1412;
             border-radius: 12px;
-            margin-top: 8px;
             text-align: left;
             width: 100%;
         }
@@ -678,7 +673,7 @@
             border: 1px solid rgba(229, 192, 123, 0.2);
             padding: 3px 10px;
             border-radius: 12px;
-            font-size: 0.7rem;
+            font-size: 0.7 glamorous;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -689,31 +684,29 @@
         .lyrics-text .lyrics-tag:first-child { margin-top: 0; }
         .lyrics-line { margin-bottom: 4px; }
 		
-        /* DISEÑO DE TRIVIA COMPETITIVO ACTUALIZADO */
+        /* DISEÑO DE TRIVIA */
         .quiz-card { padding: 20px; text-align: left; }
         .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #23352f; padding-bottom: 6px; }
         .quiz-progress { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
         .quiz-score-badge { font-size: 0.75rem; color: var(--gold); font-weight: bold; background: rgba(229, 192, 123, 0.1); padding: 2px 8px; border-radius: 10px; }
         .quiz-q { font-size: 0.95rem; font-weight: bold; color: #fff; margin-bottom: 14px; line-height: 1.4; }
         .quiz-options { display: flex; flex-direction: column; gap: 8px; }
-        .quiz-opt { background: #1c2824; border: 1px solid var(--border); padding: 11px 14px; border-radius: 8px; color: #fff; font-size: 0.85rem; cursor: pointer; text-align: left; transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); outline: none; }
+        .quiz-opt { background: #1c2824; border: 1px solid var(--border); padding: 11px 14px; border-radius: 8px; color: #fff; font-size: 0.85rem; cursor: pointer; text-align: left; transition: background 0.15s ease, border-color 0.15s ease; outline: none; }
         
         @media (hover: hover) {
             .quiz-opt:hover { background: rgba(46,189,133,0.1); border-color: var(--green); }
         }
         
-        /* Estados visuales inmediatos al responder */
         .quiz-opt.correct-flash { background: rgba(46, 189, 133, 0.25) !important; border-color: #2ebd85 !important; color: #40dd9f !important; font-weight: bold; }
         .quiz-opt.wrong-flash { background: rgba(155, 44, 44, 0.25) !important; border-color: #e53e3e !important; color: #fc8181 !important; }
 
-        /* Estilos Pantalla de Resultados */
         .quiz-results-box { text-align: center; padding: 10px 0; }
         .results-trophy { font-size: 3rem; margin-bottom: 10px; animation: trophyBounce 1s ease infinite alternate; display: inline-block; }
         @keyframes trophyBounce { 0% { transform: translateY(0); } 100% { transform: translateY(-6px); } }
         .results-score-title { font-size: 1.1rem; font-weight: 800; color: var(--gold); margin-bottom: 6px; }
         .results-score-text { font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 14px; background: rgba(255,255,255,0.05); display: inline-block; padding: 4px 16px; border-radius: 20px; }
         .results-commentary { font-size: 0.88rem; color: var(--text-body); line-height: 1.5; font-style: italic; background: rgba(28, 40, 36, 0.6); padding: 14px; border-radius: 10px; border-left: 3px solid var(--gold); margin-bottom: 16px; }
-        .btn-restart-quiz { background: none; border: 1px solid var(--green); color: var(--green); padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 4px; }
+        .btn-restart-quiz { background: none; border: 1px solid var(--green); color: var(--green); padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 4px; }
         .btn-restart-quiz:hover { background: var(--green); color: #0d1110; }
 
         /* ========== CELEBRATE BTN ========== */
@@ -724,7 +717,7 @@
             font-weight: 800; font-size: 0.9rem; font-family: 'DM Sans', sans-serif;
             text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer;
             box-shadow: 0 6px 20px rgba(171,132,60,0.35);
-            margin: 18px 0 10px 0; transition: transform 0.2s, box-shadow 0.2s;
+            margin: 18px 0 10px 0; transition: transform 0.15s, box-shadow 0.15s;
             position: relative; overflow: hidden;
         }
 
@@ -744,7 +737,7 @@
         }
 
         .btn-celebrate:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(171,132,60,0.55); }
-        .btn-celebrate:active { transform: scale(0.97); }
+        .btn-celebrate:active { transform: scale(0.98); }
 
         .share-container {
             display: flex;
@@ -768,7 +761,7 @@
             cursor: pointer;
             flex: 1;
             justify-content: center;
-            transition: background 0.2s ease, color 0.2s ease;
+            transition: background 0.15s ease, color 0.15s ease;
             touch-action: manipulation;
         }
 
@@ -806,7 +799,7 @@
             white-space: nowrap;
             pointer-events: none;
             max-width: 90%;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .toast-notification.show {
@@ -1043,7 +1036,7 @@
                     <div class="lyrics-line">To’ lo bueno que has dejao’</div>
                     <div class="lyrics-line">En cada planta y cada puerta</div>
                     <div class="lyrics-line">Donde alguien te necesitó</div>
-                    <div class="lyrics-line">Porque hay personas que trabajan</div>
+                    <div class="lyrics-line">Because hay personas que trabajan</div>
                     <div class="lyrics-line">Y otras que dejan huella</div>
                     <div class="lyrics-line">Y tú naciste pa’ lo segundo</div>
                     <div class="lyrics-line">Aunque no te des cueeeeenta... de ella...</div>
@@ -1108,16 +1101,16 @@
         (function createParticles() {
             const container = document.getElementById('particlesBg');
             const colors = ['#2ebd85', '#e5c07b', '#c5a059', '#40dd9f', '#ffffff'];
-            for (let i = 0; i < 18; i++) {
+            for (let i = 0; i < 15; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
-                const size = Math.random() * 6 + 2;
+                const size = Math.random() * 5 + 2;
                 p.style.cssText = `
                     width:${size}px; height:${size}px;
                     left:${Math.random() * 100}%;
                     background:${colors[Math.floor(Math.random()*colors.length)]};
-                    animation-duration:${Math.random() * 18 + 10}s;
-                    animation-delay:${Math.random() * 10}s;
+                    animation-duration:${Math.random() * 14 + 10}s;
+                    animation-delay:${Math.random() * 6}s;
                     opacity:0;
                 `;
                 container.appendChild(p);
@@ -1193,14 +1186,10 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(launchConfetti, 500);
+            setTimeout(launchConfetti, 400);
             updateVolumeSliderBackground(audio.volume);
             loopGraphicsContainer.innerHTML = renderLoopIcon(0);
             
-            if (coverImage.complete) {
-                setCoverAsLoaded();
-            }
-
             if ('mediaSession' in navigator) {
                 navigator.mediaSession.metadata = new MediaMetadata({
                     title: 'La Guerrera Silenciosa (Single Oficial)',
@@ -1217,14 +1206,7 @@
                 navigator.mediaSession.setActionHandler('seekforward', () => { audio.currentTime = Math.min(audio.duration, audio.currentTime + 10); });
             }
             
-            function getShareableUrl() {
-                if (window.location.protocol === 'file:') {
-                    return 'https://capibarasound00.github.io/cristina26/';
-                }
-                return window.location.href;
-            }
-            
-            const currentUrl = getShareableUrl();
+            const currentUrl = window.location.protocol === 'file:' ? 'https://capibarasound00.github.io/cristina26/' : window.location.href;
             
             shareWhatsAppBtn.addEventListener('click', () => {
                 const text = encodeURIComponent(`¡Escucha el tema oficial de cumpleaños que le hemos hecho a Cristina! 🎂🎵: ${currentUrl}`);
@@ -1239,9 +1221,7 @@
                             text: '¡Escucha el tema de cumpleaños que le hemos hecho a Cristina! 🎂🎵',
                             url: currentUrl
                         });
-                    } catch (err) {
-                        console.log("Compartición cancelada");
-                    }
+                    } catch (err) {}
                 } else {
                     navigator.clipboard.writeText(currentUrl).then(() => {
                         showToast('Enlace copiado al portapapeles 📋', false);
@@ -1263,13 +1243,11 @@
             }
             
             toastNotification.classList.add('show');
-            setTimeout(() => { toastNotification.classList.remove('show'); }, 2200);
+            setTimeout(() => { toastNotification.classList.remove('show'); }, 2000);
         }
 
         function resetTrackEndEffects() {
-            if (easterEgg.style.display === 'block' || easterEgg.style.display === '') {
-                easterEgg.style.display = 'none';
-            }
+            if (easterEgg.style.display === 'block') easterEgg.style.display = 'none';
         }
 
         function togglePlayAudio(forceState = null) {
@@ -1278,20 +1256,14 @@
                 audio.play();
                 playIcon.style.display = 'none';
                 pauseIcon.style.display = 'block';
-                if ('mediaSession' in navigator) navigator.mediaSession.playbackState = "playing";
             } else {
                 audio.pause();
                 playIcon.style.display = 'block';
                 pauseIcon.style.display = 'none';
-                if ('mediaSession' in navigator) navigator.mediaSession.playbackState = "paused";
             }
         }
 
         playBtn.addEventListener('click', () => { togglePlayAudio(); });
-
-        playBtn.addEventListener('touchstart', function() { this.classList.add('active-press'); }, { passive: true });
-        playBtn.addEventListener('touchend', function() { this.classList.remove('active-press'); }, { passive: true });
-        playBtn.addEventListener('touchcancel', function() { this.classList.remove('active-press'); }, { passive: true });
 
         restartBtn.addEventListener('click', () => {
             audio.currentTime = 0;
@@ -1307,20 +1279,17 @@
             if (loopState === 0) {
                 audio.loop = false;
                 loopGraphicsContainer.innerHTML = renderLoopIcon(0);
-                loopBtn.setAttribute('title', 'Bucle: Desactivado');
                 showToast('🔀 Bucle desactivado', true);
             } else if (loopState === 1) {
                 audio.loop = false; 
                 hasRepeatedOnce = false;
                 loopBtn.classList.add('loop-once');
                 loopGraphicsContainer.innerHTML = renderLoopIcon(1);
-                loopBtn.setAttribute('title', 'Bucle: Repetir 1 vez');
                 showToast('🔂 Se repetirá solo una vez', true);
             } else if (loopState === 2) {
                 audio.loop = true; 
                 loopBtn.classList.add('loop-infinite');
                 loopGraphicsContainer.innerHTML = renderLoopIcon(2);
-                loopBtn.setAttribute('title', 'Bucle: Infinito');
                 showToast('🔁 Repetición infinita activada', true);
             }
         });
@@ -1338,7 +1307,6 @@
                 progressSlider.value = percent;
                 progressFill.style.width = `${percent}%`;
                 currentTimeLabel.textContent = formatTime(audio.currentTime);
-                if (audio.currentTime === 0) resetTrackEndEffects();
             }
         });
 
@@ -1351,10 +1319,6 @@
 
         progressSlider.addEventListener('change', (e) => {
             audio.currentTime = (e.target.value / 100) * audio.duration;
-            if (audio.currentTime === 0) {
-                resetTrackEndEffects();
-                hasRepeatedOnce = false;
-            }
             isSeeking = false;
         });
 
@@ -1370,9 +1334,7 @@
                         break;
                     }
                 }
-                if (bufferedEnd === 0) {
-                    bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
-                }
+                if (bufferedEnd === 0) bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
                 const bufferPercent = (bufferedEnd / audio.duration) * 100;
                 progressBuffer.style.width = `${bufferPercent}%`;
             }
@@ -1380,7 +1342,6 @@
 
         audio.addEventListener('loadedmetadata', () => {
             totalDurationLabel.textContent = formatTime(audio.duration);
-            updateBufferTrack();
         });
 
         function updateVolumeSliderBackground(value) {
@@ -1424,11 +1385,12 @@
 
         function launchConfetti() {
             if (typeof confetti === 'function') {
-                confetti({ particleCount: 60, spread: 50, origin: { x: 0.2, y: 0.8 } });
-                confetti({ particleCount: 60, spread: 50, origin: { x: 0.8, y: 0.8 } });
+                confetti({ particleCount: 40, spread: 45, origin: { x: 0.2, y: 0.85 } });
+                confetti({ particleCount: 40, spread: 45, origin: { x: 0.8, y: 0.85 } });
             }
         }
 
+        /* MANEJO DE ACORDEONES ULTRA-FLUIDOS */
         function toggleAccordion(id) {
             const content = document.getElementById(id);
             if (content.style.maxHeight && content.style.maxHeight !== "0px") {
@@ -1437,9 +1399,6 @@
             } else {
                 content.style.maxHeight = content.scrollHeight + "px";
                 content.style.opacity = "1";
-                setTimeout(() => {
-                    if (content.style.maxHeight !== "0px") content.style.maxHeight = "none";
-                }, 350);
             }
         }
 
@@ -1452,9 +1411,7 @@
                 } else {
                     loopState = 0;
                     hasRepeatedOnce = false;
-                    loopBtn.classList.remove('loop-once');
                     loopGraphicsContainer.innerHTML = renderLoopIcon(0);
-                    loopBtn.setAttribute('title', 'Bucle: Desactivado');
                     triggerTrackEndEffects();
                 }
             } else if (loopState === 0) {
@@ -1462,19 +1419,19 @@
             }
         });
 		
-        /* ======= SISTEMA DE TRIVIA COMPETITIVO CON PUNTUACIONES EXTRA ======= */
+        /* ======= SISTEMA DE TRIVIA COMPETITIVO EXTRA RÁPIDO ======= */
         const quizData = [
             { q: "¿Cuántos años cumple hoy Cristina?", o: ["25 años", "26 años", "27 años"], a: 1 },
-            { q: "¿Dónde reparte su magia y cura con abrazos?", o: ["En el hospital", "En el gimnasio", "En la playa"], a: 0 },
-            { q: "¿Cómo se llama el single oficial lanzado hoy?", o: ["La Fiestera", "Flamenco Urbano", "La Guerrera Silenciosa"], a: 2 },
-			{ q: "Si Cris tuviera que diagnosticar el estado del grupo de amigos un sábado por la noche, ¿cuál sería su veredicto definitivo?", o: ["Delirio agudo por falta de fiesta", "Arritmia producida por el reggaetón", "Coma inducido por exceso de risas"], a: 2 },
-            { q: "Empieza a sonar el estribillo de su canción oficial a mitad de la noche, ¿cuál es la reacción inmediata de Cris?", o: ["Dar palmas y venirse arriba con arte", "Ponerse roja de la vergüenza y esconderse", "Pasar olímpicamente e ir a pedir otra copa"], a: 1 },
-            { q: "En el hospital para sobrevivir a la jornada, ¿qué es lo primero que necesita Cristina?", o: ["Buscar un amuleto secreto en su bata", "Poner música fiestera en la sala de médicos", "Tomarse un buen café y quejarse del sueño"], a: 2 }
+            { q: "@Dónde reparte su magia y cura con abrazos?", o: ["En el hospital", "En el gimnasio", "En la playa"], a: 0 },
+            { q: "@Cómo se llama el single oficial lanzado hoy?", o: ["La Fiestera", "Flamenco Urbano", "La Guerrera Silenciosa"], a: 2 },
+			{ q: "Si Cris tuviera que diagnosticar el estado del grupo de amigos un sábado por la noche, @cuál sería su veredicto definitivo?", o: ["Delirio agudo por falta de fiesta", "Arritmia producida por el reggaetón", "Coma inducido por exceso de risas"], a: 2 },
+            { q: "Empieza a sonar el estribillo de su canción oficial a mitad de la noche, @cuál es la reacción inmediata de Cris?", o: ["Dar palmas y venirse arriba con arte", "Ponerse roja de la vergüenza y esconderse", "Pasar olímpicamente e ir a pedir otra copa"], a: 1 },
+            { q: "En el hospital para sobrevivir a la jornada, @qué es lo primero que necesita Cristina?", o: ["Buscar un amuleto secreto en su bata", "Poner música fiestera en la sala de médicos", "Tomarse un buen café y quejarse del sueño"], a: 2 }
         ];
 
         let currentQuizIndex = 0;
         let correctAnswersCount = 0;
-        let isAnsweringBlock = false; // Evita doble click mientras cambia de pregunta
+        let isAnsweringBlock = false;
 
 		function toggleQuizAccordion() {
             const content = document.getElementById('quizContent');
@@ -1483,13 +1440,8 @@
                 content.style.opacity = "0";
             } else {
                 renderCurrentQuizState();
-                setTimeout(() => {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                    content.style.opacity = "1";
-                    setTimeout(() => {
-                        if (content.style.maxHeight !== "0px") content.style.maxHeight = "none";
-                    }, 350);
-                }, 10);
+                content.style.maxHeight = content.scrollHeight + "px";
+                content.style.opacity = "1";
             }
         }
 
@@ -1499,16 +1451,13 @@
             isAnsweringBlock = false;
             renderCurrentQuizState();
             
-            // Recalcular el contenedor para la nueva renderización animada
             const content = document.getElementById('quizContent');
             content.style.maxHeight = content.scrollHeight + "px";
-            setTimeout(() => { content.style.maxHeight = "none"; }, 350);
         }
 
         function renderCurrentQuizState() {
             const box = document.getElementById('quizBox');
             
-            // Si el juego ha terminado, procesamos las puntuaciones y mostramos un mensaje ad-hoc
             if (currentQuizIndex >= quizData.length) {
                 let trophy = "🥉";
                 let title = "Conocedor/a Básico";
@@ -1526,7 +1475,7 @@
                 } else if (correctAnswersCount <= 1) {
                     trophy = "👁️👄👁️";
                     title = "Desconocido de Incógnito";
-                    textMessage = "¿Seguro que estás en la fiesta de la persona correcta? Cris sospecharía de ti ahora mismo. ¡Vuelve a escuchar su canción para aprenderte su historia!";
+                    textMessage = "@Seguro que estás en la fiesta de la persona correcta? Cris sospecharía de ti ahora mismo. ¡Vuelve a escuchar su canción para aprenderte su historia!";
                 }
 
                 box.innerHTML = `
@@ -1541,7 +1490,6 @@
                 return;
             }
 
-            // Renderizado habitual de la pregunta actual
             const data = quizData[currentQuizIndex];
             box.innerHTML = `
                 <div class="quiz-header">
@@ -1563,43 +1511,32 @@
         }
 
         function handleOptionSelection(selectedIdx, clickedButton) {
-            if (isAnsweringBlock) return; // Bloquear si está en transición
+            if (isAnsweringBlock) return;
             isAnsweringBlock = true;
 
             const content = document.getElementById('quizContent');
             const currentQuestionData = quizData[currentQuizIndex];
             const allOptions = document.querySelectorAll('.quiz-opt');
 
-            // Deshabilitar todos los botones temporalmente
             allOptions.forEach(b => b.style.pointerEvents = 'none');
 
-            // Validar si la respuesta es correcta
             if (selectedIdx === currentQuestionData.a) {
                 clickedButton.classList.add('correct-flash');
                 correctAnswersCount++;
-                if (typeof confetti === 'function') confetti({ particleCount: 20, spread: 30, origin: { y: 0.85 } });
+                if (typeof confetti === 'function') confetti({ particleCount: 15, spread: 25, origin: { y: 0.85 } });
             } else {
                 clickedButton.classList.add('wrong-flash');
-                // Mostrar sutilmente cuál era la respuesta correcta para aprender
                 allOptions[currentQuestionData.a].classList.add('correct-flash');
             }
 
             currentQuizIndex++;
 
-            // Pequeña pausa de 1 segundo para ver el resultado visual antes de transicionar de forma superfluida
+            // Espera de 1 segundo para feedback visual y luego cambia instantáneamente recalculando la altura sobre la marcha sin parpadeos
             setTimeout(() => {
-                content.style.maxHeight = content.scrollHeight + "px"; // Fijar altura momentánea para evitar saltos
-                
                 renderCurrentQuizState();
-                
-                setTimeout(() => {
-                    content.style.maxHeight = content.scrollHeight + "px"; // Reajustar a la nueva altura
-                    setTimeout(() => {
-                        if (content.style.maxHeight !== "0px") content.style.maxHeight = "none"; // Liberar
-                        isAnsweringBlock = false;
-                    }, 350);
-                }, 10);
-            }, 1000);
+                content.style.maxHeight = content.scrollHeight + "px"; 
+                isAnsweringBlock = false;
+            }, 900);
         }
 
         function triggerTrackEndEffects() {
@@ -1607,7 +1544,6 @@
             pauseIcon.style.display = 'none';
             easterEgg.style.display = 'block';
             launchConfetti();
-            if ('mediaSession' in navigator) navigator.mediaSession.playbackState = "stopped";
         }
     </script>
 </body>
