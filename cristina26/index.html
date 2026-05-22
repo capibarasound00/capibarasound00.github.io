@@ -326,6 +326,26 @@
             .custom-player { padding: 20px; }
         }
 
+        /* --- NUEVO ESTILO: ECUALIZADOR VISUAL RÍTMICO --- */
+        .visual-eq-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 3px;
+            height: 35px;
+            margin-bottom: 15px;
+            padding: 0 10px;
+            overflow: hidden;
+        }
+        .eq-bar {
+            flex: 1;
+            max-width: 6px;
+            height: 3px;
+            background: linear-gradient(to top, var(--green) 30%, var(--green-dim) 70%, var(--gold) 100%);
+            border-radius: 3px 3px 0 0;
+            transition: height 0.15s ease;
+        }
+
         .player-controls {
             display: flex;
             align-items: center;
@@ -533,12 +553,21 @@
             width: 100%;
         }
 
+        /* --- REDISEÑO: CONTROL DE VOLUMEN MODERNO --- */
         .volume-container {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             flex: 1;
-            min-width: 140px;
+            min-width: 150px;
+            background: rgba(13, 20, 18, 0.6);
+            padding: 6px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(45, 66, 59, 0.4);
+            transition: border-color 0.2s ease;
+        }
+        .volume-container:hover {
+            border-color: rgba(46, 189, 133, 0.5);
         }
 
         .volume-btn {
@@ -549,9 +578,17 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            width: 24px;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
             flex-shrink: 0;
             touch-action: manipulation;
+            transition: color 0.2s, background 0.2s;
+        }
+        .volume-btn:hover {
+            color: #fff;
+            background: rgba(46, 189, 133, 0.1);
         }
 
         .volume-slider-wrapper {
@@ -559,36 +596,42 @@
             flex: 1;
             display: flex;
             align-items: center;
+            height: 20px;
         }
 
         .volume-slider {
             width: 100%;
             -webkit-appearance: none;
             appearance: none;
-            height: 6px;
-            border-radius: 3px;
+            height: 5px;
+            border-radius: 4px;
             outline: none;
             cursor: pointer;
-            background: linear-gradient(to right, #2ebd85 100%, #1e2d29 0%);
+            background: #1e2d29;
         }
 
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             background: #ffffff;
             border: 2px solid #2ebd85;
             cursor: pointer;
-            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            box-shadow: 0 0 8px rgba(46, 189, 133, 0.6);
+            transition: transform 0.1s;
+        }
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.25);
         }
 
         .volume-percentage {
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             color: #a2b5ae;
-            min-width: 32px;
+            min-width: 35px;
             text-align: right;
             font-variant-numeric: tabular-nums;
+            font-weight: 600;
         }
 
         .speed-select-container {
@@ -711,6 +754,13 @@
         .lyrics-text .lyrics-tag:first-child { margin-top: 0; }
         .lyrics-line { margin-bottom: 4px; }
 
+        /* DISEÑO DE TRIVIA INTERACTIVO FUNCIONAL */
+        .quiz-card { padding: 20px; text-align: left; }
+        .quiz-q { font-size: 0.95rem; font-weight: bold; color: var(--gold); margin-bottom: 12px; line-height: 1.4; }
+        .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+        .quiz-opt { background: #1c2824; border: 1px solid var(--border); padding: 10px 12px; border-radius: 8px; color: #fff; font-size: 0.85rem; cursor: pointer; text-align: left; transition: all 0.2s; }
+        .quiz-opt:hover { background: rgba(46,189,133,0.15); border-color: var(--green); }
+
         .btn-celebrate {
             display: block; width: 100%; padding: 15px;
             background: linear-gradient(135deg, #c5a059 0%, #a07a2a 100%);
@@ -812,6 +862,12 @@
             color: #cbdad5;
             border: 1px solid #2ebd85;
         }
+        
+        .toast-notification.error-toast {
+            background: #9b2c2c;
+            color: #ffffff;
+            border: 1px solid #e53e3e;
+        }
     </style>
 </head>
 <body>
@@ -847,8 +903,10 @@
         </div>
 
         <div class="custom-player">
+            <div class="visual-eq-container" id="visualEq">
+                </div>
+
             <div class="player-controls">
-                
                 <button class="nav-btn" id="restartBtn" title="Volver al principio" aria-label="Volver al principio de la canción">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M6 6h2v12H6V6zm11.5 12l-8.5-6 8.5-6v12z"/>
@@ -1066,7 +1124,19 @@
                 </div>
             </div>
         </div>
-
+        
+		<div class="accordion-container">
+            <button class="btn-accordion" onclick="toggleQuizAccordion()">
+                <span>🕹️</span> Jugar al Trivia de Cris
+            </button>
+            <div class="accordion-content" id="quizContent">
+                <div class="quiz-card" id="quizBox">
+                    <div class="quiz-q" id="quizQuestion">Cargando pregunta...</div>
+                    <div class="quiz-options" id="quizOptions"></div>
+                </div>
+            </div>
+        </div>
+		
         <button class="btn-celebrate" onclick="launchConfetti()">¡Felicitar a lo grande! 🥳</button>
 
         <div class="share-container">
@@ -1143,10 +1213,41 @@
         let loopState = 0; 
         let hasRepeatedOnce = false; 
 
-        // Variables para la detección del "Long Press" (Mantener presionado)
         let pressTimer = null;
         let isLongPress = false;
-        const LONG_PRESS_DURATION = 700; // Milisegundos requeridos para hacer STOP
+        const LONG_PRESS_DURATION = 700;
+
+        /* ======= GENERACIÓN E INSTALACIÓN DEL ECUALIZADOR VISUAL ======= */
+        const visualEqContainer = document.getElementById('visualEq');
+        const totalEqBars = 26; // Uno por cada primavera de Cris
+        let eqInterval = null;
+
+        for (let i = 0; i < totalEqBars; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'eq-bar';
+            visualEqContainer.appendChild(bar);
+        }
+        const eqBarsElements = document.querySelectorAll('.eq-bar');
+
+        function startEqAnimation() {
+            if (eqInterval) clearInterval(eqInterval);
+            eqInterval = setInterval(() => {
+                if (!audio.paused) {
+                    eqBarsElements.forEach(bar => {
+                        // Genera alturas aleatorias orgánicas simulando ondas
+                        const randomHeight = Math.floor(Math.random() * 32) + 4;
+                        bar.style.height = `${randomHeight}px`;
+                    });
+                }
+            }, 120);
+        }
+
+        function stopEqAnimation() {
+            if (eqInterval) clearInterval(eqInterval);
+            eqBarsElements.forEach(bar => {
+                bar.style.height = '3px';
+            });
+        }
 
         function renderLoopIcon(state) {
             let basePaths = `
@@ -1182,7 +1283,6 @@
             coverImage.addEventListener('load', setCoverAsLoaded);
         }
 
-        // --- SISTEMA DINÁMICO DE ICONOS DE ESTADO (Spinner / ⚡ / 🎵) ---
         function setAudioStatus(status) {
             if (status === 'loading') {
                 audioSpinner.style.display = 'inline-block';
@@ -1193,27 +1293,28 @@
                 audioCheckIcon.style.display = 'inline-block';
                 audioCheckIcon.textContent = '🎵';
                 audioStatusContainer.setAttribute('title', 'Reproduciendo');
+                startEqAnimation();
             } else if (status === 'paused') {
                 audioSpinner.style.display = 'none';
                 audioCheckIcon.style.display = 'inline-block';
                 audioCheckIcon.textContent = '🎵';
                 audioStatusContainer.setAttribute('title', 'Pausado');
+                stopEqAnimation();
             } else if (status === 'stopped' || status === 'ended') {
                 audioSpinner.style.display = 'none';
                 audioCheckIcon.style.display = 'inline-block';
                 audioCheckIcon.textContent = '⚡';
                 audioStatusContainer.setAttribute('title', 'Canción detenida');
+                stopEqAnimation();
             }
         }
 
-        // Listeners nativos del elemento Audio para cambiar los estados visuales automáticamente
         audio.addEventListener('waiting', () => setAudioStatus('loading'));
         audio.addEventListener('loadstart', () => setAudioStatus('loading'));
         audio.addEventListener('seeking', () => setAudioStatus('loading'));
         
         audio.addEventListener('canplay', () => {
             if (audio.paused) {
-                // Si está cargada pero parada al inicio de todo, muestra el rayo inicial
                 if(audio.currentTime === 0) setAudioStatus('stopped');
                 else setAudioStatus('paused');
             } else {
@@ -1234,8 +1335,6 @@
             setTimeout(launchConfetti, 500);
             updateVolumeSliderBackground(audio.volume);
             loopGraphicsContainer.innerHTML = renderLoopIcon(0);
-            
-            // Estado inicial antes de interactuar: "⚡" parado
             setAudioStatus('stopped');
 
             if (coverImage.complete) {
@@ -1291,13 +1390,18 @@
             });
         });
 
-        function showToast(text, isLoopMsg = false) {
+        function showToast(text, isLoopMsg = false, isError = false) {
             toastNotification.textContent = text;
-            if (isLoopMsg) {
-                toastNotification.classList.add('loop-toast');
-            } else {
+            if (isError) {
+                toastNotification.classList.add('error-toast');
                 toastNotification.classList.remove('loop-toast');
+            } else if (isLoopMsg) {
+                toastNotification.classList.add('loop-toast');
+                toastNotification.classList.remove('error-toast');
+            } else {
+                toastNotification.classList.remove('loop-toast', 'error-toast');
             }
+            
             toastNotification.classList.add('show');
             setTimeout(() => {
                 toastNotification.classList.remove('show');
@@ -1310,7 +1414,6 @@
             }
         }
 
-        /* ======= PLAY/PAUSE ======= */
         function togglePlayAudio(forceState = null) {
             const shouldPlay = forceState !== null ? forceState : audio.paused;
             if (shouldPlay) {
@@ -1326,7 +1429,6 @@
             }
         }
 
-        // --- FUNCIONALIDAD: DETENER TOTALMENTE (STOP) ---
         function stopAudio() {
             audio.pause();
             audio.currentTime = 0;
@@ -1337,7 +1439,6 @@
             if ('mediaSession' in navigator) navigator.mediaSession.playbackState = "stopped";
         }
 
-        // --- MANEJO EXCLUSIVO DE LOGICA DE CLICK, TAP Y LONG PRESS EN PLAY_BTN ---
         function startPress() {
             isLongPress = false;
             playBtn.classList.add('active-press');
@@ -1350,14 +1451,10 @@
         function endPress(e) {
             if (pressTimer) clearTimeout(pressTimer);
             playBtn.classList.remove('active-press');
-            
-            // Si fue una pulsación larga, prevenimos que ejecute el click normal alternando play/pause
             if (isLongPress) {
                 if (e) e.preventDefault();
                 return;
             }
-            
-            // Si fue una pulsación normal corta, actúa normalmente cambiando el play/pause
             togglePlayAudio();
         }
 
@@ -1366,12 +1463,10 @@
             playBtn.classList.remove('active-press');
         }
 
-        // Eventos para Ratón (Escritorio)
         playBtn.addEventListener('mousedown', startPress);
         playBtn.addEventListener('mouseup', endPress);
         playBtn.addEventListener('mouseleave', cancelPress);
 
-        // Eventos Táctiles (Móviles)
         playBtn.addEventListener('touchstart', (e) => {
             startPress();
         }, { passive: true });
@@ -1381,7 +1476,6 @@
         }, { passive: false });
 
         playBtn.addEventListener('touchcancel', cancelPress);
-
 
         restartBtn.addEventListener('click', () => {
             audio.currentTime = 0;
@@ -1473,6 +1567,7 @@
             updateBufferTrack();
         });
 
+        /* ======= LÓGICA DE VOLUMEN INTELIGENTE CON MEMORIA ======= */
         function updateVolumeSliderBackground(value) {
             const percentage = value * 100;
             volumeSlider.style.background = `linear-gradient(to right, #2ebd85 0%, #2ebd85 ${percentage}%, #1e2d29 ${percentage}%, #1e2d29 100%)`;
@@ -1484,22 +1579,25 @@
             audio.volume = vol;
             updateVolumeSliderBackground(vol);
             if (vol === 0) volumeBtn.textContent = '🔇';
-            else if (vol < 0.5) volumeBtn.textContent = '🔉';
+            else if (vol < 0.4) volumeBtn.textContent = '🔈';
+            else if (vol < 0.7) volumeBtn.textContent = '🔉';
             else volumeBtn.textContent = '🔊';
         });
 
         volumeBtn.addEventListener('click', () => {
             if (audio.volume > 0) {
+                // Guarda el último volumen activo antes de silenciar
                 lastVolume = audio.volume;
                 audio.volume = 0;
                 volumeSlider.value = 0;
                 updateVolumeSliderBackground(0);
                 volumeBtn.textContent = '🔇';
             } else {
+                // Restaura exactamente el volumen previo en vez del 100% fijo
                 audio.volume = lastVolume;
                 volumeSlider.value = lastVolume;
                 updateVolumeSliderBackground(lastVolume);
-                volumeBtn.textContent = lastVolume < 0.5 ? '🔉' : '🔊';
+                volumeBtn.textContent = lastVolume < 0.4 ? '🔈' : (lastVolume < 0.7 ? '🔉' : '🔊');
             }
         });
 
@@ -1530,6 +1628,20 @@
             }
         }
 
+        function toggleQuizAccordion() {
+            const content = document.getElementById('quizContent');
+            if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+                content.style.maxHeight = "0px";
+                content.style.opacity = "0";
+            } else {
+                initQuiz();
+                setTimeout(() => {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    content.style.opacity = "1";
+                }, 10);
+            }
+        }
+
         audio.addEventListener('ended', () => {
             if (loopState === 1) {
                 if (!hasRepeatedOnce) {
@@ -1548,6 +1660,48 @@
                 triggerTrackEndEffects();
             }
         });
+		
+        const quizData = [
+            { q: "¿Cuántos años cumple hoy Cristina?", o: ["25 años", "26 años", "27 años"], a: 1 },
+            { q: "¿Dónde reparte su magia y cura con abrazos?", o: ["En el gimnasio", "En el hospital", "En la playa"], a: 1 },
+            { q: "¿Cómo se llama el single oficial lanzado hoy?", o: ["La Fiestera", "Flamenco Urbano", "La Guerrera Silenciosa"], a: 2 }
+        ];
+        let currentQuizIndex = 0;
+
+        function initQuiz() {
+            const box = document.getElementById('quizBox');
+            if (currentQuizIndex >= quizData.length) {
+                box.innerHTML = "<div class='quiz-q' style='text-align:center;'>🎉 ¡Has acertado todas las preguntas!<br><span style='color:var(--green);'>Eres el/la fan número uno de la Dra. Cristina.</span></div>";
+                return;
+            }
+            const data = quizData[currentQuizIndex];
+            document.getElementById('quizQuestion').textContent = `${currentQuizIndex + 1}. ${data.q}`;
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = '';
+            
+            data.o.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-opt';
+                btn.textContent = opt;
+                btn.addEventListener('click', () => checkQuizAnswer(idx));
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkQuizAnswer(idx) {
+            const content = document.getElementById('quizContent');
+            if (idx === quizData[currentQuizIndex].a) {
+                launchConfetti();
+                currentQuizIndex++;
+                initQuiz();
+                
+                if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            } else {
+                showToast("❌ ¡Respuesta incorrecta! Seguro que conoces mejor a Cris, prueba otra vez.", false, true);
+            }
+        }
 
         function triggerTrackEndEffects() {
             playIcon.style.display = 'block';
