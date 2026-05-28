@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)</title>
+    <meta name="description" content="Escucha el homenaje especial para Cristina por sus 26 primaveras. ¡Un regalo de sus amigos de siempre! 🎂🎵">
+    
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <meta property="og:title" content="¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)">
+    <meta property="og:description" content="Escucha el homenaje especial para Cristina por sus 26 primaveras. ¡Un regalo de sus amigos de siempre! 🎂🎵">
+    <meta property="og:url" content="https://capibarasound00.github.io/cristina26/">
+    <meta property="og:site_name" content="Capibara Sound">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.webp">
+    <meta property="og:image:secure_url" content="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.webp">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="¡Feliz Cumpleaños Cristina! - La Guerrera Silenciosa (Single Oficial)">
+    <meta name="twitter:description" content="Escucha el homenaje especial para Cristina por sus 26 primaveras. ¡Un regalo de sus amigos de siempre! 🎂🎵">
+    <meta name="twitter:image" content="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.webp">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
+    <style>
+        :root {
+            --gold: #e5c07b;
+            --gold-dark: #c5a059;
+            --green: #2ebd85;
+            --green-dim: #40dd9f;
+            --bg-deep: #050a08;
+            --bg-card: rgba(19, 28, 25, 0.95);
+            --bg-mid: #1c2824;
+            --bg-low: #0d1412;
+            --border: rgba(45, 66, 59, 0.6);
+            --text-main: #ffffff;
+            --text-dim: #a2b5ae;
+            --text-body: #cbdad5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            max-width: 100%;
+            width: 100%;
+            min-height: 100vh;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'DM Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px 15px 40px;
+            background: radial-gradient(ellipse at 20% 0%, #1b352b55 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 100%, #c5a05910 0%, transparent 50%),
+                        #050a08;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* FLOATING PARTICLES */
+        .particles-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #040807; }
+        ::-webkit-scrollbar-thumb { background: #226b50; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2ebd85; }
+
+        /* ========== CARD ========== */
+        .card-container {
+            background: var(--bg-card);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 28px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.9), 0 0 40px rgba(46,189,133,0.12), inset 0 1px 0 rgba(255,255,255,0.05);
+            width: 100%;
+            max-width: 470px;
+            padding: 22px;
+            text-align: center;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+            animation: cardIn 0.6s cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @media (min-width: 880px) {
+            .card-container {
+                max-width: 980px;
+                padding: 32px;
+                display: grid;
+                grid-template-columns: 390px 1fr;
+                gap: 30px;
+                text-align: left;
+            }
+            .badge-birthday { grid-column: span 2; margin-bottom: 5px; justify-content: center; }
+            .btn-celebrate { grid-column: span 2; margin-top: 10px; margin-bottom: 0; }
+            .easter-egg-toast { grid-column: span 2; text-align: center; }
+            .play-counter-bar { grid-column: span 2; }
+        }
+
+        /* ========== BADGE ========== */
+        .badge-birthday {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(197,160,89,0.15), rgba(197,160,89,0.05));
+            color: var(--gold);
+            padding: 9px 18px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 22px;
+            border: 1px solid rgba(197,160,89,0.5);
+            letter-spacing: 0.5px;
+            font-family: 'DM Sans', sans-serif;
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(197,160,89,0.3); }
+            50% { box-shadow: 0 0 0 8px rgba(197,160,89,0); }
+        }
+
+        /* ========== LEFT COLUMN ========== */
+        .desktop-left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .cover-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+            border: 2px solid var(--gold-dark);
+            background: #101816;
+        }
+
+        .cover-wrapper:not(.image-is-loaded)::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(46,189,133,0.15), transparent);
+            transform: translateX(-100%);
+            animation: skeletonHardware 1.6s infinite ease-in-out;
+        }
+
+        .cover-wrapper.image-is-loaded { background: transparent !important; }
+
+        @keyframes skeletonHardware {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .cover-art {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .cover-art.loaded { opacity: 1; }
+
+        /* Vinyl spin effect on play */
+        .cover-wrapper.is-playing .cover-art {
+            animation: vinylSpin 20s linear infinite;
+        }
+
+        @keyframes vinylSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* ========== LIKE + FORMAT BAR ========== */
+        .like-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(13,20,18,0.7);
+            padding: 10px 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(46,189,133,0.15);
+        }
+
+        .like-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'DM Sans', sans-serif;
+            transition: color 0.2s;
+        }
+
+        .like-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), fill 0.2s, stroke 0.2s;
+        }
+
+        .like-btn.liked { color: #ff4a73; }
+        .like-btn.liked svg { fill: #ff4a73; stroke: #ff4a73; transform: scale(1.2); }
+
+        .audio-format-badge {
+            font-size: 0.68rem;
+            background: var(--green);
+            color: #0d1110;
+            padding: 3px 7px;
+            border-radius: 5px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* ========== PLAY COUNTER ========== */
+        .play-counter-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 18px;
+            background: rgba(13,20,18,0.5);
+            border-radius: 12px;
+            border: 1px solid rgba(46,189,133,0.12);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .play-counter-bar strong {
+            color: var(--green);
+            font-size: 1.1rem;
+            font-variant-numeric: tabular-nums;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ========== RIGHT COLUMN ========== */
+        .desktop-right-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .track-header-block {
+            margin-bottom: 16px;
+            padding: 0 5px;
+            width: 100%;
+        }
+
+        @media (min-width: 880px) { .track-header-block { padding: 0; } }
+
+        .track-main-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #ffffff 30%, #e5c07b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            word-wrap: break-word;
+            line-height: 1.15;
+        }
+
+        @media (min-width: 400px) { .track-main-title { font-size: 2rem; } }
+        @media (min-width: 880px) { .track-main-title { font-size: 2.4rem; } }
+
+        .track-dedication-badge {
+            display: inline-block;
+            background: rgba(46,189,133,0.08);
+            border: 1px solid rgba(46,189,133,0.3);
+            padding: 6px 14px;
+            border-radius: 30px;
+            color: var(--green-dim);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .track-dedication-badge span { color: var(--gold); margin-right: 4px; }
+
+        .track-meta-subtitle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #9cb0a8;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        @media (min-width: 880px) { .track-meta-subtitle { justify-content: flex-start; } }
+
+        .track-meta-subtitle::before, .track-meta-subtitle::after {
+            content: ''; display: block; flex: 1; height: 1px;
+            background: linear-gradient(to right, transparent, #2d423b, transparent); max-width: 40px;
+        }
+
+        @media (min-width: 880px) { .track-meta-subtitle::before { display: none; } }
+        .track-meta-subtitle .separator { color: var(--gold-dark); font-size: 0.7rem; }
+
+        /* ========== TABS ========== */
+        .tabs-menu {
+            display: flex;
+            background: var(--bg-low);
+            padding: 4px;
+            border-radius: 14px;
+            margin-bottom: 16px;
+            border: 1px solid #1e2d29;
+            gap: 2px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            padding: 9px 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: 'DM Sans', sans-serif;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .tab-btn.active {
+            background: var(--bg-mid);
+            color: var(--green);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; animation: panelIn 0.3s ease both; }
+
+        @keyframes panelIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== DEDICATION BOX ========== */
+        .dedication-box {
+            background: rgba(28,40,36,0.6);
+            border-left: 3px solid var(--green);
+            padding: 14px;
+            border-radius: 10px;
+            text-align: left;
+            margin-bottom: 14px;
+        }
+
+        .dedication-box h2 {
+            font-size: 0.88rem;
+            color: var(--gold);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .dedication-box p {
+            font-size: 0.84rem;
+            color: var(--text-body);
+            line-height: 1.55;
+            font-style: italic;
+        }
+
+        /* ========== WAVEFORM VISUALIZER ========== */
+        .waveform-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            height: 36px;
+            margin-bottom: 14px;
+            padding: 0 4px;
+        }
+
+        .wave-bar {
+            width: 4px;
+            border-radius: 3px;
+            background: rgba(46,189,133,0.25);
+            transition: background 0.3s;
+            transform-origin: bottom;
+            animation: none;
+        }
+
+        .waveform-container.playing .wave-bar {
+            background: var(--green);
+        }
+
+        .wave-bar:nth-child(1)  { height: 20%; }
+        .wave-bar:nth-child(2)  { height: 50%; }
+        .wave-bar:nth-child(3)  { height: 80%; }
+        .wave-bar:nth-child(4)  { height: 60%; }
+        .wave-bar:nth-child(5)  { height: 100%; }
+        .wave-bar:nth-child(6)  { height: 75%; }
+        .wave-bar:nth-child(7)  { height: 45%; }
+        .wave-bar:nth-child(8)  { height: 90%; }
+        .wave-bar:nth-child(9)  { height: 55%; }
+        .wave-bar:nth-child(10) { height: 30%; }
+        .wave-bar:nth-child(11) { height: 70%; }
+        .wave-bar:nth-child(12) { height: 95%; }
+        .wave-bar:nth-child(13) { height: 65%; }
+        .wave-bar:nth-child(14) { height: 40%; }
+        .wave-bar:nth-child(15) { height: 85%; }
+        .wave-bar:nth-child(16) { height: 50%; }
+        .wave-bar:nth-child(17) { height: 100%; }
+        .wave-bar:nth-child(18) { height: 70%; }
+        .wave-bar:nth-child(19) { height: 35%; }
+        .wave-bar:nth-child(20) { height: 60%; }
+        .wave-bar:nth-child(21) { height: 25%; }
+        .wave-bar:nth-child(22) { height: 80%; }
+        .wave-bar:nth-child(23) { height: 45%; }
+        .wave-bar:nth-child(24) { height: 90%; }
+        .wave-bar:nth-child(25) { height: 55%; }
+        .wave-bar:nth-child(26) { height: 30%; }
+
+        /* Playing animation */
+        @keyframes waveAnim {
+            0%, 100% { transform: scaleY(0.3); }
+            50% { transform: scaleY(1); }
+        }
+
+        .waveform-container.playing .wave-bar { animation: waveAnim 0.8s ease-in-out infinite; }
+        .waveform-container.playing .wave-bar:nth-child(odd)  { animation-delay: 0s; }
+        .waveform-container.playing .wave-bar:nth-child(even) { animation-delay: 0.4s; }
+        .waveform-container.playing .wave-bar:nth-child(3n)   { animation-delay: 0.2s; animation-duration: 0.6s; }
+        .waveform-container.playing .wave-bar:nth-child(5n)   { animation-delay: 0.1s; animation-duration: 1s; }
+
+        /* ========== PLAYER ========== */
+        .custom-player {
+            background: linear-gradient(145deg, #172420 0%, #101816 100%);
+            border: 1px solid #2d423b;
+            border-radius: 22px;
+            padding: 16px;
+            margin-bottom: 14px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+        }
+
+        @media (min-width: 400px) { .custom-player { padding: 20px; } }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .nav-btn {
+            background: none; border: none; color: var(--text-dim); cursor: pointer;
+            transition: transform 0.2s, color 0.2s, background 0.2s;
+            display: flex; align-items: center; justify-content: center;
+            width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+        }
+
+        .nav-btn:hover { color: #fff; background: rgba(46,189,133,0.1); }
+        .nav-btn:active { transform: scale(0.88); }
+        .nav-btn svg { width: 18px; height: 18px; fill: currentColor; display: block; }
+
+        .play-btn {
+            width: 60px; height: 60px; border-radius: 50%;
+            background: linear-gradient(145deg, #e5c07b 0%, #c5a059 100%);
+            border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 20px rgba(197,160,89,0.45);
+            transition: transform 0.2s, box-shadow 0.2s; flex-shrink: 0;
+            position: relative;
+        }
+
+        .play-btn::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid rgba(229,192,123,0.3);
+            transition: all 0.3s;
+        }
+
+        .play-btn:hover { transform: scale(1.07); box-shadow: 0 8px 28px rgba(197,160,89,0.7); }
+        .play-btn:hover::after { inset: -8px; border-color: rgba(229,192,123,0.15); }
+        .play-btn:active { transform: scale(0.93); }
+
+        .play-icon-svg, .pause-icon-svg { width: 22px; height: 22px; fill: #0d1110; display: block; }
+        .pause-icon-svg { display: none; }
+
+        .nav-btn#loopBtn.loop-once { color: var(--gold); }
+        .nav-btn#loopBtn.loop-infinite { color: var(--green); }
+
+        /* ========== PROGRESS ========== */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            margin-bottom: 18px;
+        }
+
+        .time-label { font-size: 0.73rem; color: var(--text-dim); min-width: 35px; font-variant-numeric: tabular-nums; }
+
+        .audio-status-icon {
+            display: inline-flex;
+            align-items: center;
+            color: var(--green);
+        }
+
+        .spinner-mini {
+            width: 14px; height: 14px;
+            border: 2px solid rgba(46,189,133,0.2);
+            border-top-color: var(--green);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .progress-bar-wrapper { flex: 1; position: relative; height: 6px; background: #1e2d29; border-radius: 3px; cursor: pointer; }
+        .progress-buffer { position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: rgba(46,189,133,0.2); border-radius: 3px; }
+        .progress-fill { position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: linear-gradient(90deg, #2ebd85 0%, #40dd9f 100%); border-radius: 3px; transition: width 0.1s linear; }
+        .progress-slider { position: absolute; left: 0; top: -5px; width: 100%; height: 16px; -webkit-appearance: none; appearance: none; background: transparent; margin: 0; z-index: 3; cursor: pointer; outline: none; }
+        .progress-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--green); box-shadow: 0 0 5px rgba(0,0,0,0.6); cursor: pointer; transition: transform 0.15s; }
+        .progress-slider:hover::-webkit-slider-thumb { transform: scale(1.3); }
+
+        /* ========== PLAYER TOOLS ========== */
+        .player-tools-row {
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 12px; border-top: 1px solid #23352f; padding-top: 15px;
+        }
+
+        .volume-container { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 140px; }
+        .volume-btn { background: none; border: none; color: var(--text-dim); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; width: 24px; flex-shrink: 0; }
+        .volume-slider-wrapper { position: relative; flex: 1; display: flex; align-items: center; }
+        .volume-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 5px; border-radius: 3px; outline: none; cursor: pointer; background: linear-gradient(to right, var(--green) 100%, #1e2d29 0%); }
+        .volume-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--green); cursor: pointer; }
+        .volume-percentage { font-size: 0.7rem; color: var(--text-dim); min-width: 32px; text-align: right; font-variant-numeric: tabular-nums; }
+        .speed-select-container { flex-shrink: 0; }
+        .speed-select { background: #1c2824; color: var(--text-body); border: 1px solid #2d3f39; padding: 6px 10px; border-radius: 8px; font-size: 0.77rem; outline: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+
+        /* ========== DOWNLOAD ========== */
+        .download-wrapper { width: 100%; margin-top: 15px; }
+        .download-action-btn {
+            background: rgba(46,189,133,0.07); border: 1px solid rgba(46,189,133,0.35); color: var(--green);
+            padding: 12px 20px; border-radius: 14px; font-size: 0.84rem; text-decoration: none; font-weight: 600;
+            font-family: 'DM Sans', sans-serif;
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.22s; width: 100%;
+        }
+        .download-action-btn:hover { background: var(--green); color: #0d1110; border-color: var(--green); transform: translateY(-1px); }
+
+        /* ========== LYRICS ========== */
+        .lyrics-panel-box {
+            background: var(--bg-low);
+            border-radius: 18px;
+            border: 1px solid #1e2d29;
+            padding: 20px;
+            max-height: 440px;
+            overflow-y: auto;
+            text-align: center;
+        }
+
+        .lyrics-text { font-size: 0.93rem; color: #b3c7c0; line-height: 1.85; }
+        .lyrics-tag {
+            display: inline-block; color: var(--gold);
+            background: rgba(229,192,123,0.08); border: 1px solid rgba(229,192,123,0.2);
+            padding: 3px 10px; border-radius: 12px; font-size: 0.68rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; margin-bottom: 8px;
+        }
+        .lyrics-text .lyrics-tag:first-child { margin-top: 0; }
+        .lyrics-line { margin-bottom: 3px; }
+
+        /* ========== MESSAGES TAB ========== */
+        .messages-panel {
+            background: var(--bg-low);
+            border-radius: 18px;
+            border: 1px solid #1e2d29;
+            padding: 16px;
+            max-height: 440px;
+            overflow-y: auto;
+        }
+
+        .message-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #1e2d29;
+        }
+
+        .message-form input,
+        .message-form textarea {
+            background: #131c19;
+            border: 1px solid #2d423b;
+            border-radius: 10px;
+            color: var(--text-main);
+            padding: 10px 14px;
+            font-size: 0.84rem;
+            font-family: 'DM Sans', sans-serif;
+            outline: none;
+            transition: border-color 0.2s;
+            resize: none;
+        }
+
+        .message-form input:focus,
+        .message-form textarea:focus {
+            border-color: var(--green);
+        }
+
+        .message-form input::placeholder,
+        .message-form textarea::placeholder {
+            color: #4a6358;
+        }
+
+        .send-msg-btn {
+            background: linear-gradient(135deg, var(--green) 0%, #1e9e6c 100%);
+            color: #0d1110;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 0.84rem;
+            font-weight: 700;
+            font-family: 'DM Sans', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .send-msg-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(46,189,133,0.4); }
+        .send-msg-btn:active { transform: scale(0.97); }
+
+        .messages-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message-bubble {
+            background: rgba(28,40,36,0.6);
+            border: 1px solid rgba(46,189,133,0.1);
+            border-radius: 14px;
+            padding: 12px 14px;
+            text-align: left;
+            animation: msgIn 0.4s cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        @keyframes msgIn {
+            from { opacity: 0; transform: translateY(10px) scale(0.97); }
+            to { opacity: 1; transform: none; }
+        }
+
+        .message-bubble .msg-author {
+            font-size: 0.78rem;
+            color: var(--green);
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .message-bubble .msg-author .msg-time {
+            color: #4a6358;
+            font-weight: 400;
+            margin-left: auto;
+        }
+
+        .message-bubble .msg-text {
+            font-size: 0.85rem;
+            color: var(--text-body);
+            line-height: 1.5;
+        }
+
+        .messages-empty {
+            text-align: center;
+            color: #4a6358;
+            font-size: 0.85rem;
+            padding: 20px;
+        }
+
+        /* ========== ACCORDION ========== */
+        .accordion-container { margin-top: 10px; width: 100%; }
+
+        .btn-accordion {
+            background: none; border: 1px dashed #4a635a; color: var(--text-dim); padding: 11px 16px;
+            border-radius: 14px; font-size: 0.83rem; cursor: pointer; width: 100%;
+            font-family: 'DM Sans', sans-serif;
+            display: flex; justify-content: center; align-items: center; gap: 8px; transition: all 0.2s;
+        }
+        .btn-accordion:hover { border-color: var(--green); color: #fff; background: rgba(46,189,133,0.05); }
+
+        .accordion-content {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.25,1,0.5,1), opacity 0.25s ease;
+            will-change: max-height, opacity; opacity: 0;
+            background: var(--bg-low); border-radius: 12px; margin-top: 8px;
+        }
+
+        .track-info-extended { padding: 15px; font-size: 0.79rem; color: #a3b8b0; }
+        .track-info-section-title { color: var(--gold); font-weight: 700; font-size: 0.83rem; text-transform: uppercase; margin: 12px 0 6px 0; border-bottom: 1px solid #23352f; padding-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+        .track-info-section-title:first-child { margin-top: 0; }
+        .track-info-row { display: flex; justify-content: space-between; gap: 10px; padding: 5px 0; border-bottom: 1px solid rgba(46,117,89,0.05); }
+        .track-info-row span:last-child { text-align: right; font-weight: 600; color: var(--text-body); }
+
+        /* ========== SHARE ========== */
+        .share-container { display: flex; justify-content: center; gap: 10px; width: 100%; }
+        .share-btn {
+            background: var(--bg-mid); border: 1px solid #2d3f39; color: var(--text-body); padding: 10px 12px;
+            border-radius: 28px; font-size: 0.77rem; text-decoration: none;
+            font-family: 'DM Sans', sans-serif;
+            display: inline-flex; align-items: center; gap: 5px; cursor: pointer; flex: 1; justify-content: center; transition: all 0.2s;
+        }
+        .share-btn:hover { background: var(--green); color: #0d1110; border-color: var(--green); transform: translateY(-2px); }
+
+        /* ========== CELEBRATE BTN ========== */
+        .btn-celebrate {
+            display: block; width: 100%; padding: 15px;
+            background: linear-gradient(135deg, #c5a059 0%, #a07a2a 100%);
+            color: #0d1110; border: none; border-radius: 50px;
+            font-weight: 800; font-size: 0.9rem; font-family: 'DM Sans', sans-serif;
+            text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer;
+            box-shadow: 0 6px 20px rgba(171,132,60,0.35);
+            margin: 18px 0 10px 0; transition: transform 0.2s, box-shadow 0.2s;
+            position: relative; overflow: hidden;
+        }
+
+        .btn-celebrate::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -60%;
+            width: 40%; height: 200%;
+            background: rgba(255,255,255,0.2);
+            transform: skewX(-20deg);
+            animation: shineSlide 3s ease-in-out infinite;
+        }
+
+        @keyframes shineSlide {
+            0%, 60% { left: -60%; }
+            100% { left: 130%; }
+        }
+
+        .btn-celebrate:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(171,132,60,0.55); }
+        .btn-celebrate:active { transform: scale(0.97); }
+
+        /* ========== EASTER EGG ========== */
+        .easter-egg-toast { display: none; background: var(--green); color: #0d1110; padding: 14px; border-radius: 14px; font-size: 0.85rem; font-weight: 700; margin-top: 12px; font-family: 'DM Sans', sans-serif; }
+
+        /* ========== TOAST ========== */
+        .toast-notification {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: var(--green); color: #0d1110; padding: 12px 24px; border-radius: 30px;
+            font-size: 0.84rem; font-weight: 700; font-family: 'DM Sans', sans-serif;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 9999; text-align: center;
+            white-space: nowrap; pointer-events: none; max-width: 90%; transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+        }
+        .toast-notification.show { transform: translateX(-50%) translateY(0); }
+        .toast-notification.loop-toast { background: #131c19; color: var(--text-body); border: 1px solid var(--green); }
+    </style>
+</head>
+<body>
+
+    <!-- FLOATING PARTICLES -->
+    <div class="particles-bg" id="particlesBg"></div>
+
+    <audio id="birthday-song" preload="metadata">
+        <source src="https://capibarasound00.github.io/cristina26/assets/sound/Cristina - La Guerrera Silenciosa (Flamenco v2).mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="card-container">
+        <div class="badge-birthday">
+            🎂 ¡FELIZ CUMPLE CRISTINA, 26 PRIMAVERAS! 🎉
+        </div>
+
+        <!-- ===== COLUMNA IZQUIERDA ===== -->
+        <div class="desktop-left-column">
+            <div class="cover-wrapper" id="coverWrapper">
+                <img class="cover-art" id="coverImage"
+                    src="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.webp"
+                    alt="Portada de la canción La Guerrera Silenciosa" width="418" height="418">
+            </div>
+
+            <div class="like-container">
+                <button class="like-btn" id="likeBtn" aria-label="Dar me gusta a la canción">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    <span id="likeText">Añadir a Favoritos</span>
+                </button>
+                <span class="audio-format-badge">322kbps MP3</span>
+            </div>
+
+            <!-- PLAY COUNTER -->
+            <div class="play-counter-bar">
+                🎵 Reproducida <strong id="playCountDisplay">0</strong> veces
+            </div>
+
+            <div class="share-container">
+                <button class="share-btn" id="shareWhatsAppBtn"><span>💬</span> WhatsApp</button>
+                <button class="share-btn" id="shareInstagramBtn"><span>🔗</span> Copiar Link</button>
+            </div>
+        </div>
+
+        <!-- ===== COLUMNA DERECHA ===== -->
+        <div class="desktop-right-column">
+            <div class="track-header-block">
+                <h1 class="track-main-title">La Guerrera Silenciosa</h1>
+                <div class="track-dedication-badge"><span>🩺</span> Dedicado a la niña buena del hospital</div>
+                <div class="track-meta-subtitle">Homenaje Especial <span class="separator">•</span> Flamenco Urbano</div>
+            </div>
+
+            <!-- TABS -->
+            <div class="tabs-menu">
+                <button class="tab-btn active" onclick="switchTab(event, 'playerTab')">🎵 Reproductor</button>
+                <button class="tab-btn" onclick="switchTab(event, 'lyricsTab')">📝 Letra</button>
+                <button class="tab-btn" onclick="switchTab(event, 'messagesTab')">💬 Mensajes</button>
+            </div>
+
+            <!-- TAB: REPRODUCTOR -->
+            <div id="playerTab" class="tab-panel active">
+                <div class="dedication-box">
+                    <h2>💌 De tus amigos con todo el corazón:</h2>
+                    <p>"A la que cura con abrazos y nunca deja a nadie atrás. Que sigas brillando e inundando el hospital y nuestras vidas con tu magia. ¡Te queremos un mundo, Cris!"</p>
+                </div>
+
+                <!-- WAVEFORM VISUALIZER -->
+                <div class="waveform-container" id="waveformViz">
+                    <div class="wave-bar"></div><div class="wave-bar"></div>
+                    <div class="wave-bar"></div><div class="wave-bar"></div>
+                    <div class="wave-bar"></div><div class="wave-bar"></div>
+                    <div class="wave-bar"></div><div class="wave-bar"></div>
+                    <div class="wave-bar"></div><div class="wave-bar"></div>
+                    <div class="wave-bar"></div><div class="wave-bar"></div>
+                    <div class="wave-bar"></div><div class="wave-bar"></div>
+                    <div class="wave-bar"></div><div class="wave-bar"></div>
+                    <div class="wave-bar"></div><div class="wave-bar"></div>
+                    <div class="wave-bar"></div><div class="wave-bar"></div>
+                    <div class="wave-bar"></div><div class="wave-bar"></div>
+                    <div class="wave-bar"></div><div class="wave-bar"></div>
+                    <div class="wave-bar"></div><div class="wave-bar"></div>
+                </div>
+
+                <div class="custom-player">
+                    <div class="player-controls">
+                        <button class="nav-btn" id="restartBtn" title="Volver al principio">
+                            <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6V6zm11.5 12l-8.5-6 8.5-6v12z"/></svg>
+                        </button>
+                        <button class="nav-btn" id="rewindBtn" title="Retroceder 10s">
+                            <svg viewBox="0 0 24 24"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg>
+                        </button>
+
+                        <button class="play-btn" id="customPlayBtn" title="Reproducir">
+                            <svg class="play-icon-svg" id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <svg class="pause-icon-svg" id="pauseIcon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </button>
+
+                        <button class="nav-btn" id="forwardBtn" title="Adelantar 10s">
+                            <svg viewBox="0 0 24 24"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/></svg>
+                        </button>
+                        <button class="nav-btn" id="loopBtn" title="Bucle: Desactivado">
+                            <svg viewBox="0 0 24 24" id="loopSvg"><g id="loopGraphicsContainer"></g></svg>
+                        </button>
+                    </div>
+
+                    <div class="progress-container">
+                        <span class="time-label" id="currentTime">0:00</span>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-buffer" id="progressBuffer"></div>
+                            <div class="progress-fill" id="progressFill"></div>
+                            <input type="range" class="progress-slider" id="progressSlider" min="0" max="100" value="0">
+                        </div>
+                        <span class="time-label" id="totalDuration">0:00</span>
+                        <div class="audio-status-icon" id="audioStatusContainer" title="Audio Cargado">
+                            <div class="spinner-mini" id="audioSpinner"></div>
+                            <span id="audioCheckIcon" style="font-size:0.75rem;">⚡</span>
+                        </div>
+                    </div>
+
+                    <div class="player-tools-row">
+                        <div class="volume-container">
+                            <button class="volume-btn" id="volumeBtn">🔊</button>
+                            <div class="volume-slider-wrapper">
+                                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+                            </div>
+                            <span class="volume-percentage" id="volumePercentage">100%</span>
+                        </div>
+
+                        <div class="speed-select-container">
+                            <select class="speed-select" id="speedSelect">
+                                <option value="0.5">0.5x</option>
+                                <option value="0.75">0.75x</option>
+                                <option value="1" selected>Normal</option>
+                                <option value="1.25">1.25x</option>
+                                <option value="1.5">1.5x</option>
+                                <option value="2">2x</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="download-wrapper">
+                        <a href="https://capibarasound00.github.io/cristina26/assets/sound/Cristina - La Guerrera Silenciosa (Flamenco v2).mp3"
+                           download="Cristina - La Guerrera Silenciosa.mp3" class="download-action-btn">
+                            📥 Descargar Single en Alta Calidad (HQ Audio)
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: LETRA -->
+            <div id="lyricsTab" class="tab-panel">
+                <div class="lyrics-panel-box">
+                    <div class="lyrics-text">
+                        <div class="lyrics-tag">[Intro]</div>
+                        <div class="lyrics-line">Yeah-eh</div>
+                        <div class="lyrics-line">Pa' la niña del hospital</div>
+                        <div class="lyrics-line">La que nunca deja a nadie atrás</div>
+                        <div class="lyrics-line">Cristina… 26 ya</div>
+                        <div class="lyrics-line">Dale palmas, eh</div>
+
+                        <div class="lyrics-tag">[Verso 1]</div>
+                        <div class="lyrics-line">Sale temprano aunque no haya dormío'</div>
+                        <div class="lyrics-line">Siempre cuidando corazones partíos'</div>
+                        <div class="lyrics-line">Tiene ojeras pero nunca se rinde</div>
+                        <div class="lyrics-line">Mientras otros hablan, ella siempre asiste</div>
+                        <div class="lyrics-line">Va con la bata y con arte en la mirada</div>
+                        <div class="lyrics-line">Media vida arreglando madrugadas</div>
+                        <div class="lyrics-line">Y aunque el mundo a veces pese demasiado</div>
+                        <div class="lyrics-line">Ella sigue dando luz sin pedir nada a cambio</div>
+
+                        <div class="lyrics-line" style="margin-top: 12px;">Y dime quién / Se queda cuando todo va mal</div>
+                        <div class="lyrics-line">Quién abraza aunque ella esté fatal</div>
+                        <div class="lyrics-line">Quién sonríe pa' que otro pueda aguantar</div>
+                        <div class="lyrics-line">Cristina lo hace natural</div>
+
+                        <div class="lyrics-tag">[Pre-Coro]</div>
+                        <div class="lyrics-line">Y aunque el tiempo vaya rápido</div>
+                        <div class="lyrics-line">Tú sigues brillando igual</div>
+                        <div class="lyrics-line">26 vueltas al mundo</div>
+                        <div class="lyrics-line">Y todavía te queda magia pa' regalar</div>
+
+                        <div class="lyrics-tag">[Estribillo]</div>
+                        <div class="lyrics-line" style="font-weight:bold;color:#fff;">Que suennen palmas por Cristina</div>
+                        <div class="lyrics-line">La niña buena del hospital</div>
+                        <div class="lyrics-line">La que cura con abrazos</div>
+                        <div class="lyrics-line">Y tiene un corazón que no se puede explicar</div>
+                        <div class="lyrics-line">26 primaveras / Y sigue siendo especial</div>
+                        <div class="lyrics-line">Tiene fuerza pa' salvarte / Y locura pa' ponerse a bailar</div>
+
+                        <div class="lyrics-tag">[Verso 2]</div>
+                        <div class="lyrics-line">Le gusta ayudar aunque nadie lo vea</div>
+                        <div class="lyrics-line">Nunca presume de todo lo que pelea</div>
+                        <div class="lyrics-line">Tiene algo puro difícil de encontrar</div>
+                        <div class="lyrics-line">De esas personas que te arreglan el día sin hablar</div>
+
+                        <div class="lyrics-tag">[Puente Flamenco]</div>
+                        <div class="lyrics-line">Ay Cristina / Que la vida te devuelva</div>
+                        <div class="lyrics-line">To' lo bueno que has dejao'</div>
+                        <div class="lyrics-line">En cada planta y cada puerta</div>
+                        <div class="lyrics-line">Donde alguien te necesitó...</div>
+
+                        <div class="lyrics-tag">[Outro]</div>
+                        <div class="lyrics-line">Pa' Cristina / La guerrera silenciosa</div>
+                        <div class="lyrics-line">26 años / Y lo mejor todavía no ha empezao'…</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: MENSAJES (NUEVO) -->
+            <div id="messagesTab" class="tab-panel">
+                <div class="messages-panel">
+                    <div class="message-form">
+                        <input type="text" id="msgAuthorInput" placeholder="Tu nombre 👤" maxlength="30">
+                        <textarea id="msgTextInput" placeholder="Escríbele un mensaje a Cristina... 💌" maxlength="200" rows="3"></textarea>
+                        <button class="send-msg-btn" onclick="sendMessage()">Enviar mensaje 🚀</button>
+                    </div>
+                    <div class="messages-list" id="messagesList">
+                        <div class="messages-empty" id="messagesEmpty">¡Sé el primero en dejarle un mensaje! 💬</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCORDION -->
+            <div class="accordion-container">
+                <button class="btn-accordion" onclick="toggleAccordion('infoContent')">
+                    <span>📊</span> Ficha Técnica y Créditos Completos
+                </button>
+                <div class="accordion-content" id="infoContent">
+                    <div class="track-info-extended">
+                        <div class="track-info-section-title">🎵 Atributos del Single</div>
+                        <div class="track-info-row"><span>Título Oficial:</span><span>La Guerrera Silenciosa</span></div>
+                        <div class="track-info-row"><span>Versión / Edición:</span><span>Flamenco Urbano Mix (v2)</span></div>
+                        <div class="track-info-row"><span>Homenajeada:</span><span>Dra. Cristina (26º Aniversario)</span></div>
+                        <div class="track-info-row"><span>Duración Total:</span><span>03:14 (Aprox.)</span></div>
+
+                        <div class="track-info-section-title">🎛️ Producción e Ingeniería</div>
+                        <div class="track-info-row"><span>Composición y Letra:</span><span>Tus Amigos de Siempre</span></div>
+                        <div class="track-info-row"><span>Motor de Síntesis Vocal:</span><span>IA Generativa Avanzada</span></div>
+                        <div class="track-info-row"><span>Arreglos Instrumentales:</span><span>Guitarras Flamencas, Cajón Sincopado y Palmas</span></div>
+                        <div class="track-info-row"><span>Mezcla y Masterización:</span><span>Capibara Sound Studio (Digital Stereo)</span></div>
+
+                        <div class="track-info-section-title">💿 Especificaciones del Archivo</div>
+                        <div class="track-info-row"><span>Formato de Contenedor:</span><span>MPEG Layer-3 Audio (MP3)</span></div>
+                        <div class="track-info-row"><span>Tasa de Bits (Bitrate):</span><span>322 kbps Constant Bitrate (HQ)</span></div>
+                        <div class="track-info-row"><span>Frecuencia de Muestreo:</span><span>48.000 kHz</span></div>
+                        <div class="track-info-row"><span>Canales de Audio:</span><span>Estéreo Doble Canal</span></div>
+
+                        <div class="track-info-section-title">📜 Notas de los Creadores</div>
+                        <div class="track-info-row" style="flex-direction:column;align-items:flex-start;gap:4px;">
+                            <span style="color:var(--text-body);font-style:italic;font-weight:normal;text-align:left;">
+                                "Esta pieza fue diseñada combinando el compás tradicional andaluz con arreglos modernos de base urbana. El objetivo era reflejar la dualidad de Cris: su incansable dedicación en el sector hospitalario frente a su espíritu alegre y fiestero cuando está rodeada de la gente que la quiere. Un single único creado por y para la amistad."
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-celebrate" onclick="launchConfetti()">¡Felicitar a lo grande! 🥳</button>
+
+        <div class="easter-egg-toast" id="easterEgg">
+            🎁 ¡Fin del tema! Ahora ve corriendo y dale un abrazo gigante a la cumpleañera ❤️
+        </div>
+    </div>
+
+    <div class="toast-notification" id="toastNotification">Enlace copiado al portapapeles 📋</div>
+
+    <script>
+        /* ======= PARTICLES ======= */
+        (function createParticles() {
+            const container = document.getElementById('particlesBg');
+            const colors = ['#2ebd85', '#e5c07b', '#c5a059', '#40dd9f', '#ffffff'];
+            for (let i = 0; i < 18; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                const size = Math.random() * 6 + 2;
+                p.style.cssText = `
+                    width:${size}px; height:${size}px;
+                    left:${Math.random() * 100}%;
+                    background:${colors[Math.floor(Math.random()*colors.length)]};
+                    animation-duration:${Math.random() * 18 + 10}s;
+                    animation-delay:${Math.random() * 10}s;
+                    opacity:0;
+                `;
+                container.appendChild(p);
+            }
+        })();
+
+        /* ======= REFS ======= */
+        const audio = document.getElementById('birthday-song');
+        const playBtn = document.getElementById('customPlayBtn');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const progressFill = document.getElementById('progressFill');
+        const progressBuffer = document.getElementById('progressBuffer');
+        const progressSlider = document.getElementById('progressSlider');
+        const currentTimeLabel = document.getElementById('currentTime');
+        const totalDurationLabel = document.getElementById('totalDuration');
+        const audioSpinner = document.getElementById('audioSpinner');
+        const audioCheckIcon = document.getElementById('audioCheckIcon');
+        const restartBtn = document.getElementById('restartBtn');
+        const loopBtn = document.getElementById('loopBtn');
+        const loopGraphicsContainer = document.getElementById('loopGraphicsContainer');
+        const rewindBtn = document.getElementById('rewindBtn');
+        const forwardBtn = document.getElementById('forwardBtn');
+        const volumeBtn = document.getElementById('volumeBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumePercentage = document.getElementById('volumePercentage');
+        const speedSelect = document.getElementById('speedSelect');
+        const shareWhatsAppBtn = document.getElementById('shareWhatsAppBtn');
+        const shareInstagramBtn = document.getElementById('shareInstagramBtn');
+        const toastNotification = document.getElementById('toastNotification');
+        const easterEgg = document.getElementById('easterEgg');
+        const coverImage = document.getElementById('coverImage');
+        const coverWrapper = document.getElementById('coverWrapper');
+        const likeBtn = document.getElementById('likeBtn');
+        const likeText = document.getElementById('likeText');
+        const waveformViz = document.getElementById('waveformViz');
+        const playCountDisplay = document.getElementById('playCountDisplay');
+
+        let lastVolume = 1.0;
+        let isSeeking = false;
+        let loopState = 0;
+        let hasRepeatedOnce = false;
+        let playCount = parseInt(localStorage.getItem('crisCumplePlayCount') || '0');
+        let hasCountedThisSession = false;
+
+        /* ======= PLAY COUNT ======= */
+        function updatePlayCountDisplay() {
+            playCountDisplay.textContent = playCount;
+        }
+        updatePlayCountDisplay();
+
+        /* ======= TABS ======= */
+        function switchTab(event, tabId) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        /* ======= MESSAGES ======= */
+        const MESSAGES_KEY = 'crisCumpleMessages';
+
+        function loadMessages() {
+            try { return JSON.parse(localStorage.getItem(MESSAGES_KEY) || '[]'); } catch { return []; }
+        }
+
+        function saveMessages(msgs) {
+            try { localStorage.setItem(MESSAGES_KEY, JSON.stringify(msgs)); } catch {}
+        }
+
+        function renderMessages() {
+            const msgs = loadMessages();
+            const list = document.getElementById('messagesList');
+            const empty = document.getElementById('messagesEmpty');
+            if (msgs.length === 0) {
+                empty.style.display = 'block';
+                list.querySelectorAll('.message-bubble').forEach(el => el.remove());
+                return;
+            }
+            empty.style.display = 'none';
+            list.querySelectorAll('.message-bubble').forEach(el => el.remove());
+            msgs.slice().reverse().forEach(m => {
+                const el = document.createElement('div');
+                el.className = 'message-bubble';
+                el.innerHTML = `
+                    <div class="msg-author">
+                        ❤️ ${escapeHtml(m.author)}
+                        <span class="msg-time">${m.time}</span>
+                    </div>
+                    <div class="msg-text">${escapeHtml(m.text)}</div>
+                `;
+                list.appendChild(el);
+            });
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        function sendMessage() {
+            const author = document.getElementById('msgAuthorInput').value.trim();
+            const text = document.getElementById('msgTextInput').value.trim();
+            if (!author || !text) { showToast('✍️ Escribe tu nombre y mensaje'); return; }
+            const msgs = loadMessages();
+            const now = new Date();
+            msgs.push({
+                author,
+                text,
+                time: now.toLocaleDateString('es-ES', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' })
+            });
+            saveMessages(msgs);
+            document.getElementById('msgAuthorInput').value = '';
+            document.getElementById('msgTextInput').value = '';
+            renderMessages();
+            showToast('💌 ¡Mensaje enviado a Cristina!');
+        }
+
+        renderMessages();
+
+        /* ======= LIKE BTN ======= */
+        likeBtn.addEventListener('click', () => {
+            likeBtn.classList.toggle('liked');
+            if (likeBtn.classList.contains('liked')) {
+                likeText.textContent = '¡Guardado en Favoritos!';
+                showToast('❤️ Añadido a tus canciones favoritas');
+                launchConfetti();
+            } else {
+                likeText.textContent = 'Añadir a Favoritos';
+            }
+        });
+
+        /* ======= AUDIO STATUS ======= */
+        audio.addEventListener('waiting', () => {
+            audioSpinner.style.display = 'block';
+            audioCheckIcon.style.display = 'none';
+        });
+
+        audio.addEventListener('playing', () => {
+            audioSpinner.style.display = 'none';
+            audioCheckIcon.style.display = 'inline';
+            audioCheckIcon.textContent = '🎵';
+            waveformViz.classList.add('playing');
+            coverWrapper.classList.add('is-playing');
+        });
+
+        audio.addEventListener('pause', () => {
+            waveformViz.classList.remove('playing');
+            coverWrapper.classList.remove('is-playing');
+        });
+
+        audio.addEventListener('canplay', () => {
+            if (audio.paused) {
+                audioSpinner.style.display = 'none';
+                audioCheckIcon.style.display = 'inline';
+                audioCheckIcon.textContent = '⚡';
+            }
+        });
+
+        /* ======= LOOP ICON ======= */
+        function renderLoopIcon(state) {
+            const base = `<g transform="scale(0.85)" transform-origin="12 12"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></g>`;
+            if (state === 0) return base;
+            if (state === 1) return base + `<rect x="14" y="13" width="7" height="9" rx="1.5" fill="#e5c07b"/><text x="17.5" y="20.5" font-family="'DM Sans',Arial" font-size="8" font-weight="900" fill="#0d1110" text-anchor="middle">1</text>`;
+            if (state === 2) return base + `<rect x="13" y="13" width="9" height="9" rx="1.5" fill="#2ebd85"/><text x="17.5" y="20" font-family="'DM Sans',Arial" font-size="9" font-weight="900" fill="#0d1110" text-anchor="middle">∞</text>`;
+        }
+
+        audio.volume = 1.0;
+
+        /* ======= COVER LOAD ======= */
+        function setCoverAsLoaded() {
+            coverImage.classList.add('loaded');
+            coverWrapper.classList.add('image-is-loaded');
+        }
+
+        /* ======= DOM READY ======= */
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(launchConfetti, 500);
+            updateVolumeSliderBackground(audio.volume);
+            loopGraphicsContainer.innerHTML = renderLoopIcon(0);
+            if (coverImage.complete) setCoverAsLoaded();
+            else coverImage.addEventListener('load', setCoverAsLoaded);
+
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: 'La Guerrera Silenciosa (Single Oficial)',
+                    artist: 'Homenaje a Dra. Cristina 🎂',
+                    album: 'Las 26 Primaveras',
+                    artwork: [{ src: 'https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.webp', sizes: '512x512', type: 'image/webp' }]
+                });
+                navigator.mediaSession.setActionHandler('play', () => togglePlayAudio(true));
+                navigator.mediaSession.setActionHandler('pause', () => togglePlayAudio(false));
+                navigator.mediaSession.setActionHandler('seekbackward', () => { audio.currentTime = Math.max(0, audio.currentTime - 10); });
+                navigator.mediaSession.setActionHandler('seekforward', () => { audio.currentTime = Math.min(audio.duration, audio.currentTime + 10); });
+            }
+
+            function getShareableUrl() {
+                return window.location.protocol === 'file:' ? 'https://capibarasound00.github.io/cristina26/' : window.location.href;
+            }
+
+            const currentUrl = getShareableUrl();
+
+            shareWhatsAppBtn.addEventListener('click', () => {
+                const text = encodeURIComponent(`¡Escucha el tema oficial de cumpleaños que le hemos hecho a Cristina! 🎂🎵: ${currentUrl}`);
+                window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank', 'noopener');
+            });
+
+            shareInstagramBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(currentUrl).then(() => {
+                    showToast('Enlace copiado al portapapeles 📋', false);
+                });
+            });
+        });
+
+        /* ======= TOAST ======= */
+        function showToast(text, isLoopMsg = false) {
+            toastNotification.textContent = text;
+            if (isLoopMsg) toastNotification.classList.add('loop-toast');
+            else toastNotification.classList.remove('loop-toast');
+            toastNotification.classList.add('show');
+            setTimeout(() => { toastNotification.classList.remove('show'); }, 2400);
+        }
+
+        function resetTrackEndEffects() {
+            if (easterEgg.style.display === 'block') easterEgg.style.display = 'none';
+        }
+
+        /* ======= PLAY/PAUSE ======= */
+        function togglePlayAudio(forceState = null) {
+            const shouldPlay = forceState !== null ? forceState : audio.paused;
+            if (shouldPlay) {
+                audio.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                if ('mediaSession' in navigator) navigator.mediaSession.playbackState = "playing";
+                // Count play
+                if (!hasCountedThisSession) {
+                    hasCountedThisSession = true;
+                    playCount++;
+                    localStorage.setItem('crisCumplePlayCount', playCount);
+                    updatePlayCountDisplay();
+                }
+            } else {
+                audio.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+                if ('mediaSession' in navigator) navigator.mediaSession.playbackState = "paused";
+            }
+        }
+
+        playBtn.addEventListener('click', () => togglePlayAudio());
+
+        restartBtn.addEventListener('click', () => {
+            audio.currentTime = 0;
+            hasRepeatedOnce = false;
+            hasCountedThisSession = false;
+            resetTrackEndEffects();
+            togglePlayAudio(true);
+        });
+
+        /* ======= LOOP ======= */
+        loopBtn.addEventListener('click', () => {
+            loopState = (loopState + 1) % 3;
+            loopBtn.classList.remove('loop-once', 'loop-infinite');
+            if (loopState === 0) {
+                audio.loop = false;
+                loopGraphicsContainer.innerHTML = renderLoopIcon(0);
+                loopBtn.setAttribute('title', 'Bucle: Desactivado');
+                showToast('🔀 Bucle desactivado', true);
+            } else if (loopState === 1) {
+                audio.loop = false; hasRepeatedOnce = false;
+                loopBtn.classList.add('loop-once');
+                loopGraphicsContainer.innerHTML = renderLoopIcon(1);
+                loopBtn.setAttribute('title', 'Bucle: Repetir 1 vez');
+                showToast('🔂 Se repetirá solo una vez', true);
+            } else if (loopState === 2) {
+                audio.loop = true;
+                loopBtn.classList.add('loop-infinite');
+                loopGraphicsContainer.innerHTML = renderLoopIcon(2);
+                loopBtn.setAttribute('title', 'Bucle: Infinito');
+                showToast('🔁 Repetición infinita activada', true);
+            }
+        });
+
+        rewindBtn.addEventListener('click', () => {
+            audio.currentTime = Math.max(0, audio.currentTime - 10);
+            if (audio.currentTime === 0) resetTrackEndEffects();
+        });
+
+        forwardBtn.addEventListener('click', () => { audio.currentTime = Math.min(audio.duration, audio.currentTime + 10); });
+
+        /* ======= PROGRESS ======= */
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration && !isSeeking) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progressSlider.value = percent;
+                progressFill.style.width = `${percent}%`;
+                currentTimeLabel.textContent = formatTime(audio.currentTime);
+                if (audio.currentTime === 0) resetTrackEndEffects();
+            }
+        });
+
+        progressSlider.addEventListener('input', (e) => {
+            isSeeking = true;
+            const percent = e.target.value;
+            progressFill.style.width = `${percent}%`;
+            currentTimeLabel.textContent = formatTime((percent / 100) * audio.duration);
+        });
+
+        progressSlider.addEventListener('change', (e) => {
+            audio.currentTime = (e.target.value / 100) * audio.duration;
+            if (audio.currentTime === 0) { resetTrackEndEffects(); hasRepeatedOnce = false; }
+            isSeeking = false;
+        });
+
+        audio.addEventListener('progress', updateBufferTrack);
+        audio.addEventListener('timeupdate', updateBufferTrack);
+
+        function updateBufferTrack() {
+            if (audio.duration && audio.buffered.length > 0) {
+                let bufferedEnd = 0;
+                for (let i = 0; i < audio.buffered.length; i++) {
+                    if (audio.buffered.start(i) <= audio.currentTime && audio.buffered.end(i) >= audio.currentTime) {
+                        bufferedEnd = audio.buffered.end(i); break;
+                    }
+                }
+                if (bufferedEnd === 0) bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
+                progressBuffer.style.width = `${(bufferedEnd / audio.duration) * 100}%`;
+            }
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            totalDurationLabel.textContent = formatTime(audio.duration);
+            updateBufferTrack();
+        });
+
+        /* ======= VOLUME ======= */
+        function updateVolumeSliderBackground(value) {
+            const pct = value * 100;
+            volumeSlider.style.background = `linear-gradient(to right, #2ebd85 0%, #2ebd85 ${pct}%, #1e2d29 ${pct}%, #1e2d29 100%)`;
+            volumePercentage.textContent = `${Math.round(pct)}%`;
+        }
+
+        volumeSlider.addEventListener('input', (e) => {
+            const vol = parseFloat(e.target.value);
+            audio.volume = vol;
+            updateVolumeSliderBackground(vol);
+            volumeBtn.textContent = vol === 0 ? '🔇' : vol < 0.5 ? '🔉' : '🔊';
+        });
+
+        volumeBtn.addEventListener('click', () => {
+            if (audio.volume > 0) {
+                lastVolume = audio.volume; audio.volume = 0; volumeSlider.value = 0;
+                updateVolumeSliderBackground(0); volumeBtn.textContent = '🔇';
+            } else {
+                audio.volume = lastVolume; volumeSlider.value = lastVolume;
+                updateVolumeSliderBackground(lastVolume); volumeBtn.textContent = lastVolume < 0.5 ? '🔉' : '🔊';
+            }
+        });
+
+        speedSelect.addEventListener('change', (e) => { audio.playbackRate = parseFloat(e.target.value); });
+
+        /* ======= UTILS ======= */
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function launchConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 70, spread: 55, origin: { x: 0.2, y: 0.8 }, colors: ['#e5c07b','#2ebd85','#ffffff','#ff4a73'] });
+                confetti({ particleCount: 70, spread: 55, origin: { x: 0.8, y: 0.8 }, colors: ['#e5c07b','#2ebd85','#ffffff','#ff4a73'] });
+            }
+        }
+
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+                content.style.maxHeight = "0px"; content.style.opacity = "0";
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px"; content.style.opacity = "1";
+            }
+        }
+
+        /* ======= TRACK END ======= */
+        audio.addEventListener('ended', () => {
+            hasCountedThisSession = false;
+            if (loopState === 1) {
+                if (!hasRepeatedOnce) {
+                    hasRepeatedOnce = true; audio.currentTime = 0; audio.play();
+                } else {
+                    loopState = 0; hasRepeatedOnce = false;
+                    loopBtn.classList.remove('loop-once');
+                    loopGraphicsContainer.innerHTML = renderLoopIcon(0);
+                    loopBtn.setAttribute('title', 'Bucle: Desactivado');
+                    triggerTrackEndEffects();
+                }
+            } else if (loopState === 0) {
+                triggerTrackEndEffects();
+            }
+        });
+
+        function triggerTrackEndEffects() {
+            playIcon.style.display = 'block'; pauseIcon.style.display = 'none';
+            waveformViz.classList.remove('playing');
+            coverWrapper.classList.remove('is-playing');
+            easterEgg.style.display = 'block';
+            launchConfetti();
+            audioCheckIcon.textContent = '⚡';
+            if ('mediaSession' in navigator) navigator.mediaSession.playbackState = "stopped";
+        }
+    </script>
+</body>
+</html>
