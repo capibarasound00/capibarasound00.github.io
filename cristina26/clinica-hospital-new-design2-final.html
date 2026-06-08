@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>La Guerrera Silenciosa - Santuario de Acompañamiento V4</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-zen: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --glass-card: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            
+            /* Estados emocionales / Cromoterapia */
+            --gold-therapeutic: #c5a880;
+            --gold-glow: rgba(197, 168, 128, 0.25);
+            --heal-green: #0f766e;
+            --card-shadow: 0 40px 80px -20px rgba(148, 163, 184, 0.25);
+            --sos-red: #ef4444;
+        }
+
+        /* PALETAS DE EMOCIÓN DINÁMICAS */
+        body.mood-calm {
+            --gold-therapeutic: #6b9080;
+            --gold-glow: rgba(107, 144, 128, 0.25);
+        }
+        body.mood-hope {
+            --gold-therapeutic: #0f766e;
+            --gold-glow: rgba(15, 118, 110, 0.25);
+        }
+        body.mood-strength {
+            --gold-therapeutic: #c5a880;
+            --gold-glow: rgba(197, 168, 128, 0.25);
+        }
+        
+        /* FILTRO ANTI-FATIGA ACÚSTICA Y VISUAL */
+        body.acoustic-comfort {
+            filter: sepia(0.15) contrast(0.95);
+            --gold-therapeutic: #b89774;
+            --bg-zen: linear-gradient(135deg, #f4f1ea 0%, #e4dfd3 100%);
+        }
+
+        /* MODO NOCTURNO */
+        body.theme-serenity {
+            --bg-zen: linear-gradient(135deg, #090d16 0%, #111827 100%);
+            --glass-card: rgba(17, 24, 39, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --card-shadow: 0 50px 100px -30px rgba(0, 0, 0, 0.7);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
+
+        body {
+            background: var(--bg-zen);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px 15px;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .sanctuary-deck {
+            background: var(--glass-card);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            width: 100%;
+            max-width: 420px;
+            padding: 36px 28px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.5s ease;
+        }
+
+        .deck-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .care-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--gold-therapeutic);
+            font-weight: 700;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .pulse-indicator {
+            width: 10px; height: 10px;
+            background: currentColor;
+            border-radius: 50%;
+            animation: gentleHeartbeat 2.5s infinite ease-in-out;
+        }
+        @keyframes gentleHeartbeat {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+
+        .btn-sos-calm {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: var(--sos-red);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-sos-calm.active {
+            background: var(--sos-red);
+            color: white;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+            animation: emergencyPulse 1.5s infinite;
+        }
+        @keyframes emergencyPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* NÚCLEO DE RESPIRACIÓN */
+        .therapeutic-core {
+            position: relative;
+            width: 160px; height: 160px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .breathing-aura {
+            position: absolute;
+            width: 146px; height: 146px;
+            border-radius: 50%;
+            border: 1px solid var(--gold-therapeutic);
+            opacity: 0.25;
+            pointer-events: none;
+            box-shadow: 0 0 25px var(--gold-glow);
+            transition: all 0.3s ease;
+        }
+        
+        .breathing-aura.pulse-pranayama {
+            animation: pranayamaBreathe 12s infinite linear;
+        }
+        .breathing-aura.pulse-rescue {
+            animation: rescueBreathe 19s infinite linear;
+        }
+
+        @keyframes pranayamaBreathe {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            33% { transform: scale(1.25); opacity: 0.7; }
+            66% { transform: scale(1.25); opacity: 0.7; }
+        }
+        @keyframes rescueBreathe {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            21% { transform: scale(1.28); opacity: 0.8; }
+            58% { transform: scale(1.28); opacity: 0.8; }
+        }
+
+        .patient-avatar {
+            width: 130px; height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--glass-border);
+            cursor: pointer;
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .patient-avatar:active { transform: scale(0.96); }
+        .patient-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+        .track-info { text-align: center; margin-bottom: 16px; }
+        .track-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        .track-subtitle { font-size: 0.82rem; color: var(--text-secondary); letter-spacing: 0.3px; }
+
+        .cooperative-badge {
+            font-size: 0.65rem;
+            background: rgba(0,0,0,0.03);
+            padding: 4px 10px;
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 16px;
+            border: 1px solid rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        body.theme-serenity .cooperative-badge { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.02); }
+
+        .mood-selector-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            background: rgba(0,0,0,0.02);
+            padding: 4px;
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        body.theme-serenity .mood-selector-bar { background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.03); }
+
+        .mood-chip {
+            font-size: 0.68rem;
+            padding: 6px 14px;
+            border-radius: 16px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .mood-chip.active {
+            background: var(--glass-card);
+            color: var(--text-primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* TIMELINE */
+        .timeline-container { width: 100%; margin-bottom: 20px; }
+        .time-labels {
+            display: flex; justify-content: space-between;
+            font-size: 0.72rem; color: var(--text-secondary); margin-bottom: 6px;
+        }
+        .minimal-slider {
+            -webkit-appearance: none; width: 100%; height: 3px;
+            background: rgba(0, 0, 0, 0.06); border-radius: 2px; outline: none; cursor: pointer;
+        }
+        body.theme-serenity .minimal-slider { background: rgba(255, 255, 255, 0.1); }
+        .minimal-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 10px; height: 10px;
+            border-radius: 50%; background: var(--gold-therapeutic); transition: transform 0.2s;
+        }
+
+        /* MANDOS */
+        .controls-row {
+            display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 24px; width: 100%;
+        }
+        .btn-action {
+            background: transparent; border: none; color: var(--text-secondary);
+            cursor: pointer; display: flex; align-items: center; padding: 6px; transition: all 0.3s;
+        }
+        .btn-action:hover { color: var(--gold-therapeutic); transform: translateY(-1px); }
+        .btn-action svg { width: 18px; height: 18px; fill: currentColor; }
+
+        .btn-play-master {
+            width: 52px; height: 52px; border-radius: 50%;
+            background: var(--text-primary); color: var(--glass-card);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); cursor: pointer; border: none; transition: all 0.3s;
+        }
+        .btn-play-master:hover { transform: scale(1.05); background: var(--gold-therapeutic); color: white; }
+        .btn-play-master svg { width: 20px; height: 20px; fill: currentColor; margin-left: 2px; }
+
+        /* PARRILLA DE UTILIDADES OPTIMIZADAS */
+        .advanced-utilities-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            padding-top: 20px;
+            margin-bottom: 20px;
+        }
+        body.theme-serenity .advanced-utilities-grid { border-top-color: rgba(255,255,255,0.04); }
+
+        .utility-tab { display: flex; flex-direction: column; gap: 5px; }
+        .utility-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); font-weight: 600; display: flex; justify-content: space-between; }
+        
+        .interactive-pill {
+            background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04);
+            padding: 8px 10px; border-radius: 12px; font-size: 0.72rem;
+            color: var(--text-primary); cursor: pointer; text-align: center; transition: all 0.2s;
+            font-weight: 500;
+        }
+        body.theme-serenity .interactive-pill { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.04); }
+        .interactive-pill:hover, .interactive-pill.active { background: var(--gold-therapeutic); color: white; border-color: var(--gold-therapeutic); }
+        
+        .btn-acoustic-filter {
+            background: transparent; border: none; font-size: 0.6rem; color: var(--text-secondary); cursor: pointer; text-decoration: underline;
+        }
+
+        /* DIARIO */
+        .intentions-journal-box {
+            width: 100%; background: rgba(0,0,0,0.01); border: 1px solid rgba(0,0,0,0.04);
+            border-radius: 16px; padding: 12px; margin-bottom: 18px; display: flex; gap: 8px;
+        }
+        
+        .journal-input {
+            flex: 1; background: transparent; border: none; outline: none;
+            font-family: inherit; font-size: 0.75rem; color: var(--text-primary);
+        }
+        .journal-submit-btn {
+            background: transparent; border: none; color: var(--gold-therapeutic);
+            cursor: pointer; font-size: 0.72rem; font-weight: 600; padding: 2px 6px;
+        }
+
+        /* DISPLAY EXPOSITOR */
+        .affirmation-display {
+            width: 100%; background: rgba(255, 255, 255, 0.4);
+            border: 1px solid var(--glass-border); border-radius: 16px;
+            padding: 12px 16px; font-size: 0.75rem; color: var(--text-primary);
+            text-align: center; font-style: italic; min-height: 44px;
+            display: flex; align-items: center; justify-content: center; transition: opacity 0.3s;
+        }
+
+        audio { display: none; }
+    </style>
+</head>
+<body class="mood-strength">
+
+    <div class="sanctuary-deck">
+        
+        <!-- Cabecera Informativa Optimizada -->
+        <div class="deck-header">
+            <button class="btn-sos-calm" id="btn-sos" onclick="toggleSOSAnxietyMode()">SOS Ansiedad</button>
+            <div class="care-status" onclick="tapHeartPulse()">
+                <div class="pulse-indicator" id="pulse-dot"></div>
+                <span id="lbl-bpm-text">Calibrar BPM</span>
+            </div>
+        </div>
+
+        <!-- Selector de Estado de Ánimo Terapéutico -->
+        <div class="mood-selector-bar">
+            <button class="mood-chip active" onclick="changeSantuarioMood('strength', this)">💪 Fuerza</button>
+            <button class="mood-chip" onclick="changeSantuarioMood('calm', this)">🍃 Calma</button>
+            <button class="mood-chip" onclick="changeSantuarioMood('hope', this)">⚓ Esperanza</button>
+        </div>
+
+        <!-- Núcleo de Respiración Biométrica -->
+        <div class="therapeutic-core">
+            <div class="breathing-aura pulse-pranayama" id="breathe-ring"></div>
+            <div class="patient-avatar" onclick="sendTherapeuticPulse()">
+                <img src="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.webp" alt="Santuario">
+            </div>
+        </div>
+
+        <!-- Altar de Energía Consolidada -->
+        <div class="cooperative-badge" id="lbl-support-counter">
+            ✨ Energía Colectiva: 0 Puntos de Apoyo
+        </div>
+
+        <!-- Información Base -->
+        <div class="track-info">
+            <h1 class="track-title" id="lbl-main-title">La Guerrera Silenciosa</h1>
+            <p class="track-subtitle">Cristina • Frecuencia de Bienestar</p>
+        </div>
+
+        <!-- Barra del Reproductor -->
+        <div class="timeline-container">
+            <div class="time-labels">
+                <span id="lbl-time-current">00:00</span>
+                <span id="lbl-time-total">00:00</span>
+            </div>
+            <input type="range" class="minimal-slider" id="seek-slider" min="0" max="100" value="0">
+        </div>
+
+        <!-- Mandos Clásicos Sincronizados -->
+        <div class="controls-row">
+            <button class="btn-action" id="btn-restart"><svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg></button>
+            <button class="btn-action" id="btn-back"><svg viewBox="0 0 24 24"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg></button>
+            <button class="btn-play-master" id="btn-play-toggle"><svg id="play-svg-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+            <button class="btn-action" id="btn-skip"><svg viewBox="0 0 24 24"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/></svg></button>
+            <button class="btn-action" id="btn-loop-mode"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg></button>
+        </div>
+
+        <!-- Parrilla de Funciones Avanzadas Optimistas -->
+        <div class="advanced-utilities-grid">
+            <div class="utility-tab">
+                <span class="utility-label">Guía Respiratoria</span>
+                <button class="interactive-pill active" id="btn-breathe-guide" onclick="cycleBreathingPreset()">
+                    Ritmo: Pránico
+                </button>
+            </div>
+            <div class="utility-tab">
+                <span class="utility-label">Sesión de Descanso</span>
+                <button class="interactive-pill" id="btn-sleep-timer" onclick="cycleSleepTimer()">
+                    Apagar: Off
+                </button>
+            </div>
+            <div class="utility-tab" style="grid-column: span 2; margin-top: 4px;">
+                <span class="utility-label">
+                    <span id="lbl-vol-text">Volumen de Confort: 100%</span>
+                    <button class="btn-acoustic-filter" id="btn-acoustic" onclick="toggleAcousticComfortFilter()">Filtro Anti-Fatiga</button>
+                </span>
+                <input type="range" class="minimal-slider" id="volume-slider" min="0" max="1" step="0.01" value="1">
+            </div>
+        </div>
+
+        <!-- Diario de Intenciones Express -->
+        <div class="intentions-journal-box">
+            <input type="text" class="journal-input" id="input-intention" placeholder="Escribe un deseo o palabra de aliento..." maxlength="60">
+            <button class="journal-submit-btn" onclick="submitIntentionToPatient()">Enviar</button>
+        </div>
+
+        <!-- Consola de Textos de Validación -->
+        <div class="affirmation-display" id="msg-display">
+            Santuario armónico listo. Volumen fijado al máximo confort.
+        </div>
+
+        <!-- Alternador Lumínico Nocturno -->
+        <button class="interactive-pill" id="btn-ambient" onclick="toggleDarkSerenity()" style="margin-top: 14px; width: 100%; border-radius: 16px; font-size: 0.68rem; padding: 10px;">
+            🌌 Alternar Iluminación de Habitación (Modo Nocturno)
+        </button>
+
+        <audio id="audio-core-engine" preload="auto" crossorigin="anonymous">
+            <source src="https://capibarasound00.github.io/cristina26/assets/sound/Cristina%20-%20La%20Guerrera%20Silenciosa%20(Flamenco%20v2).mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        const audio = document.getElementById('audio-core-engine');
+        const playBtn = document.getElementById('btn-play-toggle');
+        const playSvg = document.getElementById('play-svg-icon');
+        const seekSlider = document.getElementById('seek-slider');
+        const volumeSlider = document.getElementById('volume-slider');
+        const timeCurrent = document.getElementById('lbl-time-current');
+        const timeTotal = document.getElementById('lbl-time-total');
+        const volText = document.getElementById('lbl-vol-text');
+        
+        const breatheRing = document.getElementById('breathe-ring');
+        const msgDisplay = document.getElementById('msg-display');
+        const btnLoop = document.getElementById('btn-loop-mode');
+        const lblSupport = document.getElementById('lbl-support-counter');
+        const lblBPMText = document.getElementById('lbl-bpm-text');
+
+        let loopState = 0, sleepTimerMinutes = 0, supportPoints = 0;
+        let sleepTimeoutId = null, sleepIntervalId = null, sosInterval = null;
+        
+        // Atributos de comportamiento optimizado
+        let breathePresetMode = 1; // 0: Off, 1: Pránico, 2: Rescate 4-7-8
+        let isSOSActive = false, isAcousticFilterActive = false;
+        let lastBPMTap = 0, tapTimes = [];
+        let userClickVelocityCounter = 0, velocityTimeout = null;
+
+        const BaseAffirmations = [
+            "La música es el lenguaje que abraza cuando faltan palabras.",
+            "En cada nota viaja un deseo sincero de recuperación.",
+            "Espacio de paz configurado. Tu presencia digital suma fuerza.",
+            "Acompañando en silencio, sosteniendo con el corazón.",
+            "Sintiendo el latido resiliente de Cristina en esta melodía."
+        ];
+
+        // CONFIGURACIÓN INICIAL NATIVA AL 100%
+        audio.volume = 1.0;
+
+        // 1. FILTRO ANTI-FATIGA ACÚSTICA Y VISUAL OPTIMIZADO
+        function toggleAcousticComfortFilter() {
+            const btn = document.getElementById('btn-acoustic');
+            isAcousticFilterActive = !isAcousticFilterActive;
+
+            if (isAcousticFilterActive) {
+                document.body.classList.add('acoustic-comfort');
+                btn.textContent = "Filtro Activo (Suave)";
+                audio.volume = 0.7;
+                volumeSlider.value = 0.7;
+                volText.textContent = "Volumen de Confort: 70%";
+                updateSliderGradient(volumeSlider, 70);
+                displayMessage("Filtro acústico aplicado: Atenuando frecuencias agudas y brillos de pantalla.");
+            } else {
+                document.body.classList.remove('acoustic-comfort');
+                btn.textContent = "Filtro Anti-Fatiga";
+                audio.volume = 1.0;
+                volumeSlider.value = 1.0;
+                volText.textContent = "Volumen de Confort: 100%";
+                updateSliderGradient(volumeSlider, 100);
+                displayMessage("Restaurada ecualización pura y brillo natural.");
+            }
+        }
+
+        // 2. PRESETS DE RESPIRACIÓN GUIADA AVANZADOS (PRÁNICO & RESCATE 4-7-8)
+        function cycleBreathingPreset() {
+            const btn = document.getElementById('btn-breathe-guide');
+            breathePresetMode = (breathePresetMode + 1) % 3;
+
+            breatheRing.classList.remove('pulse-pranayama', 'pulse-rescue');
+
+            if (breathePresetMode === 1) {
+                btn.classList.add('active');
+                btn.textContent = "Ritmo: Pránico";
+                breatheRing.classList.add('pulse-pranayama');
+                displayMessage("Ritmo Pránico Activo ($4\text{s}$ Inhala / $4\text{s}$ Retén / $4\text{s}$ Exhala) para armonizar.");
+            } else if (breathePresetMode === 2) {
+                btn.classList.add('active');
+                btn.textContent = "Ritmo: Rescate 4-7-8";
+                breatheRing.classList.add('pulse-rescue');
+                displayMessage("Modo Rescate Anatómico Activo ($4\text{s}$ Inhala / $7\text{s}$ Retén / $8\text{s}$ Exhala) para calmar el pánico.");
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = "Ritmo: Apagado";
+                displayMessage("Guía visual en pausa.");
+            }
+        }
+
+        // 3. DETECTOR DE INTERACCIÓN ERRÁTICA (MICRO-VALIDACIÓN COGNITIVA)
+        function trackUserInteractionVelocity() {
+            userClickVelocityCounter++;
+            clearTimeout(velocityTimeout);
+            
+            if (userClickVelocityCounter > 5) {
+                displayMessage("✋ Detente un segundo... Estás a salvo aquí. No hay prisa, respira hondo con el anillo dorado.");
+                userClickVelocityCounter = 0;
+                return true;
+            }
+            
+            velocityTimeout = setTimeout(() => { userClickVelocityCounter = 0; }, 1500);
+            return false;
+        }
+
+        // SOS ANSIEDAD MANTENIDO
+        function toggleSOSAnxietyMode() {
+            const btn = document.getElementById('btn-sos');
+            const mainTitle = document.getElementById('lbl-main-title');
+            isSOSActive = !isSOSActive;
+            clearInterval(sosInterval);
+
+            if (isSOSActive) {
+                btn.classList.add('active');
+                mainTitle.textContent = "Respiración de Rescate";
+                audio.volume = 0.2; volumeSlider.value = 0.2;
+                volText.textContent = "Volumen de Confort: 20% (SOS)";
+                updateSliderGradient(volumeSlider, 20);
+                if(audio.paused) audio.play();
+
+                let steps = ["🍃 Inhala por la nariz...", "✋ Retén...", "🌬️ Exhala el miedo..."];
+                let i = 0; displayMessage(steps[i]);
+                sosInterval = setInterval(() => { i = (i + 1) % steps.length; displayMessage(steps[i]); }, 4000);
+            } else {
+                btn.classList.remove('active'); mainTitle.textContent = "La Guerrera Silenciosa";
+                audio.volume = 1.0; volumeSlider.value = 1.0;
+                volText.textContent = "Volumen de Confort: 100%";
+                updateSliderGradient(volumeSlider, 100);
+                displayMessage("Línea de soporte regular restablecida.");
+            }
+        }
+
+        // CADENCIA CARDÍACA MANUAL
+        function tapHeartPulse() {
+            if (trackUserInteractionVelocity()) return;
+            let now = Date.now();
+            if (now - lastBPMTap > 2000) tapTimes = [];
+            lastBPMTap = now; tapTimes.push(now);
+
+            const dot = document.getElementById('pulse-dot');
+            dot.style.transform = "scale(1.8)"; setTimeout(() => { dot.style.transform = ""; }, 150);
+
+            if (tapTimes.length >= 3) {
+                let sum = 0;
+                for (let i = 1; i < tapTimes.length; i++) sum += (tapTimes[i] - tapTimes[i - 1]);
+                let bpm = Math.round(60000 / (sum / (tapTimes.length - 1)));
+                lblBPMText.textContent = `${bpm} BPM`;
+
+                if (bpm > 95) {
+                    displayMessage(`⚠️ Pulso acelerado (${bpm} BPM). Recomendamos cambiar al preset 'Ritmo: Rescate 4-7-8'.`);
+                } else {
+                    displayMessage(`❤️ Ritmo estable: ${bpm} BPM. Mantén ese ritmo de calma.`);
+                }
+            } else { lblBPMText.textContent = `Midiendo...`; }
+        }
+
+        // SISTEMA MULTI-APOYO COOPERATIVO
+        function addSupportEnergy(points) {
+            supportPoints += points;
+            lblSupport.textContent = `✨ Energía Colectiva: ${supportPoints} Puntos de Apoyo`;
+            if (supportPoints % 30 === 0) {
+                displayMessage(`🌟 Entorno de alta vibración terapéutica consolidado por la comunidad.`);
+            }
+        }
+
+        function changeSantuarioMood(mood, element) {
+            if (trackUserInteractionVelocity()) return;
+            document.body.classList.remove('mood-calm', 'mood-hope', 'mood-strength');
+            document.body.classList.add(`mood-${mood}`);
+            document.querySelectorAll('.mood-chip').forEach(chip => chip.classList.remove('active'));
+            element.classList.add('active');
+            addSupportEnergy(5);
+        }
+
+        function submitIntentionToPatient() {
+            const input = document.getElementById('input-intention');
+            const txt = input.value.trim();
+            if (!txt) return;
+            displayMessage(`✨ Guardado en bitácora: "${txt}"`);
+            input.value = ""; addSupportEnergy(10);
+        }
+
+        function sendTherapeuticPulse() {
+            if (trackUserInteractionVelocity()) return;
+            breatheRing.style.transform = "scale(1.18)"; setTimeout(() => { breatheRing.style.transform = ""; }, 300);
+            addSupportEnergy(2);
+        }
+
+        function toggleDarkSerenity() {
+            document.body.classList.toggle('theme-serenity');
+        }
+
+        // AUDIO CONTROLES NATIVOS CON REAJUSTE DE GRADIENTES
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play(); playBtn.classList.add('is-playing');
+                playSvg.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+                if(!isSOSActive) showRandomAffirmation();
+            } else {
+                audio.pause(); playBtn.classList.remove('is-playing');
+                playSvg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+            }
+        });
+
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value;
+            volText.textContent = `Volumen de Confort: ${Math.round(volumeSlider.value * 100)}%`;
+            updateSliderGradient(volumeSlider, volumeSlider.value * 100);
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const pct = (audio.currentTime / audio.duration) * 100;
+                seekSlider.value = pct; updateSliderGradient(seekSlider, pct);
+                timeCurrent.textContent = formatTime(audio.currentTime);
+            }
+        });
+
+        function cycleSleepTimer() {
+            const btn = document.getElementById('btn-sleep-timer');
+            clearTimeout(sleepTimeoutId); clearInterval(sleepIntervalId);
+            if (sleepTimerMinutes === 0) sleepTimerMinutes = 10;
+            else if (sleepTimerMinutes === 10) sleepTimerMinutes = 20;
+            else if (sleepTimerMinutes === 20) sleepTimerMinutes = 30;
+            else sleepTimerMinutes = 0;
+
+            if (sleepTimerMinutes > 0) {
+                btn.classList.add('active'); btn.textContent = `${sleepTimerMinutes} min`;
+                sleepTimeoutId = setTimeout(() => {
+                    audio.pause(); playBtn.classList.remove('is-playing');
+                    playSvg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+                    btn.classList.remove('active'); btn.textContent = "Apagar: Off";
+                    sleepTimerMinutes = 0;
+                }, sleepTimerMinutes * 60 * 1000);
+            } else { btn.classList.remove('active'); btn.textContent = "Apagar: Off"; }
+        }
+
+        audio.addEventListener('loadedmetadata', () => { timeTotal.textContent = formatTime(audio.duration); });
+        seekSlider.addEventListener('input', () => { if (audio.duration) audio.currentTime = (seekSlider.value / 100) * audio.duration; });
+        document.getElementById('btn-skip').addEventListener('click', () => { audio.currentTime += 10; });
+        document.getElementById('btn-back').addEventListener('click', () => { audio.currentTime -= 10; });
+        document.getElementById('btn-restart').addEventListener('click', () => { audio.currentTime = 0; });
+
+        btnLoop.addEventListener('click', () => {
+            loopState = (loopState + 1) % 2;
+            if(loopState === 1) { audio.loop = true; btnLoop.classList.add('active-loop'); } 
+            else { audio.loop = false; btnLoop.classList.remove('active-loop'); }
+        });
+
+        function displayMessage(text) {
+            msgDisplay.style.opacity = 0;
+            setTimeout(() => { msgDisplay.textContent = text; msgDisplay.style.opacity = 1; }, 180);
+        }
+
+        function showRandomAffirmation() {
+            const random = BaseAffirmations[Math.floor(Math.random() * BaseAffirmations.length)];
+            displayMessage(random);
+        }
+
+        function formatTime(seconds) {
+            let min = Math.floor(seconds / 60); let sec = Math.floor(seconds % 60);
+            return `${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        function updateSliderGradient(slider, percentage) {
+            const isDark = document.body.classList.contains('theme-serenity');
+            slider.style.background = `linear-gradient(to right, var(--gold-therapeutic) ${percentage}%, ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)'} ${percentage}%)`;
+        }
+
+        window.addEventListener('keydown', (e) => { if (e.key === " ") { e.preventDefault(); playBtn.click(); } });
+        
+        // Ejecución inicial de gradientes limpios
+        updateSliderGradient(volumeSlider, 100);
+        updateSliderGradient(seekSlider, 0);
+    </script>
+</body>
+</html>

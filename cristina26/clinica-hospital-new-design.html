@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>La Guerrera Silenciosa - Orbital Bio-Capsule V12.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-gradient: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --text-main: #f8fafc;
+            --clinical-blue: #38bdf8;
+            --heart-pulse: #34d399;
+            --border-clinical: rgba(56, 189, 248, 0.2);
+            --emergency-red: #f43f5e;
+            --warning-amber: #fbbf24;
+            --panel-dark: #020617;
+            --glow: rgba(56, 189, 248, 0.4);
+            --bio-ring-glow: rgba(52, 211, 153, 0.6);
+            --orbit-size: 260px;
+        }
+
+        /* PALETAS DE COLOR DINÁMICAS */
+        body.theme-emergency, body.overload-active {
+            --card-bg: rgba(28, 10, 10, 0.85);
+            --text-main: #fecaca;
+            --clinical-blue: #ef4444;
+            --heart-pulse: #b91c1c;
+            --border-clinical: rgba(239, 68, 68, 0.3);
+            --glow: rgba(239, 68, 68, 0.5);
+            --bio-ring-glow: rgba(239, 68, 68, 0.8);
+        }
+
+        body.theme-lab {
+            --bg-gradient: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #070414 100%);
+            --card-bg: rgba(30, 27, 75, 0.7);
+            --clinical-blue: #a855f7;
+            --heart-pulse: #6366f1;
+            --border-clinical: rgba(168, 85, 247, 0.25);
+            --glow: rgba(168, 85, 247, 0.4);
+            --bio-ring-glow: rgba(99, 102, 241, 0.7);
+        }
+
+        body.theme-clinical {
+            --bg-gradient: radial-gradient(circle at 50% 50%, #f1f5f9 0%, #cbd5e1 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-main: #0f172a;
+            --clinical-blue: #0284c7;
+            --heart-pulse: #0f766e;
+            --border-clinical: rgba(2, 132, 199, 0.25);
+            --glow: rgba(2, 132, 199, 0.2);
+            --bio-ring-glow: rgba(15, 118, 110, 0.5);
+        }
+
+        body.high-contrast-mode { filter: contrast(1.25) brightness(0.95); }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 10px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            -webkit-user-select: none;
+            overflow-x: hidden;
+        }
+
+        /* CAPSULA ORBITAL DE DISEÑO ÚNICO */
+        .orbital-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--border-clinical);
+            border-radius: 40px;
+            width: 100%;
+            max-width: 430px;
+            padding: 24px;
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        /* EFECTO SACUDIDA EN SOBRECARGA */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            30% { transform: translate(-3px, 0px) rotate(1deg); }
+            50% { transform: translate(1px, 2px) rotate(0deg); }
+            70% { transform: translate(-1px, 1px) rotate(-1deg); }
+            100% { transform: translate(1px, -2px) rotate(0deg); }
+        }
+        body.overload-active .orbital-container {
+            animation: shake 0.15s infinite;
+            border-color: var(--emergency-red);
+            box-shadow: 0 0 30px var(--emergency-red);
+        }
+
+        /* CABECERA MINIMALISTA SUPERIOR */
+        .capsule-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .header-badge {
+            color: var(--clinical-blue);
+            text-shadow: 0 0 8px var(--glow);
+        }
+
+        .dropdown-theme {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-clinical);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            padding: 4px 8px;
+            border-radius: 20px;
+            outline: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* EL NÚCLEO CENTRAL CON ENTORNO ORBITAL */
+        .core-orbital-system {
+            position: relative;
+            width: var(--orbit-size);
+            height: var(--orbit-size);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        /* Resonancia Cinética (Aura Única) */
+        .kinetic-resonance-field {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 2px dashed var(--clinical-blue);
+            opacity: 0.4;
+            transition: all 0.08s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Contenedor de la Imagen del Paciente Interactivo */
+        .interactive-patient-core {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 3;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: transform 0.1s ease;
+            border: 3px solid var(--border-clinical);
+            overflow: hidden;
+        }
+        .interactive-patient-core:active {
+            transform: scale(0.92);
+        }
+
+        .interactive-patient-core img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: filter 0.3s ease;
+        }
+
+        /* Anillo Exterior de Controles Flotantes */
+        .orbital-control-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 1px dashed var(--border-clinical);
+            pointer-events: none;
+            animation: rotateOrbit 40s linear infinite;
+        }
+        @keyframes rotateOrbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* Botones satélite flotando alrededor del núcleo */
+        .satellite-btn {
+            position: absolute;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-clinical);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .satellite-btn:hover {
+            transform: scale(1.15);
+            color: var(--clinical-blue);
+            box-shadow: 0 0 12px var(--clinical-blue);
+        }
+        .satellite-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+        /* Posiciones fijas simulando órbita */
+        .sat-play    { top: -10px; left: calc(50% - 24px); width: 48px; height: 48px; background: var(--clinical-blue); color: white; }
+        .sat-play:hover { color: white; box-shadow: 0 0 20px var(--clinical-blue); }
+        .sat-rewind  { left: -10px; top: calc(50% - 19px); }
+        .sat-forward { right: -10px; top: calc(50% - 19px); }
+        .sat-restart { bottom: 5px; left: 50px; }
+        .sat-loop    { bottom: 5px; right: 50px; }
+        .sat-loop.active-1 { color: var(--warning-amber); border-color: var(--warning-amber); }
+        .sat-loop.active-inf { color: var(--heart-pulse); border-color: var(--heart-pulse); }
+
+        /* TEXTOS E INFORMACIÓN */
+        .metadata-section {
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .track-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 2px;
+        }
+
+        .track-artist {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--clinical-blue);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+        .capsule-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            padding: 2px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-clinical);
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        /* SECCIÓN DE SLIDERS CURVOS SIMULADOS (DISTRIBUCIÓN ÚNICA) */
+        .sliders-panel {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            padding: 14px;
+            border: 1px solid var(--border-clinical);
+            margin-bottom: 15px;
+        }
+
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .slider-group:last-child { margin-bottom: 0; }
+
+        .slider-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            width: 65px;
+            text-transform: uppercase;
+            opacity: 0.8;
+            font-weight: 700;
+        }
+
+        .custom-range {
+            -webkit-appearance: none;
+            flex: 1;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+        .custom-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 0px; 
+            box-shadow: -200px 0 0 200px var(--clinical-blue);
+        }
+
+        .time-counter {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            min-width: 35px;
+            text-align: right;
+        }
+
+        /* PARÁMETROS CLÍNICOS E INTERRUPTOR DE DIVERTIDA SOBRECARGA */
+        .fun-controls-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .interactive-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-clinical);
+            border-radius: 12px;
+            padding: 8px 12px;
+        }
+        .box-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            opacity: 0.6;
+            margin-bottom: 4px;
+            display: block;
+        }
+        .box-select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            outline: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* BOTÓN DIVERTIDO DE SOBRECARGA RÍTMICA */
+        .btn-overload-panic {
+            grid-column: span 2;
+            background: rgba(244, 63, 94, 0.1);
+            border: 1px solid var(--emergency-red);
+            color: var(--emergency-red);
+            border-radius: 12px;
+            padding: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        .btn-overload-panic:hover {
+            background: var(--emergency-red);
+            color: white;
+            box-shadow: 0 0 15px var(--emergency-red);
+        }
+
+        /* CONSOLA DE REGISTROS BIOMÉTRICOS HOLOGRÁFICOS */
+        .hologram-logger {
+            width: 100%;
+            background: #000000;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 6px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: #4ade80;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+        }
+        .hologram-logger span::before {
+            content: "⚡ ";
+            color: var(--clinical-blue);
+        }
+        .score-badge {
+            background: rgba(74, 222, 128, 0.15);
+            padding: 1px 6px;
+            border-radius: 4px;
+            color: #4ade80;
+        }
+
+        audio { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="orbital-container">
+        <!-- Cabecera de la Cápsula -->
+        <div class="capsule-header">
+            <span class="header-badge">ORBITAL BIO-CAPSULE v12.0</span>
+            <select class="dropdown-theme" id="theme-selector" onchange="handleThemeChange()">
+                <option value="dark">🛸 ENTROPIA</option>
+                <option value="clinical">🩺 CLINIC-OS</option>
+                <option value="lab">🔮 LAB-SERUM</option>
+                <option value="emergency">🚨 EMERGENCIA</option>
+            </select>
+        </div>
+
+        <!-- SISTEMA CENTRAL DE ÓRBITA -->
+        <div class="core-orbital-system">
+            <!-- Aura Cinética de Resonancia -->
+            <div class="kinetic-resonance-field" id="resonance-field"></div>
+            
+            <!-- Núcleo con foto del paciente interactiva (MINI JUEGO DE REANIMACIÓN) -->
+            <div class="interactive-patient-core" id="patient-core" onclick="triggerReanimationShock()" title="¡Haz clic al ritmo de la música para reanimar!">
+                <img src="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.webp" alt="Paciente Core" id="patient-img">
+            </div>
+
+            <!-- Satélites de Control que orbitan flotando -->
+            <div class="orbital-control-ring"></div>
+            
+            <button class="satellite-btn sat-play" id="play-btn" title="Espacio: Tratar / Pausar">
+                <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <button class="satellite-btn sat-rewind" id="btn-rewind" title="Flecha Izq: Rebobinar">
+                <svg viewBox="0 0 24 24"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg>
+            </button>
+            <button class="satellite-btn sat-forward" id="btn-forward" title="Flecha Der: Avanzar">
+                <svg viewBox="0 0 24 24"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/></svg>
+            </button>
+            <button class="satellite-btn sat-restart" id="btn-restart" title="R: Shock Inicial">
+                <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+            </button>
+            <button class="satellite-btn sat-loop" id="btn-loop" title="L: Ciclo de Bucle">
+                <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+            </button>
+        </div>
+
+        <!-- Metadatos Integrados -->
+        <div class="metadata-section">
+            <h2 class="track-title">La Guerrera Silenciosa</h2>
+            <div class="track-artist">Cristina • Flamenco Edition</div>
+            <div class="badge-container">
+                <span class="capsule-badge" id="badge-status">ESTADO: APAGADO</span>
+                <span class="capsule-badge">44.1 KHZ</span>
+                <span class="capsule-badge" id="score-hits">RITMO: —</span>
+            </div>
+        </div>
+
+        <!-- PANEL DE ALAS DE CARGA (SLIDERS ÚNICOS EN GRUPO CONCÉNTRICO) -->
+        <div class="sliders-panel">
+            <div class="slider-group">
+                <span class="slider-label">Evolución</span>
+                <input type="range" class="custom-range" id="track-progress" min="0" max="100" value="0">
+                <span class="time-counter" id="time-current">00:00</span>
+            </div>
+            <div class="slider-group">
+                <span class="slider-label">Amplitud</span>
+                <input type="range" class="custom-range" id="track-volume" min="0" max="1" step="0.01" value="0.8">
+                <span class="time-counter" id="volume-val">80%</span>
+            </div>
+        </div>
+
+        <!-- CONTROLES ADICIONALES DIVERTIDOS -->
+        <div class="fun-controls-grid">
+            <div class="interactive-box">
+                <span class="box-title">Modulador Dosis</span>
+                <select class="box-select" id="dose-speed">
+                    <option value="0.75">Ralentizado</option>
+                    <option value="1.0" selected>Fisiológico</option>
+                    <option value="1.25">Acelerado 🔥</option>
+                </select>
+            </div>
+            <div class="interactive-box">
+                <span class="box-title">Espectro Filtro</span>
+                <select class="box-select" id="filter-type">
+                    <option value="off" selected>Flujo Directo</option>
+                    <option value="sedation">Sedación Pasiva</option>
+                    <option value="underwater">Efecto Subacuático</option>
+                </select>
+            </div>
+            
+            <!-- FUNCIÓN MEJORADA: Botón de Crisis Extrema -->
+            <button class="btn-overload-panic" id="btn-overload" onclick="toggleOverloadCrisis()">
+                🚨 ACTIVAR CRISIS DE SOBRECARGA RÍTMICA 🚨
+            </button>
+        </div>
+
+        <!-- LOG LOGÍSTICO HOLOGRÁFICO -->
+        <div class="hologram-logger">
+            <span id="log-display">BIO-CÁPSULA LISTA</span>
+            <div class="score-badge" id="reanim-streak">STREAK: 0</div>
+        </div>
+    </div>
+
+    <audio id="audio-core" preload="auto" crossorigin="anonymous">
+        <source src="https://capibarasound00.github.io/cristina26/assets/sound/Cristina%20-%20La%20Guerrera%20Silenciosa%20(Flamenco%20v2).mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const audio = document.getElementById('audio-core');
+        const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const trackProgress = document.getElementById('track-progress');
+        const trackVolume = document.getElementById('track-volume');
+        const timeCurrent = document.getElementById('time-current');
+        const volumeVal = document.getElementById('volume-val');
+        const themeSelector = document.getElementById('theme-selector');
+        
+        const resonanceField = document.getElementById('resonance-field');
+        const patientCore = document.getElementById('patient-core');
+        const patientImg = document.getElementById('patient-img');
+        const logDisplay = document.getElementById('log-display');
+        const badgeStatus = document.getElementById('badge-status');
+        const scoreHits = document.getElementById('score-hits');
+        const reanimStreak = document.getElementById('reanim-streak');
+
+        const doseSpeed = document.getElementById('dose-speed');
+        const filterType = document.getElementById('filter-type');
+
+        let audioCtx = null, sourceNode = null, analyser = null, biquadFilter = null;
+        let overloadNode = null, dataArray = [], animationId = null;
+        let loopState = 0, consecutiveHits = 0, isOverloadActive = false;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                sourceNode = audioCtx.createMediaElementSource(audio);
+                
+                analyser = audioCtx.createAnalyser();
+                analyser.fftSize = 64;
+                dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+                biquadFilter = audioCtx.createBiquadFilter();
+                biquadFilter.type = "lowpass";
+                biquadFilter.frequency.value = 22000;
+
+                // Nodo oscilador/ganancia para simular efecto tremolo divertido en la sobrecarga
+                overloadNode = audioCtx.createGain();
+
+                sourceNode.connect(biquadFilter);
+                biquadFilter.connect(overloadNode);
+                overloadNode.connect(audioCtx.destination);
+            }
+        }
+
+        // MOTOR RE-ACTIVADOR DEL AURA ÚNICA CONCÉNTRICA
+        function updateResonanceAura() {
+            animationId = requestAnimationFrame(updateResonanceAura);
+            if (audio.paused) {
+                resonanceField.style.transform = 'scale(1)';
+                resonanceField.style.boxShadow = 'none';
+                return;
+            }
+
+            analyser.getByteFrequencyData(dataArray);
+            let total = 0;
+            for(let i=0; i<dataArray.length; i++) total += dataArray[i];
+            let average = total / dataArray.length;
+
+            let scale = 1 + (average / 200) * 0.45;
+            let blur = (average / 255) * 20;
+
+            resonanceField.style.transform = `scale(${scale})`;
+            resonanceField.style.boxShadow = `0 0 ${blur + 10}px ${blur/3}px var(--bio-ring-glow)`;
+            
+            // Si el modo sobrecarga está activo, forzamos distorsión rítmica divertida en tiempo real
+            if (isOverloadActive) {
+                let speedMod = Math.sin(audioCtx.currentTime * 18) * 0.4 + 0.6;
+                overloadNode.gain.setValueAtTime(speedMod, audioCtx.currentTime);
+            } else {
+                overloadNode.gain.setValueAtTime(1.0, audioCtx.currentTime);
+            }
+        }
+
+        playBtn.addEventListener('click', togglePlay);
+        
+        function togglePlay() {
+            initAudio();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            if (audio.paused) {
+                audio.play();
+                badgeStatus.textContent = "ESTADO: CRÍTICO";
+                playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+                updateLog("Suministrando dosis");
+                if(!animationId) updateResonanceAura();
+            } else {
+                audio.pause();
+                badgeStatus.textContent = "ESTADO: ESTABLE";
+                playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+                updateLog("Infusión en pausa");
+            }
+        }
+
+        // MINI-JUEGO DIVERTIDO: DESCARGA DE REANIMACIÓN RÍTMICA AL HACER CLICK EN LA FOTO
+        function triggerReanimationShock() {
+            if(audio.paused) {
+                updateLog("¡Enciende la música primero!");
+                return;
+            }
+            
+            // Calculamos precisión basada en la intensidad de las frecuencias bajas/medias actuales
+            analyser.getByteFrequencyData(dataArray);
+            let punch = dataArray[2] || 0; // Capturador del Kick de bajos
+
+            patientImg.style.filter = "brightness(2.5) contrast(1.5)";
+            setTimeout(() => { patientImg.style.filter = "none"; }, 120);
+
+            if (punch > 175) {
+                consecutiveHits++;
+                reanimStreak.textContent = `STREAK: ${consecutiveHits}`;
+                scoreHits.textContent = "RITMO: ¡PERFECTO!";
+                updateLog("💥 ¡SHOCK PERFECTO! Ritmo optimizado");
+            } else if (punch > 90) {
+                consecutiveHits = 0;
+                reanimStreak.textContent = `STREAK: 0`;
+                scoreHits.textContent = "RITMO: REGULAR";
+                updateLog("🩺 Desfibrilación descompasada");
+            } else {
+                consecutiveHits = 0;
+                reanimStreak.textContent = `STREAK: 0`;
+                scoreHits.textContent = "RITMO: CAÓTICO";
+                updateLog("⚠️ Fallo de cálculo rítmico");
+            }
+        }
+
+        // FUNCIÓN MEJORADA DIVERTIDA: MODO CRISIS EXTREMA
+        function toggleOverloadCrisis() {
+            initAudio();
+            isOverloadActive = !isOverloadActive;
+            const btn = document.getElementById('btn-overload');
+
+            if (isOverloadActive) {
+                document.body.classList.add('overload-active');
+                btn.textContent = "⚡ ¡APAGAR CRISIS ANTES DE QUE EXPLOTE! ⚡";
+                updateLog("🚨 ADVERTENCIA: Colapso rítmico inducido");
+            } else {
+                document.body.classList.remove('overload-active');
+                btn.textContent = "🚨 ACTIVAR CRISIS DE SOBRECARGA RÍTMICA 🚨";
+                updateLog("Crisis controlada. Constantes estables");
+            }
+        }
+
+        // FILTROS AVANZADOS AUDIO
+        filterType.addEventListener('change', () => {
+            initAudio();
+            const val = filterType.value;
+            if(val === 'off') {
+                biquadFilter.type = "lowpass"; biquadFilter.frequency.setValueAtTime(22000, audioCtx.currentTime);
+                updateLog("Espectro limpio");
+            } else if (val === 'sedation') {
+                biquadFilter.type = "lowpass"; biquadFilter.frequency.setValueAtTime(1200, audioCtx.currentTime);
+                updateLog("Filtro sedante activado");
+            } else if (val === 'underwater') {
+                biquadFilter.type = "peaking"; biquadFilter.frequency.setValueAtTime(350, audioCtx.currentTime);
+                updateLog("Efecto inmersión total");
+            }
+        });
+
+        // MANEJO DE INFUSIÓN DE VELOCIDAD
+        doseSpeed.addEventListener('change', () => {
+            audio.playbackRate = parseFloat(doseSpeed.value);
+            updateLog(`Flujo rítmico cambiado a ${doseSpeed.value}x`);
+        });
+
+        // ACTUALIZACIONES DE VOLUMEN Y PROGRESO DE ALAS CURVAS
+        trackVolume.addEventListener('input', () => {
+            audio.volume = trackVolume.value;
+            volumeVal.textContent = `${Math.round(trackVolume.value * 100)}%`;
+            trackVolume.style.background = `linear-gradient(to right, var(--clinical-blue) ${trackVolume.value * 100}%, rgba(255,255,255,0.1) ${trackVolume.value * 100}%)`;
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            if(audio.duration) {
+                const pct = (audio.currentTime / audio.duration) * 100;
+                trackProgress.value = pct;
+                trackProgress.style.background = `linear-gradient(to right, var(--clinical-blue) ${pct}%, rgba(255,255,255,0.1) ${pct}%)`;
+
+                let min = Math.floor(audio.currentTime / 60);
+                let sec = Math.floor(audio.currentTime % 60);
+                timeCurrent.textContent = `${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`;
+            }
+        });
+
+        trackProgress.addEventListener('input', () => {
+            if(audio.duration) {
+                audio.currentTime = (trackProgress.value / 100) * audio.duration;
+            }
+        });
+
+        // CONTROLES DE SATÉLITES ORBITALES RESTANTES
+        document.getElementById('btn-forward').addEventListener('click', () => { audio.currentTime += 10; updateLog("+10s inyectados"); });
+        document.getElementById('btn-rewind').addEventListener('click', () => { audio.currentTime -= 10; updateLog("-10s retirados"); });
+        document.getElementById('btn-restart').addEventListener('click', () => { audio.currentTime = 0; updateLog("Ciclo reseteado"); if(audio.paused) togglePlay(); });
+
+        const btnLoop = document.getElementById('btn-loop');
+        btnLoop.addEventListener('click', () => {
+            loopState = (loopState + 1) % 3;
+            if (loopState === 0) {
+                audio.loop = false; btnLoop.className = "satellite-btn sat-loop"; updateLog("Bucle inactivo");
+            } else if (loopState === 1) {
+                audio.loop = true; btnLoop.className = "satellite-btn sat-loop active-1"; updateLog("Monobucle x1");
+            } else if (loopState === 2) {
+                audio.loop = false; btnLoop.className = "satellite-btn sat-loop active-inf"; updateLog("Bucle Continuo");
+            }
+        });
+
+        audio.addEventListener('ended', () => {
+            if (loopState === 2) { audio.currentTime = 0; audio.play(); } 
+            else if (loopState === 0) {
+                audio.currentTime = 0; togglePlay(); badgeStatus.textContent = "ESTADO: TERMINADO";
+            }
+        });
+
+        function handleThemeChange() {
+            document.body.className = "";
+            if (themeSelector.value !== "dark") {
+                document.body.classList.add(`theme-${themeSelector.value}`);
+            }
+            updateLog(`Entorno: ${themeSelector.value.toUpperCase()}`);
+        }
+
+        function updateLog(msg) { logDisplay.textContent = msg.toUpperCase(); }
+
+        // INICIALIZADOR DE TECLADO GAMER/MÉDICO
+        window.addEventListener('keydown', (e) => {
+            if (e.key === " ") { e.preventDefault(); togglePlay(); }
+            else if (e.key === "ArrowRight") { audio.currentTime += 10; updateLog("+10s"); }
+            else if (e.key === "ArrowLeft") { audio.currentTime -= 10; updateLog("-10s"); }
+            else if (e.key.toLowerCase() === "r") { audio.currentTime = 0; if(audio.paused) togglePlay(); }
+            else if (e.key.toLowerCase() === "l") { btnLoop.click(); }
+            else if (e.key.toLowerCase() === "s") { toggleOverloadCrisis(); }
+        });
+
+        // Configuración inicial de sliders de gradientes de color cromados
+        trackVolume.dispatchEvent(new Event('input'));
+    </script>
+</body>
+</html>

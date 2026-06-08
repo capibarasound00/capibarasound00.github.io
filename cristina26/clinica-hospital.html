@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>La Guerrera Silenciosa - Clinical Console V9.7</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* PALETAS DE COLOR DE LA CONSOLA */
+        :root {
+            --bg-gradient: radial-gradient(circle at 0% 0%, #e2e8f0 0%, #f8fafc 50%, #f1f5f9 100%);
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --clinical-blue: #0284c7;
+            --heart-pulse: #d97706; 
+            --border-clinical: #cbd5e1;
+            --emergency-red: #ef4444;
+            --warning-amber: #d97706;
+            --panel-dark: #f1f5f9; 
+            --inner-box-bg: #f8fafc;
+            --glow: transparent;
+            --grid-color: rgba(0, 0, 0, 0.06);
+            --ecg-bg: #f8fafc;
+            --dropdown-bg: #ffffff;
+            --dropdown-text: #0f172a;
+        }
+
+        body.theme-operating {
+            --bg-gradient: radial-gradient(circle at 100% 100%, #071927 0%, #020617 70%, #061f1a 100%);
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --text-main: #f8fafc;
+            --clinical-blue: #38bdf8;
+            --heart-pulse: #34d399;
+            --border-clinical: #334155;
+            --warning-amber: #f59e0b;
+            --panel-dark: #020617;
+            --inner-box-bg: rgba(255, 255, 255, 0.04);
+            --glow: rgba(56, 189, 248, 0.15);
+            --grid-color: rgba(255, 255, 255, 0.06);
+            --ecg-bg: #020617;
+            --dropdown-bg: #1e293b;
+            --dropdown-text: #f8fafc;
+        }
+
+        body.theme-emergency {
+            --bg-gradient: radial-gradient(circle at 50% 50%, #2d0f0f 0%, #0f0505 100%);
+            --card-bg: rgba(28, 10, 10, 0.9);
+            --text-main: #fecaca;
+            --clinical-blue: #f87171;
+            --heart-pulse: #ef4444;
+            --border-clinical: #7f1d1d;
+            --warning-amber: #f97316;
+            --panel-dark: #000000;
+            --inner-box-bg: rgba(239, 68, 68, 0.05);
+            --glow: rgba(239, 68, 68, 0.2);
+            --grid-color: rgba(255, 255, 255, 0.06);
+            --ecg-bg: #000000;
+            --dropdown-bg: #451a03;
+            --dropdown-text: #fecaca;
+        }
+
+        body.theme-lab {
+            --bg-gradient: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f0a26 100%);
+            --card-bg: rgba(17, 12, 46, 0.9);
+            --text-main: #e0e7ff;
+            --clinical-blue: #818cf8;
+            --heart-pulse: #a855f7;
+            --border-clinical: #4338ca;
+            --warning-amber: #f43f5e;
+            --panel-dark: #070414;
+            --inner-box-bg: rgba(129, 140, 248, 0.06);
+            --glow: rgba(168, 85, 247, 0.2);
+            --grid-color: rgba(255, 255, 255, 0.06);
+            --ecg-bg: #070414;
+            --dropdown-bg: #312e81;
+            --dropdown-text: #e0e7ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            touch-action: manipulation;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 10px;
+            transition: background 0.5s ease, color 0.4s ease;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .medical-monitor {
+            background: var(--card-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--border-clinical);
+            border-radius: 28px;
+            width: 100%;
+            max-width: 440px;
+            padding: 24px;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .medical-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-clinical);
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+        }
+
+        .header-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--clinical-blue);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .theme-select-dropdown {
+            background: var(--dropdown-bg);
+            color: var(--dropdown-text);
+            border: 1px solid var(--border-clinical);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        /* ZONA CENTRAL */
+        .main-clinical-zone {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .patient-photo-wrapper {
+            width: 100px;
+            height: 100px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border-clinical);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .playing-pulse {
+            animation: photo-glow-pulse 1.5s infinite ease-in-out;
+        }
+        @keyframes photo-glow-pulse {
+            0% { box-shadow: 0 0 4px var(--heart-pulse); border-color: var(--heart-pulse); }
+            50% { box-shadow: 0 0 12px var(--heart-pulse); border-color: var(--heart-pulse); }
+            100% { box-shadow: 0 0 4px var(--heart-pulse); border-color: var(--heart-pulse); }
+        }
+
+        .cover-art {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .clinical-info-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 4px;
+            color: #0f172a;
+        }
+        body[class*="theme-"] h1 { color: var(--text-main); }
+
+        .artist {
+            font-size: 0.8rem;
+            color: var(--clinical-blue);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        .biometric-tags {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .bio-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            padding: 2px 6px;
+            background: #f1f5f9;
+            border: 1px solid var(--border-clinical);
+            border-radius: 4px;
+            font-weight: 500;
+            color: #475569;
+        }
+        body[class*="theme-"] .bio-tag { background: var(--inner-box-bg); color: var(--text-main); }
+
+        /* MONITOR MONITORIZACIÓN VOCAL AISLADA */
+        .ecg-screen {
+            background-color: var(--ecg-bg);
+            border-radius: 14px;
+            padding: 10px;
+            margin-bottom: 18px;
+            position: relative;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            border: 1px solid var(--border-clinical);
+        }
+
+        .ecg-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
+            background-size: 8px 8px;
+            background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                              linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+        }
+
+        .ecg-track-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0; top: 0;
+        }
+
+        .ecg-line {
+            stroke: var(--heart-pulse);
+            stroke-width: 2.2;
+            fill: none;
+            transition: stroke 0.4s;
+        }
+
+        .stop-alert .ecg-line { stroke: var(--emergency-red); }
+
+        .heart-rate-text {
+            position: absolute;
+            right: 12px; top: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            color: #10b981;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 5;
+        }
+        .stop-alert .heart-rate-text { color: var(--emergency-red); }
+
+        /* PARÁMETROS */
+        .parameters-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .param-box {
+            background: #ffffff;
+            border: 1px solid var(--border-clinical);
+            padding: 8px;
+            border-radius: 10px;
+        }
+        body[class*="theme-"] .param-box { background: var(--inner-box-bg); }
+
+        .param-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 700;
+            opacity: 0.7;
+            color: #475569;
+        }
+        body[class*="theme-"] .param-title { color: var(--text-main); }
+
+        .param-select {
+            width: 100%;
+            background: #ffffff;
+            border: 1px solid var(--border-clinical);
+            color: var(--text-main);
+            padding: 4px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            outline: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        body[class*="theme-"] .param-select { background: transparent; }
+
+        /* PROGRESO */
+        .progress-bar-container {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+            margin-bottom: 6px;
+            overflow: hidden;
+        }
+        body[class*="theme-"] .progress-bar-container { background: rgba(255, 255, 255, 0.12); }
+
+        .progress-buffer-fill {
+            height: 100%;
+            background: rgba(2, 132, 199, 0.15);
+            position: absolute;
+            left: 0; top: 0; width: 0%;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--clinical-blue);
+            width: 0%;
+            position: absolute;
+            left: 0; top: 0;
+            z-index: 2;
+        }
+
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #475569;
+        }
+        body[class*="theme-"] .time-display { color: var(--text-main); }
+
+        /* PANEL DE MANDOS DE 5 COLUMNAS */
+        .reanimation-deck {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 18px;
+            border: 1px solid var(--border-clinical);
+        }
+        body[class*="theme-"] .reanimation-deck { background: var(--inner-box-bg); }
+
+        .button-row-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .btn-medical-action {
+            background: transparent;
+            border: none;
+            color: #334155;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        body[class*="theme-"] .btn-medical-action { color: var(--text-main); }
+        
+        .btn-medical-action:hover {
+            color: var(--clinical-blue);
+            background: rgba(2, 132, 199, 0.08);
+        }
+
+        .btn-medical-action.loop-btn.active-1 { color: var(--warning-amber); }
+        .btn-medical-action.loop-btn.active-inf { color: #10b981; }
+
+        /* BOTÓN DINÁMICO CENTRAL */
+        .play-médico-btn {
+            background: var(--clinical-blue);
+            color: #ffffff;
+            border: none;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .play-médico-btn:hover { transform: scale(1.05); }
+        
+        .play-médico-btn svg { 
+            width: 22px; 
+            height: 22px; 
+            fill: #ffffff; 
+            transition: fill 0.2s ease;
+        }
+
+        .play-médico-btn.stopped-status {
+            background: var(--emergency-red) !important;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4) !important;
+        }
+        .play-médico-btn.stopped-status svg {
+            fill: #ffffff !important;
+        }
+
+        .btn-medical-action svg { width: 22px; height: 22px; fill: currentColor; }
+
+        /* SECCIÓN INFERIOR */
+        .button-row-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px dashed var(--border-clinical);
+            padding-top: 14px;
+        }
+
+        .vol-control-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffffff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border-clinical);
+        }
+        body[class*="theme-"] .vol-control-wrapper { background: rgba(255,255,255,0.02); }
+
+        .vol-icon {
+            width: 18px;
+            height: 18px;
+            fill: var(--clinical-blue);
+            cursor: pointer;
+        }
+
+        .vol-slider {
+            -webkit-appearance: none;
+            width: 70px;
+            height: 5px;
+            background: var(--border-clinical);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+        .vol-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: var(--clinical-blue);
+        }
+
+        .clinical-log {
+            background: #f1f5f9;
+            border-radius: 6px;
+            padding: 6px 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: #059669; 
+            height: 28px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            border: 1px solid var(--border-clinical);
+            max-width: 180px;
+            flex: 1;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+        body[class*="theme-"] .clinical-log { background: #000000; color: #4ade80; border: 1px solid rgba(255,255,255,0.1); }
+        .clinical-log span::before { content: "• "; color: var(--clinical-blue); }
+
+        audio { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="medical-monitor">
+        <!-- Cabecera -->
+        <div class="medical-header">
+            <span class="header-title">CONSOLA DE CONTROL CLÍNICO v9.7</span>
+            <div class="dropdown-theme-wrapper">
+                <select class="theme-select-dropdown" id="theme-selector" onchange="handleThemeChange()">
+                    <option value="clinical">⚙️ M. CLÍNICO</option>
+                    <option value="operating">🟢 M. QUIRÓFANO</option>
+                    <option value="emergency">🟠 M. URGENCIAS</option>
+                    <option value="lab">🟣 M. LABORATORIO</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Zona Central -->
+        <div class="main-clinical-zone">
+            <div class="patient-photo-wrapper" id="photo-container">
+                <img class="cover-art" src="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.webp" alt="Portada">
+            </div>
+            <div class="clinical-info-panel">
+                <h1>La Guerrera Silenciosa</h1>
+                <p class="artist">Pista: Cristina (Flamenco v2)</p>
+                <div class="biometric-tags">
+                    <span class="bio-tag">KEY: LA MENOR</span>
+                    <span class="bio-tag">FREQ: 44.1 KHZ</span>
+                    <span class="bio-tag" id="tag-db">GAIN: 0.0 DB</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monitor ECG de Hospital Modulado Clínicamente -->
+        <div class="ecg-screen stop-alert" id="ecg-screen">
+            <div class="ecg-grid"></div>
+            <div class="heart-rate-text" id="bpm-display">BPM: CONECTADO</div>
+            <div class="ecg-track-container">
+                <svg width="100%" height="100%" viewBox="0 0 400 64" preserveAspectRatio="none">
+                    <path class="ecg-line" id="ecg-path" d="M 0 32 L 400 32" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Parámetros -->
+        <div class="parameters-grid">
+            <div class="param-box">
+                <label class="param-title">Dosis Rítmica</label>
+                <select class="param-select" id="dose-select">
+                    <option value="0.75">Relajante</option>
+                    <option value="1.0" selected>Estable</option>
+                    <option value="1.3">Crítica</option>
+                </select>
+            </div>
+            <div class="param-box">
+                <label class="param-title">Analgésicos</label>
+                <select class="param-select" id="sedation-select" onchange="applySedationFilter()">
+                    <option value="none" selected>Ninguno</option>
+                    <option value="light">Sedación</option>
+                    <option value="deep">Anestesia</option>
+                </select>
+            </div>
+            <div class="param-box">
+                <label class="param-title">Bypass Red</label>
+                <select class="param-select" id="filter-select">
+                    <option value="normal" selected>Directo</option>
+                    <option value="alta">Eco-Filtro</option>
+                </select>
+            </div>
+        </div>
+        
+        <audio id="clinical-audio" preload="auto" crossorigin="anonymous">
+            <source src="https://capibarasound00.github.io/cristina26/assets/sound/Cristina%20-%20La%20Guerrera%20Silenciosa%20(Flamenco%20v2).mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- Barra Temporal -->
+        <div class="progress-bar-container" id="progress-container">
+            <div class="progress-buffer-fill" id="progress-buffer"></div>
+            <div class="progress-bar-fill" id="progress-bar"></div>
+        </div>
+
+        <div class="time-display">
+            <span id="current-time">00:00</span>
+            <span id="total-duration">00:00</span>
+        </div>
+
+        <!-- Fila de Control Mítica -->
+        <div class="reanimation-deck">
+            <div class="button-row-top">
+                
+                <!-- 1. BUCLE -->
+                <button class="btn-medical-action loop-btn" id="btn-loop" title="Configurar Bucle">
+                    <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+                </button>
+
+                <!-- 2. RETROCEDER 10s -->
+                <button class="btn-medical-action" id="btn-rewind" title="Retroceder 10s">
+                    <svg viewBox="0 0 24 24"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg>
+                </button>
+
+                <!-- 3. PLAY / PAUSE / STOP SQUARE (HOLD) -->
+                <button class="play-médico-btn" id="play-btn" title="Pulsación corta: Play/Pausa | Pulsación larga: Stop">
+                    <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+
+                <!-- 4. AVANZAR 10s -->
+                <button class="btn-medical-action" id="btn-forward" title="Avanzar 10s">
+                    <svg viewBox="0 0 24 24"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/></svg>
+                </button>
+
+                <!-- 5. RETORNO INMEDIATO A ORIGEN -->
+                <button class="btn-medical-action" id="btn-restart" title="Volver al inicio">
+                    <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+                </button>
+            </div>
+
+            <!-- Volumen e Informes -->
+            <div class="button-row-bottom">
+                <div class="vol-control-wrapper" id="vol-box">
+                    <svg class="vol-icon" id="vol-icon" viewBox="0 0 24 24">
+                        <path id="vol-svg-path" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                    <input type="range" class="vol-slider" id="volume-slider" min="0" max="1" step="0.01" value="1">
+                </div>
+
+                <div class="clinical-log">
+                    <span id="log-text">SISTEMA CONECTADO</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('clinical-audio');
+        const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const progressBar = document.getElementById('progress-bar');
+        const progressBuffer = document.getElementById('progress-buffer');
+        const progressContainer = document.getElementById('progress-container');
+        const currentTimeEl = document.getElementById('current-time');
+        const durationEl = document.getElementById('total-duration');
+        
+        const themeSelector = document.getElementById('theme-selector');
+        const ecgScreen = document.getElementById('ecg-screen');
+        const ecgPath = document.getElementById('ecg-path');
+        const bpmDisplay = document.getElementById('bpm-display');
+        const doseSelect = document.getElementById('dose-select');
+        const sedationSelect = document.getElementById('sedation-select');
+        const filterSelect = document.getElementById('filter-select');
+        const logText = document.getElementById('log-text');
+        const photoContainer = document.getElementById('photo-container');
+        
+        const volumeSlider = document.getElementById('volume-slider');
+        const volIcon = document.getElementById('vol-icon');
+        const volSvgPath = document.getElementById('vol-svg-path');
+
+        const btnRewind = document.getElementById('btn-rewind');
+        const btnForward = document.getElementById('btn-forward');
+        const btnRestart = document.getElementById('btn-restart');
+        const btnLoop = document.getElementById('btn-loop');
+
+        let loopState = 0; 
+        let holdTimer = null;
+        let isHoldAction = false;
+        let previousVolume = 1;
+        let currentBpmBase = 76;
+
+        // Contexto y Nodos de Análisis de Audio
+        let audioCtx = null;
+        let sourceNode = null;
+        let biquadFilter = null;
+        let voiceIsolationFilter = null; 
+        let analyser = null;
+        let dataArray = [];
+        let animationId = null;
+        
+        // Variables físicas suavizadas para evitar saltos bruscos
+        let ecgPhase = 0;
+        let smoothedVoiceFactor = 0;
+
+        function initAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                sourceNode = audioCtx.createMediaElementSource(audio);
+                
+                analyser = audioCtx.createAnalyser();
+                analyser.fftSize = 512;
+                const bufferLength = analyser.frequencyBinCount;
+                dataArray = new Uint8Array(bufferLength);
+
+                // FILTRO EXCLUSIVO DE ECG: Rango vocal lírico medio-alto
+                voiceIsolationFilter = audioCtx.createBiquadFilter();
+                voiceIsolationFilter.type = "bandpass";
+                voiceIsolationFilter.frequency.value = 1500; 
+                voiceIsolationFilter.Q.value = 1.4;          
+
+                biquadFilter = audioCtx.createBiquadFilter();
+                biquadFilter.type = "lowpass";
+                biquadFilter.frequency.value = 22000;
+                
+                sourceNode.connect(biquadFilter);
+                biquadFilter.connect(audioCtx.destination);
+
+                sourceNode.connect(voiceIsolationFilter);
+                voiceIsolationFilter.connect(analyser);
+            }
+        }
+
+        /* RENDERING DEL ECG REAL: LOS PICOS QUEDAN COMPLETAMENTE INTACTOS Y NATURALES */
+        function drawECG() {
+            animationId = requestAnimationFrame(drawECG);
+            
+            const width = 400;
+            const height = 64;
+            const midY = height / 2;
+            
+            if (audio.paused || ecgScreen.classList.contains('stop-alert')) {
+                ecgPath.setAttribute('d', `M 0 ${midY} L ${width} ${midY}`);
+                return;
+            }
+
+            analyser.getByteFrequencyData(dataArray);
+
+            // Medir la fuerza lírica real (Rango medio)
+            let voiceEnergy = 0;
+            let samples = 0;
+            for (let i = 10; i < 50; i++) { 
+                voiceEnergy += dataArray[i];
+                samples++;
+            }
+            voiceEnergy = samples > 0 ? (voiceEnergy / samples) / 255 : 0; 
+
+            // Umbral calibrado de voz
+            let targetVoiceFactor = 0;
+            if (voiceEnergy > 0.18) { 
+                targetVoiceFactor = (voiceEnergy - 0.18) * 2.0;
+                if (targetVoiceFactor > 1.0) targetVoiceFactor = 1.0;
+            }
+
+            // Interpolación matemática (Amortiguación): Elimina movimientos bruscos
+            smoothedVoiceFactor += (targetVoiceFactor - smoothedVoiceFactor) * 0.12;
+
+            const speedFactor = parseFloat(doseSelect.value);
+            // La voz acelera de forma milimétrica y real la línea temporal (Arritmia sinusal biológica)
+            ecgPhase += (0.07 + (smoothedVoiceFactor * 0.015)) * speedFactor;
+
+            let points = [];
+            for (let x = 0; x <= width; x += 3) {
+                let y = midY;
+                
+                // Generador anatómico exacto de un ciclo cardíaco estable (130 píxeles por ciclo)
+                let pulseCycle = (x + ecgPhase * 45) % 130;
+                let baseWave = 0;
+                
+                if (pulseCycle > 15 && pulseCycle < 22) { 
+                    baseWave = -2.5; // Onda P
+                } else if (pulseCycle >= 22 && pulseCycle < 25) { 
+                    baseWave = 1.5;  // Q
+                } else if (pulseCycle >= 25 && pulseCycle < 29) { 
+                    baseWave = -26;  // R (Pico principal anatómico - FIJO e intocable verticalmente)
+                } else if (pulseCycle >= 29 && pulseCycle < 33) { 
+                    baseWave = 6;    // S
+                } else if (pulseCycle >= 42 && pulseCycle < 54) { 
+                    baseWave = -4.5; // Onda T
+                }
+
+                // MODULACIÓN BIOLÓGICA NATURAL:
+                // En vez de estirar el pico R, la voz genera una suave ondulación en la línea de respiración básica (Línea Isopotencial)
+                let respiratoryWavelength = Math.sin(x * 0.025 + ecgPhase * 3.5) * (smoothedVoiceFactor * 4.5);
+                
+                // Micro-vibración nerviosa imperceptible de fondo que delata que está sonando la letra
+                let muscleMicroTremor = Math.cos(x * 0.4 + ecgPhase * 8) * (smoothedVoiceFactor * 0.8);
+                
+                y += baseWave + respiratoryWavelength + muscleMicroTremor;
+                points.push(`${x} ${y}`);
+            }
+            
+            ecgPath.setAttribute('d', 'M ' + points.join(' L '));
+        }
+
+        function applySedationFilter() {
+            initAudioContext();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            const mode = sedationSelect.value;
+            if (mode === "none") {
+                biquadFilter.frequency.setValueAtTime(22000, audioCtx.currentTime);
+                updateLog("Filtro: Desactivado");
+            } else if (mode === "light") {
+                biquadFilter.frequency.setValueAtTime(1400, audioCtx.currentTime);
+                updateLog("Filtro: Sedación Leve");
+            } else if (mode === "deep") {
+                biquadFilter.frequency.setValueAtTime(450, audioCtx.currentTime);
+                updateLog("Filtro: Anestesia Total");
+            }
+        }
+
+        function updateLog(message) {
+            logText.textContent = message.toUpperCase();
+        }
+
+        function handleThemeChange() {
+            const selectedTheme = themeSelector.value;
+            document.body.className = ""; 
+            if (selectedTheme !== 'clinical') {
+                document.body.classList.add(`theme-${selectedTheme}`);
+            }
+            updateLog(`Entorno: ${selectedTheme}`);
+        }
+
+        audio.addEventListener('loadedmetadata', renderTime);
+        if (audio.readyState >= 1) renderTime();
+
+        function renderTime() {
+            if (isNaN(audio.duration)) return;
+            let totalMin = Math.floor(audio.duration / 60) || 0;
+            let totalSec = Math.floor(audio.duration % 60) || 0;
+            if (totalSec < 10) totalSec = `0${totalSec}`;
+            durationEl.textContent = `${totalMin < 10 ? '0' : ''}${totalMin}:${totalSec}`;
+        }
+
+        function startHold() {
+            isHoldAction = false;
+            holdTimer = setTimeout(() => {
+                isHoldAction = true;
+                executeFadeOutAndStop();
+            }, 800); 
+        }
+
+        function cancelHold() {
+            clearTimeout(holdTimer);
+        }
+
+        function handleRelease() {
+            cancelHold();
+            if (!isHoldAction) togglePlay();
+        }
+
+        playBtn.addEventListener('mousedown', startHold);
+        playBtn.addEventListener('mouseup', handleRelease);
+        playBtn.addEventListener('mouseleave', cancelHold);
+        playBtn.addEventListener('touchstart', (e) => { e.preventDefault(); startHold(); });
+        playBtn.addEventListener('touchend', (e) => { e.preventDefault(); handleRelease(); });
+
+        function togglePlay() {
+            initAudioContext();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            if (audio.paused) {
+                audio.play();
+                playBtn.classList.remove('stopped-status');
+                ecgScreen.className = "ecg-screen playing";
+                photoContainer.classList.add('playing-pulse');
+                updateBpmText();
+                playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'; 
+                updateLog("Signos: En curso");
+                if(!animationId) drawECG();
+            } else {
+                audio.pause();
+                ecgScreen.className = "ecg-screen paused-alert";
+                photoContainer.classList.remove('playing-pulse');
+                bpmDisplay.textContent = "BPM: ASISTIDO";
+                playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>'; 
+                updateLog("Signos: En Pausa");
+            }
+        }
+
+        function executeFadeOutAndStop() {
+            updateLog("Parada Cardíaca...");
+            photoContainer.classList.remove('playing-pulse');
+            ecgScreen.className = "ecg-screen stop-alert";
+            
+            let fadeVolume = audio.volume;
+            const fadeInterval = setInterval(() => {
+                if (fadeVolume > 0.1) {
+                    fadeVolume -= 0.1;
+                    audio.volume = Math.max(0, fadeVolume);
+                } else {
+                    clearInterval(fadeInterval);
+                    audio.pause();
+                    audio.currentTime = 0;
+                    
+                    playBtn.classList.add('stopped-status'); 
+                    playIcon.innerHTML = '<path d="M6 6h12v12H6z"/>'; 
+                    
+                    bpmDisplay.textContent = "BPM: 00 (STOP)";
+                    progressBar.style.width = '0%';
+                    updateVolumeStyle();
+                    updateLog("Línea Plana total");
+                }
+            }, 25);
+        }
+
+        btnForward.addEventListener('click', () => { audio.currentTime = Math.min(audio.currentTime + 10, audio.duration); updateLog("+10 Segundos"); });
+        btnRewind.addEventListener('click', () => { audio.currentTime = Math.max(audio.currentTime - 10, 0); updateLog("-10 Segundos"); });
+
+        btnRestart.addEventListener('click', () => {
+            audio.currentTime = 0;
+            updateLog("Retorno a Origen");
+            if(audio.paused) togglePlay();
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === "ArrowRight") {
+                e.preventDefault();
+                audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
+                updateLog("+10 Segundos");
+            } else if (e.key === "ArrowLeft") {
+                e.preventDefault();
+                audio.currentTime = Math.max(audio.currentTime - 10, 0);
+                updateLog("-10 Segundos");
+            } else if (e.key === "ArrowUp") {
+                e.preventDefault();
+                volumeSlider.value = Math.min(parseFloat(volumeSlider.value) + 0.05, 1);
+                updateVolumeStyle();
+                updateLog(`Volumen: ${Math.round(volumeSlider.value * 100)}%`);
+            } else if (e.key === "ArrowDown") {
+                e.preventDefault();
+                volumeSlider.value = Math.max(parseFloat(volumeSlider.value) - 0.05, 0);
+                updateVolumeStyle();
+                updateLog(`Volumen: ${Math.round(volumeSlider.value * 100)}%`);
+            }
+        });
+
+        btnLoop.addEventListener('click', () => {
+            loopState = (loopState + 1) % 3;
+            if (loopState === 0) {
+                audio.loop = false;
+                btnLoop.className = "btn-medical-action loop-btn";
+                updateLog("Bucle: Off");
+            } else if (loopState === 1) {
+                audio.loop = true;
+                btnLoop.className = "btn-medical-action loop-btn active-1";
+                updateLog("Bucle: Único x1");
+            } else if (loopState === 2) {
+                audio.loop = false;
+                btnLoop.className = "btn-medical-action loop-btn active-inf";
+                updateLog("Bucle: Continuo");
+            }
+        });
+
+        audio.addEventListener('ended', () => {
+            if (loopState === 2) {
+                audio.currentTime = 0;
+                audio.play();
+            } else if (loopState === 0) {
+                executeFadeOutAndStop();
+            }
+        });
+
+        function updateVolumeStyle() {
+            const val = volumeSlider.value;
+            audio.volume = filterSelect.value === "alta" ? val * 0.5 : val;
+            const percent = val * 100;
+            volumeSlider.style.background = `linear-gradient(to right, var(--clinical-blue) ${percent}%, var(--border-clinical) ${percent}%)`;
+            
+            if (val == 0) {
+                volIcon.style.fill = "var(--emergency-red)";
+                volSvgPath.setAttribute("d", "M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z");
+            } else {
+                volIcon.style.fill = "var(--clinical-blue)";
+                volSvgPath.setAttribute("d", "M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z");
+            }
+        }
+
+        volumeSlider.addEventListener('input', updateVolumeStyle);
+        filterSelect.addEventListener('change', updateVolumeStyle);
+
+        volIcon.addEventListener('click', () => {
+            if (volumeSlider.value > 0) {
+                previousVolume = volumeSlider.value;
+                volumeSlider.value = 0;
+            } else {
+                volumeSlider.value = previousVolume || 1;
+            }
+            updateVolumeStyle();
+        });
+
+        function updateBpmText() {
+            if(audio.paused) return;
+            const rate = parseFloat(doseSelect.value);
+            if (rate === 0.75) {
+                currentBpmBase = 54;
+                ecgScreen.style.setProperty('--heart-pulse', '#60a5fa');
+            } else if (rate === 1.3) {
+                currentBpmBase = 114;
+                ecgScreen.style.setProperty('--heart-pulse', '#f43f5e');
+            } else {
+                currentBpmBase = 76;
+                ecgScreen.style.setProperty('--heart-pulse', '#d97706');
+            }
+            bpmDisplay.textContent = `BPM: ${currentBpmBase} (SENO)`;
+        }
+
+        doseSelect.addEventListener('change', () => {
+            audio.playbackRate = parseFloat(doseSelect.value);
+            updateBpmText();
+            updateLog(`Dosis: ${doseSelect.value}x`);
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            if(audio.duration) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = `${percent}%`;
+                
+                let currentMin = Math.floor(audio.currentTime / 60);
+                let currentSec = Math.floor(audio.currentTime % 60);
+                if (currentSec < 10) currentSec = `0${currentSec}`;
+                currentTimeEl.textContent = `${currentMin < 10 ? '0' : ''}${currentMin}:${currentSec}`;
+            }
+        });
+
+        audio.addEventListener('progress', () => {
+            if (audio.duration && audio.buffered.length > 0) {
+                const bufferEnd = audio.buffered.end(audio.buffered.length - 1);
+                const bufferPercent = (bufferEnd / audio.duration) * 100;
+                progressBuffer.style.width = `${bufferPercent}%`;
+            }
+        });
+
+        progressContainer.addEventListener('click', (e) => {
+            audio.currentTime = (e.offsetX / progressContainer.clientWidth) * audio.duration;
+        });
+
+        drawECG();
+        audio.volume = 1;
+        updateVolumeStyle();
+    </script>
+</body>
+</html>

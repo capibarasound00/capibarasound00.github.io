@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>La Guerrera Silenciosa - Quantum Bio-Deck V13.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2 family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-gradient: radial-gradient(circle at 10% 10%, #020617 0%, #0f172a 50%, #020617 100%);
+            --card-bg: rgba(15, 23, 42, 0.65);
+            --text-main: #f8fafc;
+            --clinical-blue: #38bdf8;
+            --heart-pulse: #34d399;
+            --border-clinical: rgba(56, 189, 248, 0.25);
+            --emergency-red: #f43f5e;
+            --warning-amber: #fbbf24;
+            --purple-neon: #a855f7;
+            --glow: rgba(56, 189, 248, 0.35);
+            --bio-ring-glow: rgba(56, 189, 248, 0.5);
+        }
+
+        /* TEMAS DINÁMICOS DIVERTIDOS */
+        body.theme-anomaly {
+            --bg-gradient: radial-gradient(circle at 90% 90%, #1e0521 0%, #07000a 100%);
+            --card-bg: rgba(22, 6, 32, 0.8);
+            --clinical-blue: #f43f5e;
+            --bio-ring-glow: rgba(244, 63, 94, 0.7);
+            --border-clinical: rgba(244, 63, 94, 0.3);
+        }
+
+        body.theme-cyber {
+            --bg-gradient: radial-gradient(circle at 50% 50%, #061f1a 0%, #020617 100%);
+            --card-bg: rgba(6, 31, 26, 0.5);
+            --clinical-blue: #00ffcc;
+            --bio-ring-glow: rgba(0, 255, 204, 0.6);
+            --border-clinical: rgba(0, 255, 204, 0.3);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+            transition: all 0.5s ease;
+            user-select: none;
+            -webkit-user-select: none;
+            overflow: hidden;
+        }
+
+        /* CONSOLA ASIMÉTRICA */
+        .quantum-deck {
+            background: var(--card-bg);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            border: 1px solid var(--border-clinical);
+            border-radius: 36px;
+            width: 100%;
+            max-width: 440px;
+            padding: 24px;
+            box-shadow: 0 50px 100px -30px rgba(0, 0, 0, 0.7);
+            position: relative;
+            transition: transform 0.1s ease, box-shadow 0.3s ease;
+        }
+
+        /* CABECERA HOLOGRÁFICA */
+        .deck-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 1.5px;
+        }
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--clinical-blue);
+        }
+        .live-dot {
+            width: 6px; height: 6px;
+            background: var(--heart-pulse);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--heart-pulse);
+        }
+
+        /* ARQUITECTURA ASIMÉTRICA: FILA SUPERIOR */
+        .asymmetric-top-grid {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        /* CONTENEDOR FOTO CON EFECTO DE LENTE Y SONAR */
+        .lens-sonar-wrapper {
+            position: relative;
+            width: 160px; height: 160px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sonar-wave-ring {
+            position: absolute;
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            border: 2px solid var(--clinical-blue);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.08s ease;
+        }
+
+        .interactive-lens {
+            width: 130px; height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--border-clinical);
+            cursor: pointer;
+            z-index: 2;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .interactive-lens:active { transform: scale(0.9); }
+        .interactive-lens img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* ARCO DE BOTONES SATÉLITE (ALINEACIÓN DERECHA ASIMÉTRICA) */
+        .asymmetric-action-arc {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .arc-btn {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-clinical);
+            color: var(--text-main);
+            padding: 8px 14px;
+            border-radius: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 170px;
+            transition: all 0.2s ease;
+        }
+        .arc-btn:hover {
+            background: var(--clinical-blue);
+            color: #020617;
+            box-shadow: 0 0 15px var(--glow);
+            transform: translateX(-4px);
+        }
+        .arc-btn svg { width: 14px; height: 14px; fill: currentColor; }
+        
+        /* Botón de reproducción asimétrico destacado */
+        .arc-btn.btn-main-play {
+            background: var(--clinical-blue);
+            color: #020617;
+            font-size: 0.75rem;
+            border: none;
+        }
+        .arc-btn.btn-main-play:hover {
+            box-shadow: 0 0 20px var(--clinical-blue);
+            filter: brightness(1.1);
+        }
+
+        .arc-btn.active-loop { color: var(--warning-amber); border-color: var(--warning-amber); }
+
+        /* SECCIÓN DE METADATOS Y ESTADÍSTICAS */
+        .track-profile {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 14px 18px;
+            border: 1px solid var(--border-clinical);
+            margin-bottom: 20px;
+        }
+        .track-profile h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+        .track-profile p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--clinical-blue);
+            margin-top: 2px;
+            font-weight: 600;
+        }
+
+        /* SLIDERS TIPO INSTRUMENTACIÓN DE NAVE */
+        .telemetry-dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .telemetry-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-clinical);
+            border-radius: 16px;
+            padding: 10px 14px;
+        }
+        .telemetry-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.6;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .telemetry-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .telemetry-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Slider estilizado lineal minimalista */
+        .linear-range {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        .linear-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--clinical-blue);
+            box-shadow: 0 0 6px var(--clinical-blue);
+        }
+
+        /* BOTONES FUNCIÓN GAMER DIVERTIDOS */
+        .experimental-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .fun-toggle-btn {
+            background: rgba(168, 85, 247, 0.08);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: var(--purple-neon);
+            padding: 10px;
+            border-radius: 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .fun-toggle-btn:hover, .fun-toggle-btn.active {
+            background: var(--purple-neon);
+            color: #ffffff;
+            box-shadow: 0 0 15px var(--purple-neon);
+        }
+
+        .fun-toggle-btn.btn-anomaly {
+            background: rgba(251, 191, 36, 0.08);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            color: var(--warning-amber);
+        }
+        .fun-toggle-btn.btn-anomaly:hover, .fun-toggle-btn.btn-anomaly.active {
+            background: var(--warning-amber);
+            color: #020617;
+            box-shadow: 0 0 15px var(--warning-amber);
+        }
+
+        /* CAJA DE MENSAJES HOLOGRÁFICOS */
+        .hologram-terminal {
+            background: #020617;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 10px 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: #4ade80;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        .terminal-text::before { content: "» "; color: var(--clinical-blue); }
+
+        .combo-counter-badge {
+            background: linear-gradient(135deg, var(--purple-neon), var(--clinical-blue));
+            color: white;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-size: 0.6rem;
+            box-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
+        }
+
+        audio { display: none; }
+    </style>
+</head>
+<body class="theme-cyber">
+
+    <div class="quantum-deck" id="main-deck">
+        <!-- Cabecera -->
+        <div class="deck-header">
+            <div class="live-indicator">
+                <div class="live-dot"></div>
+                <span>CONSOLA BIO-DECK v13.0</span>
+            </div>
+            <span id="txt-mode-tag" style="color: var(--clinical-blue)">MODO: CYBER-NET</span>
+        </div>
+
+        <!-- REJILLA ASIMÉTRICA PRINCIPAL -->
+        <div class="asymmetric-top-grid">
+            <!-- Lado Izquierdo: Sonar Cinético Avanzado + Foto -->
+            <div class="lens-sonar-wrapper">
+                <div class="sonar-wave-ring" id="sonar-ring"></div>
+                <div class="interactive-lens" id="shock-lens" onclick="executeComboStrike()" title="¡Haz clic repetido al ritmo para desatar el Combo!">
+                    <img src="https://capibarasound00.github.io/cristina26/assets/imagen/81d076ef-d4e9-4bd9-b7d0-011a0ecbc4f8-Photo-Grid.webp" alt="Cover">
+                </div>
+            </div>
+
+            <!-- Lado Derecho: Bloque Curvado Asimétrico de Controles -->
+            <div class="asymmetric-action-arc">
+                <button class="arc-btn btn-main-play" id="play-btn">
+                    <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <span id="play-text">TRATAR</span>
+                </button>
+                <button class="arc-btn" id="btn-restart">
+                    <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+                    RE-INICIALIZAR
+                </button>
+                <button class="arc-btn" id="btn-loop">
+                    <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+                    BUCLE: APAGADO
+                </button>
+                <button class="arc-btn" id="btn-forward-10">
+                    <svg viewBox="0 0 24 24"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/></svg>
+                    AVANZAR +10S
+                </button>
+            </div>
+        </div>
+
+        <!-- METADATOS ESTILO FICHA MÉDICA -->
+        <div class="track-profile">
+            <h1>La Guerrera Silenciosa</h1>
+            <p>Cristina • Estructura Flamenco v2</p>
+        </div>
+
+        <!-- TELEMETRÍA LINEAL ASIMÉTRICA -->
+        <div class="telemetry-dashboard">
+            <div class="telemetry-box">
+                <div class="telemetry-row">
+                    <span class="telemetry-title">Cronografía</span>
+                    <span class="telemetry-value" id="lbl-time">00:00</span>
+                </div>
+                <input type="range" class="linear-range" id="slider-progress" min="0" max="100" value="0">
+            </div>
+
+            <div class="telemetry-box">
+                <div class="telemetry-row">
+                    <span class="telemetry-title">Amperaje Vol.</span>
+                    <span class="telemetry-value" id="lbl-vol">80%</span>
+                </div>
+                <input type="range" class="linear-range" id="slider-volume" min="0" max="1" step="0.01" value="0.8">
+            </div>
+        </div>
+
+        <!-- MÓDULOS DE COMPORTAMIENTO DIVERTIDO -->
+        <div class="experimental-grid">
+            <button class="fun-toggle-btn btn-anomaly" id="btn-anomaly-toggle" onclick="toggleTemporalAnomaly()" title="Simula un efecto de cinta magnética estropeada o vinilo antiguo">
+                🌀 ANOMALÍA TEMPORAL (PITCH)
+            </button>
+            <button class="fun-toggle-btn" id="btn-matrix-theme" onclick="switchThemeCycle()">
+                🎨 MUTAR ENTORNO VISUAL
+            </button>
+        </div>
+
+        <!-- REPRODUCTOR OCULTO -->
+        <audio id="audio-engine" preload="auto" crossorigin="anonymous">
+            <source src="https://capibarasound00.github.io/cristina26/assets/sound/Cristina%20-%20La%20Guerrera%20Silenciosa%20(Flamenco%20v2).mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- TERMINAL DE SALIDA HOLOGRÁFICA -->
+        <div class="hologram-terminal">
+            <span class="terminal-text" id="terminal-log">SISTEMA INICIALIZADO</span>
+            <span class="combo-counter-badge" id="lbl-combo-streak">MAX COMBO: 0</span>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('audio-engine');
+        const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const playText = document.getElementById('play-text');
+        const sliderProgress = document.getElementById('slider-progress');
+        const sliderVolume = document.getElementById('slider-volume');
+        const lblTime = document.getElementById('lbl-time');
+        const lblVol = document.getElementById('lbl-vol');
+        
+        const sonarRing = document.getElementById('sonar-ring');
+        const mainDeck = document.getElementById('main-deck');
+        const terminalLog = document.getElementById('terminal-log');
+        const lblComboStreak = document.getElementById('lbl-combo-streak');
+        const btnLoop = document.getElementById('btn-loop');
+        const txtModeTag = document.getElementById('txt-mode-tag');
+
+        let audioCtx = null, sourceNode = null, analyser = null, dataArray = [], animationId = null;
+        let loopState = 0, currentTheme = 0, isAnomalyActive = false, anomalyInterval = null;
+        
+        // Variables del divertido juego de combos
+        let comboCount = 0;
+        let maxCombo = 0;
+        let lastClickTime = 0;
+
+        function initAudioEngine() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                sourceNode = audioCtx.createMediaElementSource(audio);
+                analyser = audioCtx.createAnalyser();
+                analyser.fftSize = 32;
+                dataArray = new Uint8Array(analyser.frequencyBinCount);
+                
+                sourceNode.connect(analyser);
+                analyser.connect(audioCtx.destination);
+            }
+        }
+
+        // MOTOR VECTORIAL: EL ANILLO HOLOGRÁFICO QUE EXPANDE SEGÚN EL AUDIO
+        function updateVectorSonar() {
+            animationId = requestAnimationFrame(updateVectorSonar);
+            if(audio.paused) {
+                sonarRing.style.transform = 'scale(1)';
+                sonarRing.style.opacity = '0';
+                return;
+            }
+
+            analyser.getByteFrequencyData(dataArray);
+            let total = 0;
+            for(let i=0; i<dataArray.length; i++) total += dataArray[i];
+            let average = total / dataArray.length;
+
+            // Escala asimétrica responsiva
+            let targetScale = 1 + (average / 140) * 0.4;
+            let targetOpacity = 0.2 + (average / 255) * 0.8;
+
+            sonarRing.style.transform = `scale(${targetScale})`;
+            sonarRing.style.opacity = targetOpacity;
+            sonarRing.style.boxShadow = `0 0 ${average/8}px var(--bio-ring-glow), inset 0 0 ${average/12}px var(--bio-ring-glow)`;
+        }
+
+        playBtn.addEventListener('click', togglePlayAction);
+
+        function togglePlayAction() {
+            initAudioEngine();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            if (audio.paused) {
+                audio.play();
+                playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+                playText.textContent = "PAUSAR";
+                printLog("Flujo de ondas activo");
+                if(!animationId) updateVectorSonar();
+            } else {
+                audio.pause();
+                playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+                playText.textContent = "TRATAR";
+                printLog("Estabilización de cabina");
+            }
+        }
+
+        // FUNCIÓN MEJORADA: EL DIVERTIDO JUEGO DEL COMBO STRIKE
+        function executeComboStrike() {
+            if(audio.paused) {
+                printLog("¡Enciende el flujo musical primero!");
+                return;
+            }
+
+            let now = Date.now();
+            let timeGap = now - lastClickTime;
+            lastClickTime = now;
+
+            // Para encadenar combos debes pulsar rápido y al ritmo (menos de 600ms entre toques)
+            if (timeGap < 600) {
+                comboCount++;
+                if (comboCount > maxCombo) {
+                    maxCombo = comboCount;
+                    lblComboStreak.textContent = `MAX COMBO: ${maxCombo}`;
+                }
+                
+                // Efecto de impacto visual asimétrico en toda la deck
+                let force = Math.min(1 + comboCount * 0.02, 1.12);
+                mainDeck.style.transform = `scale(${force}) rotate(${comboCount % 2 === 0 ? '1deg' : '-1deg'})`;
+                setTimeout(() => { mainDeck.style.transform = "scale(1) rotate(0deg)"; }, 80);
+
+                if(comboCount >= 8) {
+                    printLog(`🔥 ¡SOBREDOSIS RÍTMICA X${comboCount}!`);
+                } else if(comboCount >= 4) {
+                    printLog(`⚡ ¡COMBO HYPER STRIKE x${comboCount}!`);
+                } else {
+                    printLog(`¡Buen Beat! Racha: ${comboCount}`);
+                }
+            } else {
+                comboCount = 1;
+                printLog("Descarga de Sincronía única");
+            }
+        }
+
+        // FUNCIÓN DIVERTIDA: MODULACIÓN DE ANOMALÍA TEMPORAL (WOW & FLUTTER)
+        function toggleTemporalAnomaly() {
+            const btn = document.getElementById('btn-anomaly-toggle');
+            isAnomalyActive = !isAnomalyActive;
+
+            if (isAnomalyActive) {
+                btn.classList.add('active');
+                document.body.classList.add('theme-anomaly');
+                printLog("Anomalía temporal: Desajustando Pitch");
+                
+                // Intervalo rápido que cambia aleatoriamente la velocidad simulando una cinta vieja
+                anomalyInterval = setInterval(() => {
+                    if(!audio.paused) {
+                        let randomPitch = 0.82 + Math.random() * 0.35; // Oscila entre cámara lenta y acelerado
+                        audio.playbackRate = randomPitch;
+                    }
+                }, 250);
+            } else {
+                btn.classList.remove('active');
+                document.body.classList.remove('theme-anomaly');
+                clearInterval(anomalyInterval);
+                audio.playbackRate = 1.0;
+                printLog("Línea temporal restaurada");
+            }
+        }
+
+        // CICLO DE MUTACIÓN VISUAL DIVERTIDO
+        function switchThemeCycle() {
+            currentTheme = (currentTheme + 1) % 3;
+            document.body.className = "";
+            
+            if (currentTheme === 0) {
+                document.body.classList.add('theme-cyber');
+                txtModeTag.textContent = "MODO: CYBER-NET";
+                printLog("Entorno: Cyber-Net establecido");
+            } else if (currentTheme === 1) {
+                txtModeTag.textContent = "MODO: OSCURO ABISAL";
+                printLog("Entorno: Modo Oscuro Abisal");
+            } else if (currentTheme === 2) {
+                document.body.classList.add('theme-anomaly');
+                txtModeTag.textContent = "MODO: ANOMALÍA VIOLETA";
+                printLog("Entorno: Espectro Cuántico Prohibido");
+            }
+        }
+
+        // TELEMETRÍA DE AUDIO (PROGRESO Y VOLUMEN)
+        sliderVolume.addEventListener('input', () => {
+            audio.volume = sliderVolume.value;
+            lblVol.textContent = `${Math.round(sliderVolume.value * 100)}%`;
+            sliderVolume.style.background = `linear-gradient(to right, var(--clinical-blue) ${sliderVolume.value * 100}%, rgba(255,255,255,0.1) ${sliderVolume.value * 100}%)`;
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            if(audio.duration) {
+                const pct = (audio.currentTime / audio.duration) * 100;
+                sliderProgress.value = pct;
+                sliderProgress.style.background = `linear-gradient(to right, var(--clinical-blue) ${pct}%, rgba(255,255,255,0.1) ${pct}%)`;
+
+                let min = Math.floor(audio.currentTime / 60);
+                let sec = Math.floor(audio.currentTime % 60);
+                lblTime.textContent = `${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`;
+            }
+        });
+
+        sliderProgress.addEventListener('input', () => {
+            if(audio.duration) {
+                audio.currentTime = (sliderProgress.value / 100) * audio.duration;
+            }
+        });
+
+        // ASIGNACIONES DE BOTONES RESTANTES
+        document.getElementById('btn-forward-10').addEventListener('click', () => { audio.currentTime += 10; printLog("Salto temporal +10s"); });
+        document.getElementById('btn-restart').addEventListener('click', () => { audio.currentTime = 0; printLog("Cronograma reajustado"); if(audio.paused) togglePlayAction(); });
+
+        btnLoop.addEventListener('click', () => {
+            loopState = (loopState + 1) % 3;
+            if (loopState === 0) {
+                audio.loop = false; btnLoop.textContent = "BUCLE: APAGADO"; btnLoop.classList.remove('active-loop'); printLog("Bucle disuelto");
+            } else if (loopState === 1) {
+                audio.loop = true; btnLoop.textContent = "BUCLE: PISTA x1"; btnLoop.classList.add('active-loop'); printLog("Monobucle fijado");
+            } else if (loopState === 2) {
+                audio.loop = false; btnLoop.textContent = "BUCLE: INFINITO"; btnLoop.classList.add('active-loop'); printLog("Bucle Continuo activo");
+            }
+        });
+
+        audio.addEventListener('ended', () => {
+            if (loopState === 2) { audio.currentTime = 0; audio.play(); } 
+            else if (loopState === 0) {
+                audio.currentTime = 0; togglePlayAction(); printLog("Trayecto completado con éxito");
+            }
+        });
+
+        function printLog(msg) { terminalLog.textContent = msg.toUpperCase(); }
+
+        // MAPEO DE MANDOS POR TECLADO COMODIDAD EXTRA
+        window.addEventListener('keydown', (e) => {
+            if (e.key === " ") { e.preventDefault(); togglePlayAction(); }
+            else if (e.key === "ArrowRight") { audio.currentTime += 10; printLog("+10s"); }
+            else if (e.key === "ArrowLeft") { audio.currentTime -= 10; printLog("-10s"); }
+            else if (e.key.toLowerCase() === "r") { audio.currentTime = 0; if(audio.paused) togglePlayAction(); }
+            else if (e.key.toLowerCase() === "l") { btnLoop.click(); }
+            else if (e.key.toLowerCase() === "a") { toggleTemporalAnomaly(); }
+        });
+
+        // Configuración cosmética inicial
+        sliderVolume.dispatchEvent(new Event('input'));
+    </script>
+</body>
+</html>
